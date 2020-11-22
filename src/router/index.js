@@ -11,12 +11,12 @@ const routes = [
     component: Home,
   },
   {
-    path: '/about',
-    name: 'About',
+    path: '/app',
+    name: 'App',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    component: () => import(/* webpackChunkName: "app-view" */ '../views/AppView.vue'),
     meta: {
       requiresAuth: true,
     },
@@ -27,6 +27,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue'),
     meta: {
       login: true,
+    },
+  },
+  {
+    path: '/new-topic',
+    name: 'New Topic',
+    component: () => import(/* webpackChunkName: "new-topic" */ '../views/NewTopic.vue'),
+    meta: {
+      requiresAuth: true,
     },
   },
 ];

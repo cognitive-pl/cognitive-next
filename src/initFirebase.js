@@ -24,18 +24,16 @@ firebase.auth().onAuthStateChanged((user) => {
   if (router.currentRoute.meta.requiresAuth && !user) {
     router.push('/login');
   } else if (router.currentRoute.meta.login && user) {
-    router.push('/about');
+    router.push('/app');
   }
 });
 
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth && !auth.currentUser) {
-    router.push('/login')
-      .catch(() => {});
+    next('/login');
   } else if (to.meta.login && auth.currentUser) {
-    router.push(from.path)
-      .catch(() => {});
-  } else next();
+    next('/app');
+  } next();
 });
 
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
