@@ -1,4 +1,5 @@
 import firebase from 'firebase/app';
+import 'firebase/analytics';
 import 'firebase/auth';
 import 'firebase/firestore';
 import router from './router';
@@ -16,6 +17,7 @@ const configOptions = {
 };
 
 firebase.initializeApp(configOptions);
+firebase.analytics();
 
 export const auth = firebase.auth();
 

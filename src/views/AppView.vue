@@ -2,11 +2,14 @@
   <div class="about">
     <router-link to="/new-topic">New Topic</router-link>
     <h1>Hello {{this.$store.state.user.displayName}}</h1>
-    <button @click="logout()">Sign out :(</button><br/>
-    <div v-for="topic in this.topics" :key="topic.id">
-      <h1>{{ topic.name }}</h1>
-      <h2>{{ topic.description }}</h2>
-    </div>
+    <duet-button @click.once="logout()" variation="destructive">Sign out</duet-button>
+    <duet-grid responsive distribution="center" breakpoint="large">
+      <duet-grid-item v-for="topic in this.topics" :key="topic.id">
+        <duet-card :heading="topic.name">
+          {{ topic.description }}
+        </duet-card>
+      </duet-grid-item>
+    </duet-grid>
   </div>
 </template>
 

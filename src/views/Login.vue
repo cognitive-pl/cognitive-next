@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click.once="login()">Sign In</button>
+    <duet-button @click.once="login()" variation="primary">Sign in with Google</duet-button>
   </div>
 </template>
 
