@@ -1,21 +1,11 @@
 <template>
-  <div class="about">
-    <router-link to="/new-topic">New Topic</router-link>
-    <h1>Hello {{this.$store.state.user.displayName}}</h1>
-    <duet-button @click.once="logout()" variation="destructive">Sign out</duet-button>
-    <duet-grid responsive distribution="center" breakpoint="large">
-      <duet-grid-item v-for="topic in this.topics" :key="topic.id">
-        <duet-card :heading="topic.name">
-          {{ topic.description }}
-        </duet-card>
-      </duet-grid-item>
-    </duet-grid>
+  <div class="container">
+    <h1>Hello {{$store.state.user.displayName}}</h1>
   </div>
 </template>
 
 <script>
 import { auth } from '@/initFirebase';
-import store from '@/store';
 
 export default {
   name: 'App',
@@ -27,8 +17,8 @@ export default {
     };
   },
   mounted() {
-    store.dispatch('bindTopics');
-    this.topics = store.state.topics;
+    this.$store.dispatch('bindTopics');
+    this.topics = this.$store.state.topics;
   },
   methods: {
     logout() {

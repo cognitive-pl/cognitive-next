@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <duet-button @click.once="login()" variation="primary">Sign in with Google</duet-button>
-  </div>
+  <a-button @click.once="login()" type="primary">Log In with Google</a-button>
 </template>
 
 <script>

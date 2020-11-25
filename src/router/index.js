@@ -1,14 +1,14 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
+import Landing from '../views/Landing.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    name: 'Landing',
+    component: Landing,
   },
   {
     path: '/app',
@@ -18,6 +18,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "app-view" */ '../views/AppView.vue'),
     meta: {
+      title: 'App',
       requiresAuth: true,
     },
   },

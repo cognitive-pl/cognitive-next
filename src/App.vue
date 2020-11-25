@@ -1,33 +1,72 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/login" v-if="!this.$store.state.user">Login</router-link>
-      <router-link to="/app" v-if="this.$store.state.user">App</router-link>
-    </div>
-    <router-view/>
+    <a-layout>
+      <a-layout-header>
+        <a-menu
+          theme="dark"
+          mode="horizontal"
+          :default-selected-keys="['1']"
+          :style="{ lineHeight: '64px' }"
+        >
+          <a-menu-item key="1">
+            <router-link to="/app">Home</router-link>
+          </a-menu-item>
+          <a-menu-item key="2">
+            <router-link to="/new-topic">New topic</router-link>
+          </a-menu-item>
+          <a-menu-item key="3" @click="logout()" style="float: right">
+            <a-icon type="unlock" /> Logout
+          </a-menu-item>
+        </a-menu>
+      </a-layout-header>
+      <a-layout-content class="contentWrapper">
+        <a-breadcrumb style="margin: 16px 0">
+          <a-breadcrumb-item>Home</a-breadcrumb-item>
+          <a-breadcrumb-item>List</a-breadcrumb-item>
+          <a-breadcrumb-item>App</a-breadcrumb-item>
+        </a-breadcrumb>
+        <div class="contentWrapper__inner">
+          <!-- <a-empty v-if="!$store.state.user"/> -->
+          <!-- <router-view v-if="$store.state.user"/> -->
+          <router-view />
+        </div>
+      </a-layout-content>
+      <a-layout-footer style="text-align: center">
+        Copyright © {{new Date().getFullYear()}} Aleksander Skubała
+      </a-layout-footer>
+    </a-layout>
   </div>
 </template>
 
+<script>
+import { auth } from '@/initFirebase';
+
+export default {
+  name: 'App',
+  methods: {
+    logout() {
+      auth.signOut();
+    },
+  },
+};
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+  body, html {
+    margin: 0;
+  }
 
-#nav {
-  padding: 30px;
+  .contentWrapper {
+    padding: 0 25px;
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+    @media (min-width: 435px) {
+      padding: 0 50px;
     }
   }
-}
+
+  .contentWrapper__inner {
+    background-color: #fff;
+    padding: 24px;
+    min-height: 280px;
+  }
 </style>

@@ -30,13 +30,5 @@ firebase.auth().onAuthStateChanged((user) => {
   }
 });
 
-router.beforeEach((to, from, next) => {
-  if (to.meta.requiresAuth && !auth.currentUser) {
-    next('/login');
-  } else if (to.meta.login && auth.currentUser) {
-    next('/app');
-  } next();
-});
-
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
 export const db = firebase.firestore();
