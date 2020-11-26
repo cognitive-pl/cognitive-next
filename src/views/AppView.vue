@@ -2,7 +2,7 @@
   <div class="main">
     <h1>Hello {{$store.state.user.displayName}}</h1>
       <div class="main__grid">
-        <a-card v-for="topic in topics" :key="topic.id" :title="topic.name">
+        <a-card :title="topic.name" v-for="topic in topics" :key="topic.id">
           <a slot="extra" href="#">
             Open
             <a-icon type="right" />
@@ -41,8 +41,9 @@ export default {
   }
 
   .main__grid {
+    max-width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    grid-gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 2.5rem 3rem;
   }
 </style>

@@ -27,6 +27,7 @@ const routes = [
     name: 'Login',
     component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue'),
     meta: {
+      title: 'Login',
       login: true,
     },
   },
@@ -35,6 +36,7 @@ const routes = [
     name: 'New Topic',
     component: () => import(/* webpackChunkName: "new-topic" */ '../views/NewTopic.vue'),
     meta: {
+      title: 'New Topic',
       requiresAuth: true,
     },
   },

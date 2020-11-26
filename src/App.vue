@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <a-layout>
+    <a-layout v-if="$router.currentRoute.meta.requiresAuth">
       <a-layout-header>
         <a-menu
           theme="dark"
@@ -11,19 +11,15 @@
             <router-link to="/app">Home</router-link>
           </a-menu-item>
           <a-menu-item key="2">
-            <router-link to="/new-topic">New topic</router-link>
+            <router-link to="/new-topic">Add new topic</router-link>
           </a-menu-item>
-          <a-popconfirm
-            title="Are you sure you want to logout?"
-            ok-text="Imma head out"
-            cancel-text="I'll stay"
-            @confirm="logout"
-            style="cursor: pointer"
-          >
-          <a-menu-item key="3" style="float: right">
-              <a-icon type="unlock" /> Logout
-          </a-menu-item>
-          </a-popconfirm>
+          <a-divider type="vertical" />
+          <a-sub-menu>
+            <span slot="title"><a-icon type="setting" />Account</span>
+            <a-menu-item @click="logout()" key="account:1">
+                <a-icon type="unlock" /> Logout
+            </a-menu-item>
+          </a-sub-menu>
         </a-menu>
       </a-layout-header>
       <a-layout-content class="contentWrapper">
@@ -34,13 +30,13 @@
         <div class="contentWrapper__inner">
           <a-empty v-if="!$store.state.user"/>
           <router-view v-if="$store.state.user"/>
-          <!-- <router-view /> -->
         </div>
       </a-layout-content>
       <a-layout-footer style="text-align: center">
         Copyright © {{new Date().getFullYear()}} Aleksander Skubała
       </a-layout-footer>
     </a-layout>
+    <router-view v-if="!$router.currentRoute.meta.requiresAuth"/>
   </div>
 </template>
 
@@ -66,13 +62,13 @@ export default {
     padding: 0 25px;
 
     @media (min-width: 435px) {
-      padding: 0 50px;
+      padding: 0 40px;
     }
   }
 
   .contentWrapper__inner {
     background-color: #fff;
-    padding: 24px;
+    padding: 28px;
     min-height: 280px;
   }
 </style>

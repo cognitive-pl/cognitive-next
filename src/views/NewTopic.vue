@@ -6,6 +6,9 @@
     <a-button @click="addTopic()" type="primary" icon="plus">
       Add Topic
     </a-button>
+    <a-button type="primary" icon="plus">
+      test
+    </a-button>
     </a-space>
   </div>
 </template>
@@ -27,6 +30,8 @@ export default {
         name: this.name,
         description: this.description,
       });
+      this.name = '';
+      this.description = '';
     },
   },
 };
