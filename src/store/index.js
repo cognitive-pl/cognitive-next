@@ -24,8 +24,8 @@ export default new Vuex.Store({
       if (user) commit('setUser', user);
       else commit('setUser', user);
     },
-    bindTopics: firestoreAction(({ bindFirestoreRef }) => (
-      bindFirestoreRef('topics', db.collection('topics'))
+    bindUnits: firestoreAction(({ bindFirestoreRef }) => (
+      bindFirestoreRef('units', db.collection('units'))
     )),
   },
   modules: {

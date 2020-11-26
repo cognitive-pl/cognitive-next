@@ -2,12 +2,12 @@
   <div class="main">
     <h1>Hello {{$store.state.user.displayName}}</h1>
       <div class="main__grid">
-        <a-card :title="topic.name" v-for="topic in topics" :key="topic.id">
+        <a-card :title="unit.name" v-for="unit in units" :key="unit.id">
           <a slot="extra" href="#">
             Open
             <a-icon type="right" />
           </a>
-          <p>{{topic.description}}</p>
+          <p>{{unit.description}}</p>
         </a-card>
       </div>
   </div>
@@ -20,12 +20,12 @@ export default {
   name: 'App',
   data: function () {
     return {
-      topics: [],
+      units: [],
     };
   },
   mounted() {
-    this.$store.dispatch('bindTopics');
-    this.topics = this.$store.state.topics;
+    this.$store.dispatch('bindUnits');
+    this.units = this.$store.state.units;
   },
   methods: {
     logout() {

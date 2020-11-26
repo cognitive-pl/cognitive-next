@@ -11,7 +11,7 @@
             <router-link to="/app">Home</router-link>
           </a-menu-item>
           <a-menu-item key="2">
-            <router-link to="/new-topic">Add new topic</router-link>
+            <router-link to="/new-unit">Add new unit</router-link>
           </a-menu-item>
           <a-divider type="vertical" />
           <a-sub-menu>

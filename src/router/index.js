@@ -32,11 +32,11 @@ const routes = [
     },
   },
   {
-    path: '/new-topic',
-    name: 'New Topic',
-    component: () => import(/* webpackChunkName: "new-topic" */ '../views/NewTopic.vue'),
+    path: '/new-unit',
+    name: 'New Unit',
+    component: () => import(/* webpackChunkName: "new-unit" */ '../views/NewUnit.vue'),
     meta: {
-      title: 'New Topic',
+      title: 'New Unit',
       requiresAuth: true,
     },
   },

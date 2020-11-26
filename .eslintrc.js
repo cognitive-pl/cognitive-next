@@ -17,6 +17,7 @@ module.exports = {
     'object-shorthand': 0,
     'func-names': 0,
     'max-len': 0,
+    'dot-notation': 0,
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
   },
