@@ -1,8 +1,12 @@
 <template>
   <div>
-    <input type="text" v-model="name" placeholder="name"/><br/>
-    <input type="text" v-model="description" placeholder="description"/><br/>
-    <button @click="addTopic()">Add topic</button><br/>
+    <a-space direction="vertical" size="small">
+    <a-input v-model="name" placeholder="Title" />
+    <a-input v-model="description" placeholder="Description" />
+    <a-button @click="addTopic()" type="primary" icon="plus">
+      Add Topic
+    </a-button>
+    </a-space>
   </div>
 </template>
 
