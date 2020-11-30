@@ -18,6 +18,8 @@ module.exports = {
     'func-names': 0,
     'max-len': 0,
     'dot-notation': 0,
+    'no-plusplus': 0,
+    'eqeqeq': 0,
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
   },

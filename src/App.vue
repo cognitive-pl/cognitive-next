@@ -13,7 +13,7 @@
           <a-menu-item key="2">
             <router-link to="/new-unit">Add new unit</router-link>
           </a-menu-item>
-          <a-divider type="vertical" />
+          <a-divider class="divider" type="vertical" />
           <a-sub-menu>
             <span slot="title"><a-icon type="setting" />Account</span>
             <a-menu-item @click="logout()" key="account:1">
@@ -70,5 +70,13 @@ export default {
     background-color: #fff;
     padding: 28px;
     min-height: 280px;
+  }
+
+  .divider {
+    display: none;
+
+    @media (min-width: 475px) {
+      display: inline-block;
+    }
   }
 </style>

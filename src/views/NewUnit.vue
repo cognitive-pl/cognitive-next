@@ -1,67 +1,77 @@
 <template>
   <div>
-    <a-form :form="form" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }" @submit="handleAddUnit">
-      <a-form-item label="Name">
-        <a-input
-          v-decorator="['name', { rules: [{ required: true, message: 'Please input your note!' }] }]"
-        />
-      </a-form-item>
-      <a-form-item label="Description">
-        <a-textarea
-          v-decorator="['description', { rules: [{ required: true, message: 'Please input description!' }] }]"
-          :auto-size="{ minRows: 2, maxRows: 6 }"
-        />
-      </a-form-item>
-      <a-form-item label="Deadline">
-        <a-date-picker
-          v-decorator="['deadline', { rules: [{ required: true, message: 'Please input deadline!' }] }]"
-          show-time
-          format="YYYY-MM-DD HH:mm:ss"
-        />
-      </a-form-item>
-      <a-form-item :wrapper-col="{ span: 12, offset: 5 }">
-        <a-button type="primary" icon="plus" html-type="submit">
-          Add Unit
-        </a-button>
-      </a-form-item>
-    </a-form>
+    <a-steps :current="stage" style="margin-bottom: 28px">
+      <a-step title="Basic info" />
+      <a-step title="Material parts" />
+    </a-steps>
+    <FirstStage @nextStage="next" v-if="stage === 0" />
+    <SecondStage @handleSubmit="handleAddUnit" @back="prev()" v-if="stage === 1" />
   </div>
 </template>
-
 <script>
 import { db } from '@/initFirebase';
+import FirstStage from '@/components/FirstStage.vue';
+import SecondStage from '@/components/SecondStage.vue';
 
 export default {
   name: 'NewUnit',
-  data: function () {
+  components: {
+    FirstStage,
+    SecondStage,
+  },
+  data() {
     return {
-      name: '',
+      stage: 0,
+      basicInfo: {},
+      parts: [],
+      steps: [
+        {
+          title: 'First',
+        },
+        {
+          title: 'Second',
+        },
+        {
+          title: 'Last',
+        },
+      ],
     };
   },
-  beforeCreate() {
-    this.form = this.$form.createForm(this, { name: 'unit' });
-  },
   methods: {
-    handleAddUnit(e) {
-      e.preventDefault();
-      this.form.validateFields((err, fieldsValue) => {
-        if (err) return;
+    next(values) {
+      this.stage++;
+      this.basicInfo = values;
+    },
+    prev() {
+      this.stage--;
+    },
+    handleAddUnit(values) {
+      this.parts = values;
 
-        const values = {
-          ...fieldsValue,
-          deadline: fieldsValue['deadline'].format('YYYY-MM-DD HH:mm:ss'),
-        };
+      const dbData = {
+        ...this.basicInfo,
+        parts: this.parts,
+      };
 
-        db.collection('units').add(values)
-          .then(() => {
-            this.$notification['success']({
-              message: 'Great!',
-              description: 'You just made new unit, happy learning!',
-            });
+      db.collection('units').add(dbData)
+        .then(() => {
+          this.$notification['success']({
+            message: 'Great!',
+            description: 'You just made new unit, happy learning!',
           });
-        this.form.resetFields();
-      });
+        })
+        .catch(() => {
+          this.$notification['warning']({
+            message: 'Oh, something went wrong...',
+            description: 'It looks like there are some problems with databse, please try again later...',
+          });
+        });
     },
   },
 };
 </script>
+<style scoped>
+  .steps-action {
+    margin-top: 28px;
+  }
+</style>
