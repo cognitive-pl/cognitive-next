@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { db } from '@/initFirebase';
+import { auth, db } from '@/initFirebase';
 import Vuex from 'vuex';
 import { firestoreAction, vuexfireMutations } from 'vuexfire';
 
@@ -25,7 +25,7 @@ export default new Vuex.Store({
       else commit('setUser', user);
     },
     bindUnits: firestoreAction(({ bindFirestoreRef }) => (
-      bindFirestoreRef('units', db.collection('units'))
+      bindFirestoreRef('units', db.collection('units').where('uid', '==', auth.currentUser.uid))
     )),
   },
   modules: {

@@ -51,6 +51,7 @@ export default {
       const dbData = {
         ...this.basicInfo,
         parts: this.parts,
+        uid: this.$store.state.user.uid,
       };
 
       db.collection('units').add(dbData)
