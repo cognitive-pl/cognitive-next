@@ -62,6 +62,7 @@ export default {
       e.preventDefault();
       if (this.parts.length > 0) {
         this.$emit('handleSubmit', this.parts);
+        this.$emit('back');
       } else this.$message.error('Please input at least one part');
     },
   },

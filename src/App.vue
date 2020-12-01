@@ -5,7 +5,7 @@
         <a-menu
           theme="dark"
           mode="horizontal"
-          :style="{ lineHeight: '64px' }"
+          class="menu"
         >
           <a-menu-item key="1">
             <router-link to="/app">Home</router-link>
@@ -56,6 +56,10 @@ export default {
 <style lang="scss">
   body, html {
     margin: 0;
+  }
+
+  .menu {
+    line-height: 64px;
   }
 
   .contentWrapper {

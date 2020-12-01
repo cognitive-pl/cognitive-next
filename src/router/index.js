@@ -1,6 +1,10 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Landing from '../views/Landing.vue';
+import Landing from '@/views/Landing.vue';
+import Login from '@/views/Login.vue';
+import AppView from '@/views/AppView.vue';
+import NewUnit from '@/views/NewUnit.vue';
+import Unit from '@/views/Unit.vue';
 
 Vue.use(VueRouter);
 
@@ -13,10 +17,7 @@ const routes = [
   {
     path: '/app',
     name: 'App',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "app-view" */ '../views/AppView.vue'),
+    component: AppView,
     meta: {
       title: 'App',
       requiresAuth: true,
@@ -25,7 +26,7 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue'),
+    component: Login,
     meta: {
       title: 'Login',
       login: true,
@@ -34,9 +35,18 @@ const routes = [
   {
     path: '/new-unit',
     name: 'New Unit',
-    component: () => import(/* webpackChunkName: "new-unit" */ '../views/NewUnit.vue'),
+    component: NewUnit,
     meta: {
       title: 'New Unit',
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/unit/:id',
+    name: 'Unit',
+    component: Unit,
+    meta: {
+      title: 'Unit',
       requiresAuth: true,
     },
   },
