@@ -1,13 +1,15 @@
 <template>
-  <div>
-    <h1>{{ unitObject.name }}</h1>
-    <h3>{{ unitObject.description }}</h3>
-    <p>Part of material:</p>
-    <ul>
-      <li v-for="(part, index) in unitObject.parts" :key="index">
-        {{ part }}
-      </li>
-    </ul>
+  <div class="unit">
+    <div v-if="unitObject">
+      <h1>{{ unitObject.name }}</h1>
+      <h3>{{ unitObject.description }}</h3>
+      <p>Parts of material:</p>
+      <ul>
+        <li v-for="(part, index) in unitObject.parts" :key="index">
+          {{ part }}
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -21,7 +23,7 @@ export default {
       unitObject: {},
     };
   },
-  beforeCreate() {
+  mounted() {
     const unitRef = db.collection('units').doc(this.$route.params.id);
     unitRef.get()
       .then((doc) => { this.unitObject = doc.data(); })

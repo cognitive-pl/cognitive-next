@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="newUnit">
     <a-steps :current="stage" style="margin-bottom: 28px">
       <a-step title="Basic info" />
       <a-step title="Material parts" />

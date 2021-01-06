@@ -5,6 +5,7 @@
         <a-menu
           theme="dark"
           mode="horizontal"
+          :selectable="false"
           class="menu"
         >
           <a-menu-item key="1">
@@ -28,8 +29,14 @@
           <a-breadcrumb-item>{{this.$router.currentRoute.name}}</a-breadcrumb-item>
         </a-breadcrumb>
         <div class="contentWrapper__inner">
-          <a-empty v-if="!$store.state.user"/>
-          <router-view v-if="$store.state.user"/>
+          <!-- <a-empty :description="false" v-if="!$store.state.user"/> -->
+          <transition
+            name="fade"
+            mode="out-in"
+          >
+            <router-view/>
+          </transition>
+          <!-- <router-view v-if="$store.state.user"/> -->
         </div>
       </a-layout-content>
       <a-layout-footer style="text-align: center">
@@ -49,6 +56,11 @@ export default {
     logout() {
       auth.signOut();
     },
+  },
+  data: function () {
+    return {
+      toggle: true,
+    };
   },
 };
 </script>
@@ -74,6 +86,10 @@ export default {
     background-color: #fff;
     padding: 28px;
     min-height: 280px;
+
+    * {
+      transition: opacity 0.35s ease-out;
+    }
   }
 
   .divider {
@@ -82,5 +98,15 @@ export default {
     @media (min-width: 475px) {
       display: inline-block;
     }
+  }
+
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0;
+  }
+
+  .fade-enter-to,
+  .fade-leave-to {
+    opacity: 0;
   }
 </style>
