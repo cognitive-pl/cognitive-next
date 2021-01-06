@@ -1,16 +1,21 @@
 <template>
   <div class="main">
-    <h1>Hello {{$store.state.user.displayName}}</h1>
+    <h1>Hi {{$store.state.user.displayName}}!</h1>
       <div class="main__grid" v-if="units.length > 0">
         <a-card :title="unit.name" v-for="unit in units" :key="unit.id">
-          <a slot="extra" :href="'/unit/'+unit.id">
-            Open
-            <a-icon type="right" />
+          <a slot="extra">
+            <router-link :to="'/unit/'+unit.id">
+              Open
+              <a-icon type="right" />
+            </router-link>
           </a>
           <p>{{unit.description}}</p>
         </a-card>
       </div>
-      <h1 v-if="units.length == 0">Go on and add new unit!</h1>
+      <a-empty size="large" v-if="units.length == 0">
+        <span slot="description">Start your adventure with learning!</span>
+        <a-button href="/new-unit" type="primary">Add unit</a-button>
+      </a-empty>
   </div>
 </template>
 

@@ -7,7 +7,7 @@
           {{part}}
           <a-icon
             type="minus-circle-o"
-            @click="() => handlePartRemove(index)"
+            @click="handlePartRemove(index)"
           />
         </p>
         <a-input
