@@ -1,18 +1,17 @@
 <template>
   <div id="app">
-    <a-layout v-if="$router.currentRoute.meta.requiresAuth">
+    <a-layout v-if="$router.currentRoute.meta.requiresAuth" style="min-height: 100vh">
       <a-layout-header class="header">
         <a-icon
-          class="trigger"
           :type="collapsed ? 'menu-unfold' : 'menu-fold'"
-          @click="() => (collapsed = !collapsed)"
+          @click="() => {collapsed = !collapsed}"
         />
       </a-layout-header>
-      <a-layout>
+      <a-layout style="position: relative">
       <a-layout-sider
         v-model="collapsed"
-        className="sidebar"
-        breakpoint="lg"
+        class="sidebar"
+        breakpoint="md"
         :collapsedWidth="0"
         :trigger="null"
       >
@@ -81,6 +80,7 @@ export default {
   html {
     font-size: 100%;
     line-height: 1.3;
+    box-sizing: border-box;
   }
 
   body {
@@ -95,13 +95,26 @@ export default {
     color: white;
     padding: 0 32px;
 
-    @media (min-width: 966px) {
+    @media (min-width: 768px) {
       display: none;
     }
   }
 
+  .menu {
+    line-height: 64px;
+    padding: 16px;
+  }
+
+  .sidebar {
+    @media (max-width: 768px) {
+      height: 100%;
+      position: absolute;
+      z-index: 9999;
+    }
+  }
+
   .contentWrapper {
-    padding: 0 25px;
+    min-width: 50vw;
 
     @media (min-width: 435px) {
       padding: 0 40px;
