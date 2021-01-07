@@ -1,10 +1,24 @@
 <template>
   <div id="app">
     <a-layout v-if="$router.currentRoute.meta.requiresAuth">
-      <a-layout-header>
+      <a-layout-header class="header">
+        <a-icon
+          class="trigger"
+          :type="collapsed ? 'menu-unfold' : 'menu-fold'"
+          @click="() => (collapsed = !collapsed)"
+        />
+      </a-layout-header>
+      <a-layout>
+      <a-layout-sider
+        v-model="collapsed"
+        className="sidebar"
+        breakpoint="lg"
+        :collapsedWidth="0"
+        :trigger="null"
+      >
         <a-menu
           theme="dark"
-          mode="horizontal"
+          mode="vertical"
           :selectable="false"
           class="menu"
         >
@@ -14,7 +28,6 @@
           <a-menu-item key="2">
             <router-link to="/new-unit">Add new unit</router-link>
           </a-menu-item>
-          <a-divider class="divider" type="vertical" />
           <a-sub-menu>
             <span slot="title"><a-icon type="setting" />Account</span>
             <a-menu-item @click="logout()" key="account:1">
@@ -22,26 +35,25 @@
             </a-menu-item>
           </a-sub-menu>
         </a-menu>
-      </a-layout-header>
+      </a-layout-sider>
       <a-layout-content class="contentWrapper">
         <a-breadcrumb style="margin: 16px 0">
           <a-breadcrumb-item>Home</a-breadcrumb-item>
           <a-breadcrumb-item>{{this.$router.currentRoute.name}}</a-breadcrumb-item>
         </a-breadcrumb>
         <div class="contentWrapper__inner">
-          <!-- <a-empty :description="false" v-if="!$store.state.user"/> -->
           <transition
             name="fade"
             mode="out-in"
           >
             <router-view/>
           </transition>
-          <!-- <router-view v-if="$store.state.user"/> -->
         </div>
-      </a-layout-content>
       <a-layout-footer style="text-align: center">
         Copyright © {{new Date().getFullYear()}} Aleksander Skubała
       </a-layout-footer>
+      </a-layout-content>
+      </a-layout>
     </a-layout>
     <router-view v-if="!$router.currentRoute.meta.requiresAuth"/>
   </div>
@@ -59,19 +71,33 @@ export default {
   },
   data: function () {
     return {
-      toggle: true,
+      collapsed: false,
     };
   },
 };
 </script>
 
 <style lang="scss">
-  body, html {
+  html {
+    font-size: 100%;
+    line-height: 1.3;
+  }
+
+  body {
     margin: 0;
   }
 
-  .menu {
-    line-height: 64px;
+  *, *::before, *::after {
+    box-sizing: inherit;
+  }
+
+  .header {
+    color: white;
+    padding: 0 32px;
+
+    @media (min-width: 966px) {
+      display: none;
+    }
   }
 
   .contentWrapper {
@@ -92,14 +118,6 @@ export default {
     }
   }
 
-  .divider {
-    display: none;
-
-    @media (min-width: 475px) {
-      display: inline-block;
-    }
-  }
-
   .fade-enter-active,
   .fade-leave-active {
     transition: opacity 0;
@@ -109,4 +127,5 @@ export default {
   .fade-leave-to {
     opacity: 0;
   }
+
 </style>
