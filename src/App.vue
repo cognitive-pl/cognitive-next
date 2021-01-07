@@ -36,7 +36,7 @@
         </a-menu>
       </a-layout-sider>
       <a-layout-content class="contentWrapper">
-        <a-breadcrumb style="margin: 16px 0">
+        <a-breadcrumb class="breadcrumb">
           <a-breadcrumb-item>Home</a-breadcrumb-item>
           <a-breadcrumb-item>{{this.$router.currentRoute.name}}</a-breadcrumb-item>
         </a-breadcrumb>
@@ -110,6 +110,14 @@ export default {
       height: 100%;
       position: absolute;
       z-index: 9999;
+    }
+  }
+
+  .breadcrumb {
+    margin: 16px 0;
+
+    @media (max-width: 435px) {
+      margin: 16px 16px;
     }
   }
 
