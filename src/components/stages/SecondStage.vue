@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-form :form="form" :label-col="{ span: 5 }" :wrapper-col="{ span: 9 }" @submit="handleSubmit">
+    <a-form :form="form" :label-col="{ span: 5 }" :wrapper-col="{ span: 14 }" @submit="handleSubmit">
       <p>Divide whole material into parts that you will learn in time of one session.</p>
       <a-form-item label="Parts">
         <p v-for="(part, index) in parts" :key="index">

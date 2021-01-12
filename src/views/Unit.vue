@@ -6,7 +6,7 @@
       <p>Parts of material:</p>
       <ul>
         <li v-for="(part, index) in unitObject.parts" :key="index">
-          {{ part }}
+          {{ part.content }}, {{ new Date(part.date).toLocaleDateString() }}
         </li>
       </ul>
     </div>

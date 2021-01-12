@@ -14,7 +14,7 @@
       </div>
       <a-empty size="large" v-if="units.length == 0">
         <span slot="description">Start your adventure with learning!</span>
-        <a-button href="/new-unit" type="primary">Add unit</a-button>
+        <a-button type="primary"><router-link to="/new-unit">Add unit</router-link></a-button>
       </a-empty>
   </div>
 </template>

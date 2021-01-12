@@ -34,8 +34,6 @@ export default {
   name: 'FirstStage',
   data: function () {
     return {
-      // deadline: new Date('2021-01-19 16:18:07'),
-      // parts: ['test0', 'test1', 'test2', 'test2', 'test2', 'test2', 'test2'],
       deadline: '',
       parts: [],
       timeline: [],
@@ -57,22 +55,11 @@ export default {
     tomorrow.setDate(tomorrow.getDate() + 1);
 
     this.timeline = spreadOverTime(tomorrow, this.deadline, this.parts);
-    console.table(this.timeline);
   },
   methods: {
     handleSubmit(e) {
       e.preventDefault();
-      this.form.validateFields((err, fieldsValue) => {
-        if (err) return;
-
-        const values = {
-          ...fieldsValue,
-          description: fieldsValue['description'] ? fieldsValue['description'] : '',
-          deadline: fieldsValue['deadline'].format('YYYY-MM-DD HH:mm:ss'),
-        };
-
-        this.$emit('timelineSubmit', values);
-      });
+      this.$emit('timelineSubmit', this.timeline);
     },
   },
 };

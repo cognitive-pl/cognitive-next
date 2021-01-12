@@ -10,7 +10,6 @@ export default function spreadOverTime(startDate, endDate, parts) {
       daysList.push(i);
     }
   } else if (daysAmount - 2 >= tasksAmount) {
-    console.log(multiplier);
     for (let i = 0; i < tasksAmount; i++) {
       daysList.push(i * Math.round(multiplier));
     }

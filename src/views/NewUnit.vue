@@ -5,8 +5,8 @@
       <a-step title="Material parts" />
       <a-step title="Division over time" />
     </a-steps>
-    <FirstStage @infoSubmit="handleInfoSubmit" v-if="stage === 0" />
-    <SecondStage @partsSubmit="handlePartsSubmit" @back="prev()" v-if="stage === 1" />
+    <FirstStage @infoSubmit="handleInfoSubmit" v-show="stage === 0"/>
+    <SecondStage @partsSubmit="handlePartsSubmit" @back="prev()" v-show="stage === 1" />
     <ThirdStage :partsProp="parts" :deadlineProp="basicInfo.deadline" @timelineSubmit="handleTimelineSubmit" @back="prev()" v-if="stage === 2" />
   </div>
 </template>
@@ -50,8 +50,7 @@ export default {
     addUnit() {
       const dbData = {
         ...this.basicInfo,
-        parts: this.parts,
-        partsTime: this.partsTime,
+        parts: this.timeline,
         uid: this.$store.state.user.uid,
       };
 
