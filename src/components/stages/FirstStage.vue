@@ -46,7 +46,7 @@ export default {
           deadline: fieldsValue['deadline'].format('YYYY-MM-DD HH:mm:ss'),
         };
 
-        this.$emit('nextStage', values);
+        this.$emit('infoSubmit', values);
       });
     },
   },

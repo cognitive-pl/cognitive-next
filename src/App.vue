@@ -45,7 +45,7 @@
             name="fade"
             mode="out-in"
           >
-            <router-view/>
+            <router-view v-if="$store.state.user"/>
           </transition>
         </div>
       <a-layout-footer style="text-align: center">
@@ -122,8 +122,6 @@ export default {
   }
 
   .contentWrapper {
-    min-width: 50vw;
-
     @media (min-width: 435px) {
       padding: 0 40px;
     }
@@ -135,7 +133,7 @@ export default {
     min-height: 280px;
 
     * {
-      transition: opacity 0.35s ease-out;
+      transition: opacity 0.3s ease-out;
     }
   }
 

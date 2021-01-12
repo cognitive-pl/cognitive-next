@@ -3,54 +3,55 @@
     <a-steps :current="stage" style="margin-bottom: 28px">
       <a-step title="Basic info" />
       <a-step title="Material parts" />
+      <a-step title="Division over time" />
     </a-steps>
-    <FirstStage @nextStage="next" v-if="stage === 0" />
-    <SecondStage @handleSubmit="handleAddUnit" @back="prev()" v-if="stage === 1" />
+    <FirstStage @infoSubmit="handleInfoSubmit" v-if="stage === 0" />
+    <SecondStage @partsSubmit="handlePartsSubmit" @back="prev()" v-if="stage === 1" />
+    <ThirdStage :partsProp="parts" :deadlineProp="basicInfo.deadline" @timelineSubmit="handleTimelineSubmit" @back="prev()" v-if="stage === 2" />
   </div>
 </template>
 <script>
 import { db } from '@/initFirebase';
-import FirstStage from '@/components/FirstStage.vue';
-import SecondStage from '@/components/SecondStage.vue';
+import ThirdStage from '@/components/stages/ThirdStage.vue';
+import SecondStage from '@/components/stages/SecondStage.vue';
+import FirstStage from '@/components/stages/FirstStage.vue';
 
 export default {
   name: 'NewUnit',
   components: {
     FirstStage,
     SecondStage,
+    ThirdStage,
   },
   data() {
     return {
       stage: 0,
       basicInfo: {},
       parts: [],
-      steps: [
-        {
-          title: 'First',
-        },
-        {
-          title: 'Second',
-        },
-        {
-          title: 'Last',
-        },
-      ],
+      timelineSubmit: [],
     };
   },
   methods: {
-    next(values) {
-      this.stage++;
-      this.basicInfo = values;
-    },
     prev() {
       this.stage--;
     },
-    handleAddUnit(values) {
+    handleInfoSubmit(values) {
+      this.stage++;
+      this.basicInfo = values;
+    },
+    handlePartsSubmit(values) {
       this.parts = values;
-
+      this.stage++;
+    },
+    handleTimelineSubmit(values) {
+      this.timeline = values;
+      this.addUnit();
+    },
+    addUnit() {
       const dbData = {
         ...this.basicInfo,
         parts: this.parts,
+        partsTime: this.partsTime,
         uid: this.$store.state.user.uid,
       };
 
