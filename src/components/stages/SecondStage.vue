@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     handlePartRemove(index) {
-      this.parts = this.parts.filter((part) => part != this.parts[index]);
+      this.parts = this.parts.filter((part, partIndex) => partIndex != index);
     },
     handleAddPart(e) {
       e.preventDefault();

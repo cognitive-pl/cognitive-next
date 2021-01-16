@@ -26,7 +26,7 @@ export default function spreadOverTime(startDate, endDate, parts) {
 
     newParts.push({
       content,
-      date: new Date(partDate),
+      date: new Date(partDate).toString(),
     });
   });
 
