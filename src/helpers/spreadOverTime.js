@@ -1,6 +1,7 @@
 export default function spreadOverTime(startDate, endDate, parts) {
   const tasksAmount = parts.length;
-  const daysAmount = endDate.getDate() - startDate.getDate();
+  const diffTime = Math.abs(startDate - endDate);
+  const daysAmount = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   const multiplier = (daysAmount - 1) / tasksAmount;
   const daysList = [];
   const newParts = [];
