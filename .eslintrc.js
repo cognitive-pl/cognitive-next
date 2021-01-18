@@ -20,6 +20,7 @@ module.exports = {
     'dot-notation': 0,
     'no-plusplus': 0,
     'array-callback-return': 0,
+    'consistent-return': 0,
     eqeqeq: 0,
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',

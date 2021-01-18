@@ -5,8 +5,11 @@
       <h3>{{ unitObject.description }}</h3>
       <p>Parts of material:</p>
       <ul>
-        <li v-for="({ content, date }, index) in unitObject.parts" :key="index">
-          {{ content }}, {{ new Date(date).toLocaleDateString() }}
+        <li v-for="({ content, date, done }, index) in unitObject.parts" :key="index">
+          <a-badge
+            :status="done ? 'success' : (todaySession.content === content ? 'processing' : 'default')"
+            :text="`${content}, ${ new Date(date).toLocaleDateString() }`"
+          />
         </li>
       </ul>
       <h3>Session for today:</h3>
@@ -31,13 +34,26 @@ export default {
     unitRef.get()
       .then((doc) => {
         this.unitObject = doc.data();
-        this.todaySession = this.unitObject.parts.find(({ date }) => {
-          const today = new Date().setHours(0, 0, 0);
-          const partDate = new Date(date).setHours(0, 0, 0);
-          return today === partDate;
+        this.todaySession = this.unitObject.parts.find((part) => {
+          const today = new Date();
+          const partDate = new Date(part.date);
+          return (
+            today.getDate() === partDate.getDate()
+            && today.getMonth() === partDate.getMonth()
+            && today.getFullYear() === partDate.getFullYear()
+          );
         });
       })
       .catch(() => this.$message.error('Something went wrong with database connection...'));
   },
 };
 </script>
+
+<style lang="scss">
+
+.unit ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+</style>
