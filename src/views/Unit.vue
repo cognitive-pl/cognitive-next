@@ -65,7 +65,7 @@ export default {
         .catch(() => this.$message.error('Something went wrong with database connection...'));
     },
     markAsDone() {
-      const notDoneIndex = this.unitObject.parts.findIndex(({ content }) => content === this.notDone.content);
+      const notDoneIndex = this.unitObject.parts.findIndex((part) => part === this.notDone);
       const newParts = [...this.unitObject.parts];
       newParts[notDoneIndex] = {
         ...this.notDone,

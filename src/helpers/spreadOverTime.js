@@ -6,6 +6,19 @@ export default function spreadOverTime(startDate, endDate, parts) {
   const daysList = [];
   const newParts = [];
 
+  const testParts = [];
+  parts.forEach((part, index) => {
+    if (index === 1) {
+      testParts.push(part);
+      testParts.push(parts[index - 1]);
+    } else if (index > 1) {
+      testParts.push(part);
+      testParts.push(parts[index-1]);
+      testParts.push(parts[index-2]);
+    } else testParts.push(part);
+  });
+  console.log(testParts);
+
   if (daysAmount == tasksAmount) {
     for (let i = 0; i < tasksAmount; i++) {
       daysList.push(i);

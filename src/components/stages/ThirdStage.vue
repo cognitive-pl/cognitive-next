@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import spreadOverTime from '@/helpers/spreadOverTime';
+import spreadOverTime from '@/helpers/spreadOverTime2';
 
 export default {
   name: 'FirstStage',
