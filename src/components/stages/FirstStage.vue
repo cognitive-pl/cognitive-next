@@ -40,7 +40,7 @@ export default {
       this.form.validateFields((err, fieldsValue) => {
         if (err) return;
         if (fieldsValue['deadline'] < new Date()) {
-          this.$message.error('Do not pick a date prior to today');
+          this.$message.error('Do not pick a date prior to tommorow');
           return;
         }
 

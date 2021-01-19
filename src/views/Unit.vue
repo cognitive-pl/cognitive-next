@@ -18,17 +18,23 @@
           />
         </li>
       </ul>
-      <h3>Sessions for today:</h3>
-      <ol v-if="todaySessions.length > 0">
-        <li v-for="({ content }, index) in todaySessions" :key="index">
-          {{ content }}
-        </li>
-      </ol>
-      {{todaySessions.length === 0 ? 'No sessions for today': null}}
-      <h3>Last not done part</h3>
-      {{notDone ? notDone.content : "Everything's done!"}}
-      <br/>
-      <a-button type="primary" style="margin-top: 15px" @click="markAsDone">Mark session as done</a-button>
+      <a-row :gutter="[0, { xs: 12, sm: 12, md: 0 }]">
+        <a-col :xs="{ span: 24 }" :md="{ span: 12 }" :flex="5">
+          <h3>Sessions for today:</h3>
+          <ol v-if="todaySessions.length > 0">
+            <li v-for="({ content }, index) in todaySessions" :key="index">
+              {{ content }}
+            </li>
+          </ol>
+          {{todaySessions.length === 0 ? 'No sessions for today': null}}
+        </a-col>
+        <a-col :xs="{ span: 24 }" :md="{ span: 12 }" :flex="5">
+          <h3>Last not done part</h3>
+          {{notDone ? notDone.content : "Everything's done!"}}
+          <br/>
+          <a-button type="primary" style="margin-top: 15px" @click="markAsDone">Mark session as done</a-button>
+        </a-col>
+      </a-row>
     </div>
   </div>
 </template>
@@ -93,6 +99,29 @@ export default {
 .unit ul {
   list-style-type: none;
   padding: 0;
+}
+
+.unit .sessionInfo {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  * {
+    width: 100%;
+  }
+
+  .notDone button {
+    display: block;
+    width: auto;
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+
+    * {
+      width: 50%;
+    }
+  }
 }
 
 </style>
