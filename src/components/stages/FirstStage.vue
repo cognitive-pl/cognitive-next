@@ -39,6 +39,10 @@ export default {
       e.preventDefault();
       this.form.validateFields((err, fieldsValue) => {
         if (err) return;
+        if (fieldsValue['deadline'] < new Date()) {
+          this.$message.error('Do not pick a date prior to today');
+          return;
+        }
 
         const values = {
           ...fieldsValue,
