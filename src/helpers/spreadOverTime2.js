@@ -1,8 +1,8 @@
 export default function spreadOverTime(startDate, endDate, parts) {
-  const tasksAmount = parts.length;
+  const tasksAmount = parts.length + 1;
   const diffTime = Math.abs(startDate - endDate);
   const daysAmount = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  const multiplier = (daysAmount - 1) / (tasksAmount + 1);
+  const multiplier = (daysAmount - 1) / tasksAmount;
   const newParts = [];
 
   const partDate = startDate;
@@ -39,7 +39,7 @@ export default function spreadOverTime(startDate, endDate, parts) {
       }
     });
 
-    partDate.setDate(startDay + (parts.length - 1));
+    partDate.setDate(startDay + parts.length);
     newParts.push({
       content: `${parts[parts.length - 1]} (repetition 1)`,
       date: new Date(partDate).toString(),
@@ -78,7 +78,7 @@ export default function spreadOverTime(startDate, endDate, parts) {
       }
     });
 
-    partDate.setDate(startDay + ((parts.length - 1) * Math.round(multiplier)));
+    partDate.setDate(startDay + (parts.length * Math.round(multiplier)));
     newParts.push({
       content: `${parts[parts.length - 1]} (repetition 1)`,
       date: new Date(partDate).toString(),
@@ -117,7 +117,7 @@ export default function spreadOverTime(startDate, endDate, parts) {
       }
     });
 
-    partDate.setDate(startDay + Math.floor((parts.length - 1) * multiplier));
+    partDate.setDate(startDay + Math.floor(parts.length * multiplier));
     newParts.push({
       content: `${parts[parts.length - 1]} (repetition 1)`,
       date: new Date(partDate).toString(),

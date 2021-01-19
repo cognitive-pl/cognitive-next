@@ -2,30 +2,33 @@
   <div class="unit">
     <div v-if="unitObject">
       <h2>{{ unitObject.name }}</h2>
-      <h3>{{ unitObject.description }}</h3>
-      <p>Parts of material:</p>
+      <h4>{{ unitObject.description }}</h4>
+      <p style="margin-top: 10px">Parts of material:</p>
       <ul>
         <li v-for="({ content, date, done }, index) in unitObject.parts" :key="index">
           <a-badge
-            :status="done ? 'success' : (todaySession.content === content ? 'processing' : 'default')"
+            :status="done ? 'success' : (isTodaySession(index) ? 'processing' : 'default')"
             :text="`${content}, ${ new Date(date).toLocaleDateString() }`"
-            v-if="todaySession"
+            v-if="todaySessions"
           />
           <a-badge
             :status="done ? 'success' : 'default'"
             :text="`${content}, ${ new Date(date).toLocaleDateString() }`"
-            v-if="!todaySession"
+            v-if="!todaySessions"
           />
         </li>
       </ul>
-      <h3>Session for today:</h3>
-      {{todaySession ? todaySession.content : 'No session for today'}}
-      <br/>
-      <br/>
+      <h3>Sessions for today:</h3>
+      <ol v-if="todaySessions.length > 0">
+        <li v-for="({ content }, index) in todaySessions" :key="index">
+          {{ content }}
+        </li>
+      </ol>
+      {{todaySessions.length === 0 ? 'No sessions for today': null}}
       <h3>Last not done part</h3>
       {{notDone ? notDone.content : "Everything's done!"}}
       <br/>
-      <a-button type="primary" @click="markAsDone">Mark session as done</a-button>
+      <a-button type="primary" style="margin-top: 15px" @click="markAsDone">Mark session as done</a-button>
     </div>
   </div>
 </template>
@@ -38,7 +41,7 @@ export default {
   data: function () {
     return {
       unitObject: {},
-      todaySession: '',
+      todaySessions: '',
       notDone: '',
     };
   },
@@ -51,7 +54,7 @@ export default {
       unitRef.get()
         .then((doc) => {
           this.unitObject = doc.data();
-          this.todaySession = this.unitObject.parts.find(({ date }) => {
+          this.todaySessions = this.unitObject.parts.filter(({ date }) => {
             const today = new Date();
             const partDate = new Date(date);
             return (
@@ -63,6 +66,9 @@ export default {
           this.notDone = this.unitObject.parts.find(({ done }) => !done);
         })
         .catch(() => this.$message.error('Something went wrong with database connection...'));
+    },
+    isTodaySession(index) {
+      return this.todaySessions.includes(this.unitObject.parts[index]);
     },
     markAsDone() {
       const notDoneIndex = this.unitObject.parts.findIndex((part) => part === this.notDone);
