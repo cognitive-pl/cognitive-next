@@ -1,41 +1,14 @@
 <template>
-  <div class="unit">
-    <div v-if="unitObject">
-      <h2>{{ unitObject.name }}</h2>
-      <h4>{{ unitObject.description }}</h4>
-      <a-row :gutter="[24, { xs: 12, sm: 12, md: 0 }]" style="margin-top: 10px">
-        <a-col :xs="{ span: 24 }" :md="{ span: 12 }" :lg="{ span: 8 }">
-          <h3>Sessions for today:</h3>
-          <ol v-if="todaySessions.length > 0">
-            <li v-for="({ content }, index) in todaySessions" :key="index">
-              {{ content }}
-            </li>
-          </ol>
-          {{todaySessions.length === 0 ? 'No sessions for today': null}}
-        </a-col>
-        <a-col :xs="{ span: 24 }" :md="{ span: 12 }" :lg="{ span: 8 }">
-          <h3>Last not done part</h3>
-          {{notDone ? notDone.content : "Everything's done!"}}
-          <br/>
-          <a-button type="primary" style="margin-top: 15px" @click="markAsDone" :disabled="!notDone">Mark session as done</a-button>
-        </a-col>
-      </a-row>
-      <p style="margin-top: 25px">Parts of material:</p>
-      <ul>
-        <li v-for="({ content, date, done }, index) in unitObject.parts" :key="index">
-          <a-badge
-            :status="done ? 'success' : (isTodaySession(index) ? 'processing' : 'default')"
-            :text="`${content}, ${ new Date(date).toLocaleDateString() }`"
-            v-if="todaySessions"
-          />
-          <a-badge
-            :status="done ? 'success' : 'default'"
-            :text="`${content}, ${ new Date(date).toLocaleDateString() }`"
-            v-if="!todaySessions"
-          />
-        </li>
-      </ul>
-    </div>
+  <div class="flashcardSet">
+    <h2>{{flashcardSet.name}}</h2>
+    <h4>{{flashcardSet.description}}</h4>
+    <a-card style="width: 300px; margin-top: 50px" :bodyStyle="{padding: '50px 30px', textAlign: 'center'}">
+      <template slot="actions">
+        <a-icon key="smile" type="smile" style="font-size: 1.5em; color: #4DBA87"/>
+        <a-icon key="frown" type="frown" style="font-size: 1.5em; color: #fe463a"/>
+      </template>
+      <a-card-meta :title="presentCard.firstSide"></a-card-meta>
+    </a-card>
   </div>
 </template>
 
@@ -46,9 +19,9 @@ export default {
   name: 'FlashcardSet',
   data: function () {
     return {
-      unitObject: {},
-      todaySessions: '',
-      notDone: '',
+      flashcardSet: [],
+      visibleSet: [],
+      presentCard: {},
     };
   },
   mounted() {
@@ -56,76 +29,46 @@ export default {
   },
   methods: {
     fetchData() {
-      const unitRef = db.collection('units').doc(this.$route.params.id);
-      unitRef.get()
+      const flashcardSetRef = db.collection('flashcards').doc(this.$route.params.id);
+      flashcardSetRef.get()
         .then((doc) => {
-          this.unitObject = doc.data();
-          this.todaySessions = this.unitObject.parts.filter(({ date }) => {
-            const today = new Date();
-            const partDate = new Date(date);
-            return (
-              today.getDate() === partDate.getDate()
-              && today.getMonth() === partDate.getMonth()
-              && today.getFullYear() === partDate.getFullYear()
-            );
-          });
-          this.notDone = this.unitObject.parts.find(({ done }) => !done);
+          this.flashcardSet = doc.data();
+          this.visibleSet = [
+            ...this.flashcardSet.section1,
+            ...this.flashcardSet.section2,
+            ...this.flashcardSet.section3,
+            ...this.flashcardSet.section4,
+            ...this.flashcardSet.section5,
+          ];
+          this.visibleSet = this.visibleSet.filter(({ done }) => !done);
+          this.presentCard = { ...this.visibleSet[0] };
+          console.log(this.presentCard);
         })
         .catch(() => this.$message.error('Something went wrong with database connection...'));
-    },
-    isTodaySession(index) {
-      return this.todaySessions.includes(this.unitObject.parts[index]);
-    },
-    markAsDone() {
-      const notDoneIndex = this.unitObject.parts.findIndex((part) => part === this.notDone);
-      const newParts = [...this.unitObject.parts];
-      newParts[notDoneIndex] = {
-        ...this.notDone,
-        done: true,
+
+      /* const dbData = {
+        name: 'typical cards set',
+        description: 'that is description',
+        section1: [
+          {
+            firstSide: 'firstSide',
+            secondSide: 'secondSide',
+            section: 1,
+          },
+          {
+            firstSide: 'firstSide2',
+            secondSide: 'secondSide2',
+            section: 1,
+          },
+        ],
+        section2: [],
+        section3: [],
+        section4: [],
+        section5: [],
       };
 
-      db.collection('units')
-        .doc(this.$route.params.id)
-        .update({ parts: newParts })
-        .then(() => this.fetchData())
-        .catch(() => this.$message.error('Something went wrong with database connection...'));
+      db.collection('flashcards').add(dbData); */
     },
   },
 };
 </script>
-
-<style lang="scss">
-
-.unit ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.unit ol {
-  padding-left: 20px;
-}
-
-.unit .sessionInfo {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-
-  * {
-    width: 100%;
-  }
-
-  .notDone button {
-    display: block;
-    width: auto;
-  }
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-
-    * {
-      width: 50%;
-    }
-  }
-}
-
-</style>

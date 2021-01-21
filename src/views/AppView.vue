@@ -2,14 +2,14 @@
   <div class="main">
     <h1>Hi {{$store.state.user.displayName}}!</h1>
       <div class="main__grid" v-if="units.length > 0">
-        <a-card :title="unit.name" v-for="unit in units" :key="unit.id">
+        <a-card :title="name" v-for="({ name, description, id }, index) in units" :key="index">
           <a slot="extra">
-            <router-link :to="'/unit/'+unit.id">
+            <router-link :to="'/unit/'+id">
               Open
               <a-icon type="right" />
             </router-link>
           </a>
-          <p>{{unit.description}}</p>
+          <p>{{description}}</p>
         </a-card>
       </div>
       <a-empty size="large" v-if="units.length == 0">
@@ -20,8 +20,6 @@
 </template>
 
 <script>
-import { auth } from '@/initFirebase';
-
 export default {
   name: 'App',
   data: function () {
@@ -32,11 +30,6 @@ export default {
   mounted() {
     this.$store.dispatch('bindUnits');
     this.units = this.$store.state.units;
-  },
-  methods: {
-    logout() {
-      auth.signOut();
-    },
   },
 };
 </script>

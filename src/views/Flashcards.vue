@@ -1,41 +1,45 @@
 <template>
   <div class="main">
-    <h1>Hi {{$store.state.user.displayName}}!</h1>
-      <div class="main__grid" v-if="units.length > 0">
-        <a-card :title="unit.name" v-for="unit in units" :key="unit.id">
+    <h1>Your flashcard sets</h1>
+      <div class="main__grid" v-if="flashcards.length > 0">
+        <a-card :title="flashcardSet.name" v-for="(flashcardSet, index) in flashcards" :key="index">
           <a slot="extra">
-            <router-link :to="'/unit/'+unit.id">
+            <router-link :to="'/flashcard-set/'+flashcardSet.id">
               Open
               <a-icon type="right" />
             </router-link>
           </a>
-          <p>{{unit.description}}</p>
+          <p>{{getCardsNum(flashcardSet)}} card(s), {{flashcardSet.description}}</p>
         </a-card>
       </div>
-      <a-empty size="large" v-if="units.length == 0">
-        <span slot="description">Start your adventure with learning!</span>
-        <a-button type="primary"><router-link to="/new-unit">Add unit</router-link></a-button>
+      <a-empty size="large" v-if="flashcards.length == 0">
+        <span slot="description">Go ahead and make some flashcards!</span>
+        <a-button type="primary"><router-link to="/new-set">Add flashcard set</router-link></a-button>
       </a-empty>
   </div>
 </template>
 
 <script>
-import { auth } from '@/initFirebase';
-
 export default {
   name: 'Flashcards',
   data: function () {
     return {
-      units: [],
+      flashcards: [],
     };
   },
   mounted() {
-    this.$store.dispatch('bindUnits');
-    this.units = this.$store.state.units;
+    this.$store.dispatch('bindFlashcardSets');
+    this.flashcards = this.$store.state.flashcards;
   },
   methods: {
-    logout() {
-      auth.signOut();
+    getCardsNum(flashcardSet) {
+      return [
+        ...flashcardSet.section1,
+        ...flashcardSet.section2,
+        ...flashcardSet.section3,
+        ...flashcardSet.section4,
+        ...flashcardSet.section5,
+      ].length;
     },
   },
 };

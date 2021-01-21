@@ -8,14 +8,10 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     user: null,
-    topics: [],
   },
   mutations: {
     setUser(state, data) {
       state.user = data;
-    },
-    setTopics(state, data) {
-      state.topics = data;
     },
     ...vuexfireMutations,
   },
@@ -26,6 +22,9 @@ export default new Vuex.Store({
     },
     bindUnits: firestoreAction(({ bindFirestoreRef }) => (
       bindFirestoreRef('units', db.collection('units').where('uid', '==', auth.currentUser.uid))
+    )),
+    bindFlashcardSets: firestoreAction(({ bindFirestoreRef }) => (
+      bindFirestoreRef('flashcards', db.collection('flashcards'))
     )),
   },
   modules: {
