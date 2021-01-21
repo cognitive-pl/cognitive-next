@@ -5,6 +5,9 @@ import Login from '@/views/Login.vue';
 import AppView from '@/views/AppView.vue';
 import NewUnit from '@/views/NewUnit.vue';
 import Unit from '@/views/Unit.vue';
+import Flashcards from '@/views/Flashcards.vue';
+import NewSet from '@/views/NewSet.vue';
+import FlashcardSet from '@/views/FlashcardSet.vue';
 
 Vue.use(VueRouter);
 
@@ -47,6 +50,33 @@ const routes = [
     component: Unit,
     meta: {
       title: 'Unit',
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/flashcards',
+    name: 'Flashcards',
+    component: Flashcards,
+    meta: {
+      title: 'Flashcards',
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/new-set',
+    name: 'New Set',
+    component: NewSet,
+    meta: {
+      title: 'New Set',
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/flashcard-set/:id',
+    name: 'Flashcard Set',
+    component: FlashcardSet,
+    meta: {
+      title: 'Flashcard Set',
       requiresAuth: true,
     },
   },

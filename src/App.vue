@@ -21,16 +21,34 @@
           :selectable="false"
           class="menu"
         >
-          <a-menu-item key="1">
+          <a-menu-item key="home">
             <router-link to="/app">Home</router-link>
           </a-menu-item>
-          <a-menu-item key="2">
-            <router-link to="/new-unit">Add new unit</router-link>
-          </a-menu-item>
-          <a-sub-menu>
-            <span slot="title"><a-icon type="setting" />Account</span>
+          <a-sub-menu key="unit">
+            <span slot="title"><a-icon type="book"/>Unit</span>
+            <a-menu-item key="unit:1">
+              <router-link to="/new-unit">
+                <a-icon type="plus-circle" /> Add new unit
+              </router-link>
+            </a-menu-item>
+          </a-sub-menu>
+          <a-sub-menu key="flashcards">
+            <span slot="title"><a-icon type="appstore"/>Flashcards</span>
+            <a-menu-item key="flashcards:1">
+              <router-link to="/flashcards">
+                <a-icon type="container" /> All sets
+              </router-link>
+            </a-menu-item>
+            <a-menu-item key="flashcards:2">
+              <router-link to="/new-set">
+                <a-icon type="plus-circle" /> Add new set
+              </router-link>
+            </a-menu-item>
+          </a-sub-menu>
+          <a-sub-menu key="account">
+            <span slot="title"><a-icon type="setting"/>Account</span>
             <a-menu-item @click="logout()" key="account:1">
-                <a-icon type="unlock" /> Logout
+              <a-icon type="logout" /> Logout
             </a-menu-item>
           </a-sub-menu>
         </a-menu>
