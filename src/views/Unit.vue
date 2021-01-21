@@ -3,7 +3,24 @@
     <div v-if="unitObject">
       <h2>{{ unitObject.name }}</h2>
       <h4>{{ unitObject.description }}</h4>
-      <p style="margin-top: 10px">Parts of material:</p>
+      <a-row :gutter="[24, { xs: 12, sm: 12, md: 0 }]" style="margin-top: 10px">
+        <a-col :xs="{ span: 24 }" :md="{ span: 12 }" :lg="{ span: 8 }">
+          <h3>Sessions for today:</h3>
+          <ol v-if="todaySessions.length > 0">
+            <li v-for="({ content }, index) in todaySessions" :key="index">
+              {{ content }}
+            </li>
+          </ol>
+          {{todaySessions.length === 0 ? 'No sessions for today': null}}
+        </a-col>
+        <a-col :xs="{ span: 24 }" :md="{ span: 12 }" :lg="{ span: 8 }">
+          <h3>Last not done part</h3>
+          {{notDone ? notDone.content : "Everything's done!"}}
+          <br/>
+          <a-button type="primary" style="margin-top: 15px" @click="markAsDone" :disabled="!notDone">Mark session as done</a-button>
+        </a-col>
+      </a-row>
+      <p style="margin-top: 25px">Parts of material:</p>
       <ul>
         <li v-for="({ content, date, done }, index) in unitObject.parts" :key="index">
           <a-badge
@@ -18,23 +35,6 @@
           />
         </li>
       </ul>
-      <a-row :gutter="[0, { xs: 12, sm: 12, md: 0 }]">
-        <a-col :xs="{ span: 24 }" :md="{ span: 12 }" :flex="5">
-          <h3>Sessions for today:</h3>
-          <ol v-if="todaySessions.length > 0">
-            <li v-for="({ content }, index) in todaySessions" :key="index">
-              {{ content }}
-            </li>
-          </ol>
-          {{todaySessions.length === 0 ? 'No sessions for today': null}}
-        </a-col>
-        <a-col :xs="{ span: 24 }" :md="{ span: 12 }" :flex="5">
-          <h3>Last not done part</h3>
-          {{notDone ? notDone.content : "Everything's done!"}}
-          <br/>
-          <a-button type="primary" style="margin-top: 15px" @click="markAsDone">Mark session as done</a-button>
-        </a-col>
-      </a-row>
     </div>
   </div>
 </template>
@@ -99,6 +99,10 @@ export default {
 .unit ul {
   list-style-type: none;
   padding: 0;
+}
+
+.unit ol {
+  padding-left: 20px;
 }
 
 .unit .sessionInfo {
