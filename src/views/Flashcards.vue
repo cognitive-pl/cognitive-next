@@ -9,7 +9,7 @@
               <a-icon type="right" />
             </router-link>
           </a>
-          <p>{{getCardsNum(flashcardSet)}} card(s), {{flashcardSet.description}}</p>
+          <p>{{flashcardSet.set.length}} card(s), {{flashcardSet.description}}</p>
         </a-card>
       </div>
       <a-empty size="large" v-if="flashcards.length == 0">
@@ -30,17 +30,6 @@ export default {
   mounted() {
     this.$store.dispatch('bindFlashcardSets');
     this.flashcards = this.$store.state.flashcards;
-  },
-  methods: {
-    getCardsNum(flashcardSet) {
-      return [
-        ...flashcardSet.section1,
-        ...flashcardSet.section2,
-        ...flashcardSet.section3,
-        ...flashcardSet.section4,
-        ...flashcardSet.section5,
-      ].length;
-    },
   },
 };
 </script>
