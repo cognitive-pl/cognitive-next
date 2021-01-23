@@ -2,13 +2,21 @@
   <div class="flashcardSet">
     <h2>{{flashcardSet.name}}</h2>
     <h4>{{flashcardSet.description}}</h4>
-    <a-card v-if="!allDone" style="width: 300px; margin-top: 50px" :bodyStyle="{padding: '50px 30px', textAlign: 'center'}">
+    <a-card v-if="!allDone" class="flashcardSet__card" :bodyStyle="{padding: '50px 30px', textAlign: 'center'}">
       <template slot="actions">
         <a-icon v-if="firstSide" key="eye" type="eye" style="font-size: 1.5em;" @click="reveal"/>
-        <a-icon v-if="!firstSide" key="smile" type="smile" style="font-size: 1.5em; color: #4DBA87" @click="goodAnswear"/>
+        <a-icon v-if="!firstSide" key="smile" type="smile" style="font
+        -size: 1.5em; color: #4DBA87" @click="goodAnswear"/>
         <a-icon v-if="!firstSide" key="frown" type="frown" style="font-size: 1.5em; color: #fe463a" @click="badAnswear"/>
       </template>
-      <a-card-meta :title="firstSide ? presentCard.firstSide : presentCard.secondSide"></a-card-meta>
+      <a-card-meta :description="firstSide ? presentCard.firstSide : presentCard.secondSide"></a-card-meta>
+    </a-card>
+
+    <a-card v-if="!allDone" class="flashcardSet__card" :bodyStyle="{padding: '50px 30px', textAlign: 'center'}">
+      <template slot="actions">
+        <a-icon key="sync" type="sync" style="font-size: 1.5em;" @click="reveal"/>
+      </template>
+      <a-card-meta description="You revealed all set, you can restart it by clicking button below."></a-card-meta>
     </a-card>
   </div>
 </template>
@@ -100,3 +108,18 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+
+.flashcardSet__card {
+  max-width: 80vw;
+  margin-top: 50px;
+  font-weight: bold;
+  /* font-size: 1em; */
+
+  @media (min-width: 768px) {
+    max-width: 40vw;
+  }
+}
+
+</style>
