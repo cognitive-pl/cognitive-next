@@ -2,33 +2,28 @@
   <div class="newUnit">
     <a-steps :current="stage" style="margin-bottom: 28px">
       <a-step title="Basic info" />
-      <a-step title="Material parts" />
-      <a-step title="Division over time" />
+      <a-step title="Flashcards" />
     </a-steps>
-    <FirstStage @infoSubmit="handleInfoSubmit" v-show="stage === 0"/>
-    <SecondStage @partsSubmit="handlePartsSubmit" @back="prev()" v-show="stage === 1" />
-    <ThirdStage :partsProp="parts" :deadlineProp="basicInfo.deadline" @timelineSubmit="handleTimelineSubmit" @back="prev()" v-if="stage === 2" />
+    <FlashcardFirstStage @infoSubmit="handleInfoSubmit" v-show="stage === 0"/>
+    <FlashcardsSecondStage @flashcardsSubmit="handleFlashcardsSubmit" @back="prev()" v-show="stage === 1" />
   </div>
 </template>
 <script>
 import { db } from '@/initFirebase';
-import ThirdStage from '@/components/stages/ThirdStage.vue';
-import SecondStage from '@/components/stages/SecondStage.vue';
-import FirstStage from '@/components/stages/FirstStage.vue';
+import FlashcardsSecondStage from '@/components/flashcardStages/FlashcardsSecondStage.vue';
+import FlashcardFirstStage from '@/components/flashcardStages/FlashcardFirstStage.vue';
 
 export default {
   name: 'NewSet',
   components: {
-    FirstStage,
-    SecondStage,
-    ThirdStage,
+    FlashcardFirstStage,
+    FlashcardsSecondStage,
   },
   data() {
     return {
       stage: 0,
       basicInfo: {},
-      parts: [],
-      timelineSubmit: [],
+      flashcardSet: [],
     };
   },
   methods: {
@@ -39,22 +34,18 @@ export default {
       this.stage++;
       this.basicInfo = values;
     },
-    handlePartsSubmit(values) {
-      this.parts = values;
-      this.stage++;
-    },
-    handleTimelineSubmit(values) {
-      this.timeline = values;
+    handleFlashcardsSubmit(values) {
+      this.flashcardSet = values;
       this.addUnit();
     },
     addUnit() {
       const dbData = {
         ...this.basicInfo,
-        parts: this.timeline,
+        set: this.flashcardSet,
         uid: this.$store.state.user.uid,
       };
 
-      db.collection('units').add(dbData)
+      db.collection('flashcards').add(dbData)
         .then(() => {
           this.$notification['success']({
             message: 'Great!',

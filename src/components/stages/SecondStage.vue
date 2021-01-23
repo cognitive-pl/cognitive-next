@@ -11,6 +11,7 @@
           />
         </p>
         <a-input
+          ref="partInput"
           v-decorator="['partValue', { rules: [{ required: true, message: 'Please input part!' }] }]"
         />
       </a-form-item>
@@ -56,6 +57,7 @@ export default {
         if (err) return;
         this.parts.push(partValue);
         this.form.clearField('partValue');
+        this.$refs['partInput'].focus();
       });
     },
     handleSubmit(e) {

@@ -150,8 +150,8 @@ export default {
   }
 
   .sidebar__logo {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     margin: 25px auto 0;
   }
 
