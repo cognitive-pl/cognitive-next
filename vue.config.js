@@ -3,7 +3,7 @@ module.exports = {
     name: 'Cognitive',
     short_name: 'Cognitive',
     themeColor: '#005dcc',
-    msTileColor: '#000000',
+    msTileColor: '#005dcc',
     backgroundColor: '#081221',
   }
 }

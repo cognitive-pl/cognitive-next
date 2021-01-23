@@ -49,7 +49,7 @@ export default {
         .then(() => {
           this.$notification['success']({
             message: 'Great!',
-            description: 'You just made new unit, happy learning!',
+            description: 'You just add new flashcard set, simple as that!',
           });
         })
         .catch(() => {

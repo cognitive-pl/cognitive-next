@@ -1,13 +1,13 @@
 <template>
   <div id="app">
-    <a-layout v-if="$router.currentRoute.meta.requiresAuth" style="min-height: 100vh">
+    <a-layout v-if="$router.currentRoute.meta.requiresAuth" style="min-height: 100vh;">
       <a-layout-header class="header">
         <a-icon
           :type="collapsed ? 'menu-unfold' : 'menu-fold'"
           @click="() => {collapsed = !collapsed}"
         />
       </a-layout-header>
-      <a-layout style="position: relative">
+      <a-layout>
       <a-layout-sider
         v-model="collapsed"
         class="sidebar"
@@ -53,6 +53,9 @@
             </a-menu-item>
           </a-sub-menu>
         </a-menu>
+        <button @click="download()" class="sider__download">
+          <a-icon type="cloud-download"/>
+        </button>
       </a-layout-sider>
       <a-layout-content class="contentWrapper">
         <a-breadcrumb class="breadcrumb">
@@ -85,6 +88,9 @@ export default {
   methods: {
     logout() {
       auth.signOut();
+    },
+    download() {
+      console.log('download');
     },
   },
   data: function () {
@@ -125,6 +131,11 @@ export default {
     color: white;
     padding: 0 32px;
 
+    position: sticky;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+
     @media (min-width: 768px) {
       display: none;
     }
@@ -136,6 +147,10 @@ export default {
   }
 
   .sidebar {
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    left: 0;
 
     div {
       display: flex;
@@ -143,9 +158,10 @@ export default {
     }
 
     @media (max-width: 768px) {
-      height: 100%;
-      position: absolute;
+      height: calc(100vh - 64px);
+      position: fixed;
       z-index: 9999;
+      top: 64px;
     }
   }
 
@@ -153,6 +169,20 @@ export default {
     width: 40px;
     height: 40px;
     margin: 25px auto 0;
+  }
+
+  .sider__download {
+    background-color: #002140;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    font-size: 1.5em;
+    width: 100%;
+    padding: 20px 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
   }
 
   .breadcrumb {
