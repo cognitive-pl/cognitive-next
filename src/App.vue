@@ -53,7 +53,7 @@
             </a-menu-item>
           </a-sub-menu>
         </a-menu>
-        <button @click="download()" class="sider__download">
+        <button v-if="showDownload" @click="download()" class="sider__download">
           <a-icon type="cloud-download"/>
         </button>
       </a-layout-sider>
@@ -85,18 +85,55 @@ import { auth } from '@/initFirebase';
 
 export default {
   name: 'App',
+  data: function () {
+    return {
+      collapsed: false,
+      installPrompt: null,
+      showDownload: false,
+    };
+  },
+  beforeCreate() {
+    window.addEventListener('beforeinstallprompt', (e) => {
+      // Prevent the mini-infobar from appearing on mobile
+      e.preventDefault();
+      // Stash the event so it can be triggered later.
+      this.installPrompt = e;
+      // Update UI notify the user they can install the PWA
+      this.showDownload = true;
+    });
+  },
   methods: {
     logout() {
       auth.signOut();
     },
     download() {
-      console.log('download');
+      // Checking is installation available (it could be production mode too)
+      if (this.installPrompt) {
+        // Show the install prompt
+        this.installPrompt.prompt();
+        // Wait for the user to respond to the prompt
+        this.installPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            this.$notification['success']({
+              message: 'So happy to have you here',
+              description: 'App should be installed on your device',
+            });
+            // Hide the app provided install promotion
+            this.showDownload = false;
+          } else {
+            this.$notification['warning']({
+              message: 'Ouch',
+              description: "We're sorry to see that you don't want our app.",
+            });
+          }
+        });
+      } else {
+        this.$notification['warning']({
+          message: "Something isn't right",
+          description: "Right now it isn't possible to install the app, try again later",
+        });
+      }
     },
-  },
-  data: function () {
-    return {
-      collapsed: false,
-    };
   },
 };
 </script>
