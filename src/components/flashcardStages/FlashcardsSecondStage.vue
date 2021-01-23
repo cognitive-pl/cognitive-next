@@ -1,21 +1,21 @@
 <template>
   <div>
+    <p>Here you can add your cards to your set.</p>
+    <a-list item-layout="horizontal" :data-source="flashcardSet">
+      <a-list-item slot="renderItem" slot-scope="{ firstSide, secondSide }, index">
+        <a slot="actions">
+          <a-icon
+            type="minus-circle-o"
+            @click="handleCardRemove(index)"
+          />
+        </a>
+        <a-list-item-meta
+          :title="firstSide"
+          :description="secondSide"
+        ></a-list-item-meta>
+      </a-list-item>
+    </a-list>
     <a-form :form="form" :label-col="{ span: 5 }" :wrapper-col="{ span: 10 }" @submit="handleSubmit">
-      <p>Here you can add your cards to your set.</p>
-      <a-list item-layout="horizontal" :data-source="flashcardSet">
-        <a-list-item slot="renderItem" slot-scope="{ firstSide, secondSide }, index" :key="index">
-          <a slot="actions">
-            <a-icon
-              type="minus-circle-o"
-              @click="handleCardRemove(index)"
-            />
-          </a>
-          <a-list-item-meta
-            :title="firstSide"
-            :description="secondSide"
-          ></a-list-item-meta>
-        </a-list-item>
-      </a-list>
       <a-form-item label="First side">
         <a-input
           v-decorator="['firstSide', { rules: [{ required: true, message: 'Please input first side of flashcard!' }] }]"
