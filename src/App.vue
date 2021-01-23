@@ -15,6 +15,7 @@
         :collapsedWidth="0"
         :trigger="null"
       >
+        <img class="sidebar__logo" src="@/assets/logo.png" alt="Cognitive"/>
         <a-menu
           theme="dark"
           mode="vertical"
@@ -135,11 +136,23 @@ export default {
   }
 
   .sidebar {
+
+    div {
+      display: flex;
+      flex-direction: column;
+    }
+
     @media (max-width: 768px) {
       height: 100%;
       position: absolute;
       z-index: 9999;
     }
+  }
+
+  .sidebar__logo {
+    width: 35px;
+    height: 35px;
+    margin: 25px auto 0;
   }
 
   .breadcrumb {

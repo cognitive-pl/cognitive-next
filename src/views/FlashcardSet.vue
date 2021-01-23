@@ -2,7 +2,7 @@
   <div class="flashcardSet">
     <h2>{{flashcardSet.name}}</h2>
     <h4>{{flashcardSet.description}}</h4>
-    <a-card v-if="!allDone" class="flashcardSet__card" :bodyStyle="{padding: '50px 30px', textAlign: 'center'}">
+    <a-card v-if="!allDone" class="flashcardSet__card" :bodyStyle="{padding: '50px 25px', textAlign: 'center'}">
       <template slot="actions">
         <a-icon v-if="firstSide" key="eye" type="eye" style="font-size: 1.5em;" @click="reveal"/>
         <a-icon v-if="!firstSide" key="smile" type="smile" style="font
@@ -12,9 +12,9 @@
       <a-card-meta :description="firstSide ? presentCard.firstSide : presentCard.secondSide"></a-card-meta>
     </a-card>
 
-    <a-card v-if="!allDone" class="flashcardSet__card" :bodyStyle="{padding: '50px 30px', textAlign: 'center'}">
+    <a-card v-if="allDone" class="flashcardSet__card" :bodyStyle="{padding: '50px 25px', textAlign: 'center'}">
       <template slot="actions">
-        <a-icon key="sync" type="sync" style="font-size: 1.5em;" @click="reveal"/>
+        <a-icon key="sync" type="sync" style="font-size: 1.5em;" @click="restart"/>
       </template>
       <a-card-meta description="You revealed all set, you can restart it by clicking button below."></a-card-meta>
     </a-card>
@@ -31,24 +31,7 @@ export default {
       flashcardSet: [],
       firstSide: true,
       allDone: false,
-      visibleSet: [
-        {
-          firstSide: 'firstSide',
-          secondSide: 'secondSide',
-          section: 1,
-        },
-        {
-          firstSide: 'firstSide2',
-          secondSide: 'secondSide2',
-          section: 1,
-        },
-        {
-          firstSide: 'firstSide3',
-          secondSide: 'secondSide3',
-          section: 1,
-        },
-      ],
-      updateSet: [],
+      visibleSet: [],
       presentCard: {},
     };
   },
@@ -61,11 +44,15 @@ export default {
       flashcardSetRef.get()
         .then((doc) => {
           this.flashcardSet = doc.data();
-          // this.visibleSet = this.flashcardSet.set;
-          // this.visibleSet = this.visibleSet.filter(({ done }) => !done);
-          this.updateSet = this.visibleSet;
+          this.visibleSet = this.flashcardSet.set;
           this.presentCard = { ...this.visibleSet[0] };
         })
+        .catch(() => this.$message.error('Something went wrong with database connection...'));
+    },
+    updateData() {
+      db.collection('flashcards')
+        .doc(this.$route.params.id)
+        .update({ set: this.visibleSet })
         .catch(() => this.$message.error('Something went wrong with database connection...'));
     },
     reveal() {
@@ -81,10 +68,7 @@ export default {
 
       if (this.visibleSet.filter(({ section }) => section < 5).length === 0) this.allDone = true;
 
-      db.collection('flashcards')
-        .doc(this.$route.params.id)
-        .update({ set: this.visibleSet })
-        .catch(() => this.$message.error('Something went wrong with database connection...'));
+      this.updateData();
 
       this.presentCard = { ...this.visibleSet[0] };
 
@@ -101,9 +85,25 @@ export default {
       this.visibleSet.shift();
       this.visibleSet = this.visibleSet.sort(({ section: sectionA }, { section: sectionB }) => sectionA - sectionB);
 
-      this.visibleSet = this.visibleSet.filter(({ done }) => !done);
+      this.updateData();
+
       this.presentCard = { ...this.visibleSet[0] };
       this.firstSide = true;
+    },
+    restart() {
+      this.visibleSet.forEach((card) => {
+        const cardIndex = this.visibleSet.findIndex((cardSearch) => cardSearch === card);
+        this.visibleSet[cardIndex] = {
+          ...card,
+          section: 1,
+        };
+      });
+
+      this.updateData();
+
+      this.presentCard = { ...this.visibleSet[0] };
+      this.firstSide = true;
+      this.allDone = false;
     },
   },
 };
@@ -115,10 +115,18 @@ export default {
   max-width: 80vw;
   margin-top: 50px;
   font-weight: bold;
-  /* font-size: 1em; */
+  font-size: 1.1em;
 
   @media (min-width: 768px) {
-    max-width: 40vw;
+    max-width: 30vw;
+  }
+
+    @media (min-width: 1024px) {
+    max-width: 20vw;
+  }
+
+    @media (min-width: 1440px) {
+    max-width: 20vw;
   }
 }
 
