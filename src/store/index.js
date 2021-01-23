@@ -24,7 +24,7 @@ export default new Vuex.Store({
       bindFirestoreRef('units', db.collection('units').where('uid', '==', auth.currentUser.uid))
     )),
     bindFlashcardSets: firestoreAction(({ bindFirestoreRef }) => (
-      bindFirestoreRef('flashcards', db.collection('flashcards'))
+      bindFirestoreRef('flashcards', db.collection('flashcards').where('uid', '==', auth.currentUser.uid))
     )),
   },
   modules: {

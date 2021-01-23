@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { db } from '@/initFirebase';
+import { db, auth } from '@/initFirebase';
 
 export default {
   name: 'Unit',
@@ -59,17 +59,24 @@ export default {
       const unitRef = db.collection('units').doc(this.$route.params.id);
       unitRef.get()
         .then((doc) => {
-          this.unitObject = doc.data();
-          this.todaySessions = this.unitObject.parts.filter(({ date }) => {
-            const today = new Date();
-            const partDate = new Date(date);
-            return (
-              today.getDate() === partDate.getDate()
-              && today.getMonth() === partDate.getMonth()
-              && today.getFullYear() === partDate.getFullYear()
-            );
-          });
-          this.notDone = this.unitObject.parts.find(({ done }) => !done);
+          if (doc.data().uid === auth.currentUser.uid) {
+            this.unitObject = doc.data();
+            this.todaySessions = this.unitObject.parts.filter(({ date }) => {
+              const today = new Date();
+              const partDate = new Date(date);
+              return (
+                today.getDate() === partDate.getDate()
+                && today.getMonth() === partDate.getMonth()
+                && today.getFullYear() === partDate.getFullYear()
+              );
+            });
+            this.notDone = this.unitObject.parts.find(({ done }) => !done);
+          } else {
+            this.$notification['error']({
+              message: 'Something went wrong',
+              description: 'It seems like you are not the autor of this unit...',
+            });
+          }
         })
         .catch(() => this.$message.error('Something went wrong with database connection...'));
     },
