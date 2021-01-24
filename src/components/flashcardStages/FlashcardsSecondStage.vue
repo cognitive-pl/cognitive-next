@@ -17,14 +17,16 @@
     </a-list>
     <a-form :form="form" :label-col="{ span: 5 }" :wrapper-col="{ span: 10 }" @submit="handleSubmit">
       <a-form-item label="First side">
-        <a-input
-          v-decorator="['firstSide', { rules: [{ required: true, message: 'Please input first side of flashcard!' }] }]"
+        <a-textarea
           ref="firstSideInput"
+          v-decorator="['firstSide', { rules: [{ required: true, message: 'Please input first side of flashcard!' }] }]"
+          :auto-size="{ minRows: 2, maxRows: 4 }"
         />
       </a-form-item>
       <a-form-item label="Second side">
-        <a-input
+        <a-textarea
           v-decorator="['secondSide', { rules: [{ required: true, message: 'Please input second side of flashcard!' }] }]"
+          :auto-size="{ minRows: 2, maxRows: 4 }"
         />
       </a-form-item>
       <a-form-item :wrapper-col="{ offset: 5 }">
