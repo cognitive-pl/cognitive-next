@@ -169,7 +169,7 @@ export default {
     padding: 0 32px;
 
     position: sticky;
-    z-index: 9999;
+    z-index: 1000;
     top: 0;
     left: 0;
 
@@ -195,9 +195,9 @@ export default {
     }
 
     @media (max-width: 768px) {
-      height: calc(100vh - 64px);
+      height: calc(100% - 64px);
       position: fixed;
-      z-index: 9999;
+      z-index: 1000;
       top: 64px;
     }
   }
