@@ -5,5 +5,6 @@ module.exports = {
     themeColor: '#005dcc',
     msTileColor: '#005dcc',
     backgroundColor: '#081221',
+    start_url: './login/'
   }
 }
