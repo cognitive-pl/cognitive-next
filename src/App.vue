@@ -53,9 +53,12 @@
             </a-menu-item>
           </a-sub-menu>
         </a-menu>
-        <button v-if="showDownload" @click="download()" class="sider__download">
-          <a-icon type="cloud-download"/>
-        </button>
+        <div v-if="showDownload" class="sider__download">
+          <p>Download the app</p>
+          <button @click="download">
+            <a-icon type="cloud-download"/>
+          </button>
+        </div>
       </a-layout-sider>
       <a-layout-content class="contentWrapper">
         <a-breadcrumb class="breadcrumb">
@@ -209,17 +212,21 @@ export default {
   }
 
   .sider__download {
-    background-color: #002140;
-    border: none;
-    outline: none;
-    cursor: pointer;
     color: white;
-    font-size: 1.5em;
     width: 100%;
-    padding: 20px 0;
     position: absolute;
     bottom: 0;
     left: 0;
+    text-align: center;
+
+    button {
+      font-size: 1.5em;
+      background-color: #002140;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 20px 0;
+    }
   }
 
   .breadcrumb {
