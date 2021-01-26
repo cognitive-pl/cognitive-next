@@ -3,6 +3,15 @@
     <div v-if="unitObject">
       <h2>{{ unitObject.name }}</h2>
       <h4>{{ unitObject.description }}</h4>
+      <a-button type="primary" ghost>Edit</a-button>
+      <a-popconfirm
+        title="Are you sure?"
+        ok-text="Yes"
+        cancel-text="No"
+        @confirm="deleteDoc"
+      >
+        <a-button type="danger" ghost>Delete</a-button>
+      </a-popconfirm>
       <a-row :gutter="[24, { xs: 12, sm: 12, md: 0 }]" style="margin-top: 10px">
         <a-col :xs="{ span: 24 }" :md="{ span: 12 }" :lg="{ span: 8 }">
           <h3>Sessions for today:</h3>
@@ -49,6 +58,7 @@ export default {
       unitObject: {},
       todaySessions: '',
       notDone: '',
+      unitRef: null,
     };
   },
   mounted() {
@@ -57,6 +67,7 @@ export default {
   methods: {
     fetchData() {
       const unitRef = db.collection('units').doc(this.$route.params.id);
+      this.unitRef = unitRef;
       unitRef.get()
         .then((doc) => {
           if (doc.data().uid === auth.currentUser.uid) {
@@ -91,10 +102,16 @@ export default {
         done: true,
       };
 
-      db.collection('units')
-        .doc(this.$route.params.id)
+      this.unitRef
         .update({ parts: newParts })
         .then(() => this.fetchData())
+        .catch(() => this.$message.error('Something went wrong with database connection...'));
+    },
+    deleteDoc() {
+      this.unitRef.delete()
+        .then(() => {
+          this.$router.push({ path: '/app' });
+        })
         .catch(() => this.$message.error('Something went wrong with database connection...'));
     },
   },

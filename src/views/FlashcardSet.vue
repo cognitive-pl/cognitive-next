@@ -3,11 +3,18 @@
     <div v-if="visibleSet.length > 0">
       <h2>{{flashcardSet.name}}</h2>
       <h4>{{flashcardSet.description}}</h4>
+      <a-popconfirm
+        title="Are you sure?"
+        ok-text="Yes"
+        cancel-text="No"
+        @confirm="deleteDoc"
+      >
+        <a-button type="danger" ghost>Delete</a-button>
+      </a-popconfirm>
       <a-card v-if="!allDone" class="flashcardSet__card" :bodyStyle="{padding: '50px 25px', textAlign: 'center'}">
         <template slot="actions">
           <a-icon v-if="firstSide" key="eye" type="eye" style="font-size: 1.5em;" @click="reveal"/>
-          <a-icon v-if="!firstSide" key="smile" type="smile" style="font
-          -size: 1.5em; color: #4DBA87" @click="goodAnswear"/>
+          <a-icon v-if="!firstSide" key="smile" type="smile" style="font-size: 1.5em; color: #4DBA87" @click="goodAnswear"/>
           <a-icon v-if="!firstSide" key="frown" type="frown" style="font-size: 1.5em; color: #fe463a" @click="badAnswear"/>
         </template>
         <a-card-meta :description="firstSide ? presentCard.firstSide : presentCard.secondSide"></a-card-meta>
@@ -30,6 +37,7 @@ export default {
   name: 'FlashcardSet',
   data: function () {
     return {
+      flashcardSetRef: null,
       flashcardSet: [],
       firstSide: true,
       allDone: false,
@@ -43,6 +51,7 @@ export default {
   methods: {
     fetchData() {
       const flashcardSetRef = db.collection('flashcards').doc(this.$route.params.id);
+      this.flashcardSetRef = flashcardSetRef;
       flashcardSetRef.get()
         .then((doc) => {
           if (doc.data().uid === auth.currentUser.uid) {
@@ -59,8 +68,7 @@ export default {
         .catch(() => this.$message.error('Something went wrong with database connection...'));
     },
     updateData() {
-      db.collection('flashcards')
-        .doc(this.$route.params.id)
+      this.flashcardSetRef
         .update({ set: this.visibleSet })
         .catch(() => this.$message.error('Something went wrong with database connection...'));
     },
@@ -113,6 +121,13 @@ export default {
       this.presentCard = { ...this.visibleSet[0] };
       this.firstSide = true;
       this.allDone = false;
+    },
+    deleteDoc() {
+      this.flashcardSetRef.delete()
+        .then(() => {
+          this.$router.push({ path: '/flashcards' });
+        })
+        .catch(() => this.$message.error('Something went wrong with database connection...'));
     },
   },
 };
