@@ -8,5 +8,5 @@ module.exports = {
     manifestOptions: {
       start_url: '/app',
     },
-  }
-}
+  },
+};

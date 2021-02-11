@@ -13,8 +13,8 @@ export default function spreadOverTime(startDate, endDate, parts) {
       testParts.push(parts[index - 1]);
     } else if (index > 1) {
       testParts.push(part);
-      testParts.push(parts[index-1]);
-      testParts.push(parts[index-2]);
+      testParts.push(parts[index - 1]);
+      testParts.push(parts[index - 2]);
     } else testParts.push(part);
   });
   console.log(testParts);

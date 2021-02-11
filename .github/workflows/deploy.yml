@@ -11,6 +11,7 @@ jobs:
       - uses: actions/checkout@master
       - uses: actions/setup-node@master
       - run: npm install
+      - run: npm run test:unit
       - run: npm run build
       - name: GitHub Action for Firebase
         uses: w9jds/firebase-action@v2.0.0

@@ -3,7 +3,6 @@
     <div v-if="unitObject">
       <h2>{{ unitObject.name }}</h2>
       <h4>{{ unitObject.description }}</h4>
-      <a-button type="primary" ghost>Edit</a-button>
       <a-popconfirm
         title="Are you sure?"
         ok-text="Yes"
@@ -113,6 +112,9 @@ export default {
           this.$router.push({ path: '/app' });
         })
         .catch(() => this.$message.error('Something went wrong with database connection...'));
+    },
+    updateDoc() {
+      this.$router.push({ path: `/update-unit/${this.$route.params.id}` });
     },
   },
 };

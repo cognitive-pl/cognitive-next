@@ -4,6 +4,7 @@
       <a-form-item label="Name">
         <a-input
           v-decorator="['name', { rules: [{ required: true, message: 'Please input unit name!' }] }]"
+          :value="name"
         />
       </a-form-item>
       <a-form-item label="Description">
@@ -31,8 +32,25 @@
 <script>
 export default {
   name: 'FirstStage',
+  props: [
+    'basicInfo',
+  ],
+  data: function () {
+    return {
+      form: null,
+      name: '',
+      description: '',
+      deadline: null,
+    };
+  },
   beforeCreate() {
     this.form = this.$form.createForm(this, { name: 'unit' });
+  },
+  mounted() {
+    console.log(this.basicInfo);
+    this.name = this.basicInfo.name;
+    this.description = this.basicInfo.description;
+    this.deadline = this.basicInfo.deadline;
   },
   methods: {
     handleAddUnit(e) {

@@ -4,9 +4,11 @@ import Landing from '@/views/Landing.vue';
 import Login from '@/views/Login.vue';
 import AppView from '@/views/AppView.vue';
 import NewUnit from '@/views/NewUnit.vue';
+import UpdateUnit from '@/views/UpdateUnit.vue';
 import Unit from '@/views/Unit.vue';
 import Flashcards from '@/views/Flashcards.vue';
 import NewSet from '@/views/NewSet.vue';
+import UpdateSet from '@/views/UpdateSet.vue';
 import FlashcardSet from '@/views/FlashcardSet.vue';
 
 Vue.use(VueRouter);
@@ -45,6 +47,15 @@ const routes = [
     },
   },
   {
+    path: '/update-unit/:id',
+    name: 'Update Unit',
+    component: UpdateUnit,
+    meta: {
+      title: 'Update Unit',
+      requiresAuth: true,
+    },
+  },
+  {
     path: '/unit/:id',
     name: 'Unit',
     component: Unit,
@@ -68,6 +79,15 @@ const routes = [
     component: NewSet,
     meta: {
       title: 'New Set',
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/update-set/:id',
+    name: 'Update Flashcard Set',
+    component: UpdateSet,
+    meta: {
+      title: 'Update Flashcard Set',
       requiresAuth: true,
     },
   },

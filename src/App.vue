@@ -54,7 +54,7 @@
           </a-sub-menu>
         </a-menu>
         <div v-if="showDownload" class="sider__download">
-          <p>Download the app</p>
+          <p>Install the app</p>
           <button @click="download">
             <a-icon type="cloud-download"/>
           </button>
