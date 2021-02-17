@@ -113,9 +113,6 @@ export default {
         })
         .catch(() => this.$message.error('Something went wrong with database connection...'));
     },
-    updateDoc() {
-      this.$router.push({ path: `/update-unit/${this.$route.params.id}` });
-    },
   },
 };
 </script>

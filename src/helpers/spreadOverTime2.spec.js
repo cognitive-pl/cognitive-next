@@ -1,6 +1,7 @@
 import spreadOverTime from './spreadOverTime2';
+import isSameDay from 'date-fns/isSameDay';
 
-describe('Spread Ober Time Script', () => {
+describe('Spread Over Time Script', () => {
   const today = new Date();
   const tomorrow = new Date(today);
   tomorrow.setDate(today.getDate() + 1);
@@ -18,8 +19,17 @@ describe('Spread Ober Time Script', () => {
     expect(spreadOverTime).toBeTruthy();
   });
 
-  it('take props and give right array back', async () => {
-    const result = await spreadOverTime(tomorrow, endDate, exampleParts);
-    expect(result.length).toBe(exampleParts.length*3);
+  it('give right array back', async () => {
+    const results = await spreadOverTime(tomorrow, endDate, exampleParts);
+    expect(results.length).toBe(exampleParts.length*3);
+  });
+
+  it('return elements in right time interval', async () => {
+    const results = await spreadOverTime(tomorrow, endDate, exampleParts);
+    const firstDate = new Date(results[0].date);
+    const secondDate = new Date(results[results.length-1].date);
+
+    expect(firstDate > tomorrow || isSameDay(firstDate, tomorrow)).toBe(true);
+    expect(secondDate < endDate || isSameDay(secondDate, endDate)).toBe(true);
   });
 });
