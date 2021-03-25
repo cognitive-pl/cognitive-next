@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import spreadOverTime from '@/helpers/spreadOverTime2';
+import SpreadOverTime from '@/helpers/spreadOverTime';
 
 export default {
   name: 'FirstStage',
@@ -46,7 +46,7 @@ export default {
   beforeCreate() {
     this.form = this.$form.createForm(this, { name: 'time' });
   },
-  mounted() {
+  async mounted() {
     this.deadline = new Date(this.deadlineProp);
     this.parts = this.partsProp;
 
@@ -54,7 +54,7 @@ export default {
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
 
-    this.timeline = spreadOverTime(tomorrow, this.deadline, this.parts);
+    this.timeline = await new SpreadOverTime(tomorrow, this.deadline, this.parts).schedule();
   },
   methods: {
     handleSubmit(e) {

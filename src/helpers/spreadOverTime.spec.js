@@ -1,4 +1,4 @@
-import spreadOverTime from './spreadOverTime2';
+import SpreadOverTime from './spreadOverTime';
 import isSameDay from 'date-fns/isSameDay';
 
 describe('Spread Over Time Script', () => {
@@ -16,16 +16,16 @@ describe('Spread Over Time Script', () => {
   ];
 
   it('is truthy', () => {
-    expect(spreadOverTime).toBeTruthy();
+    expect(SpreadOverTime).toBeTruthy();
   });
 
   it('give right array back', async () => {
-    const results = await spreadOverTime(tomorrow, endDate, exampleParts);
+    const results = await new SpreadOverTime(tomorrow, endDate, exampleParts).schedule();
     expect(results.length).toBe(exampleParts.length*3);
   });
 
   it('return elements in right time interval', async () => {
-    const results = await spreadOverTime(tomorrow, endDate, exampleParts);
+    const results = await new SpreadOverTime(tomorrow, endDate, exampleParts).schedule();
     const firstDate = new Date(results[0].date);
     const secondDate = new Date(results[results.length-1].date);
 

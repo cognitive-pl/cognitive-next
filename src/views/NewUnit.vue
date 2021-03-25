@@ -11,7 +11,6 @@
   </div>
 </template>
 <script>
-import { db } from '@/initFirebase';
 import ThirdStage from '@/components/stages/ThirdStage.vue';
 import SecondStage from '@/components/stages/SecondStage.vue';
 import FirstStage from '@/components/stages/FirstStage.vue';
@@ -54,7 +53,7 @@ export default {
         uid: this.$store.state.user.uid,
       };
 
-      db.collection('units').add(dbData)
+      this.$service.newUnit(dbData)
         .then(() => {
           this.$notification['success']({
             message: 'Great!',

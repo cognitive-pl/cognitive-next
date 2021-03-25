@@ -10,6 +10,14 @@ export default class ServiceClass {
     this.fetchUnit = this.fetchUnit.bind(this);
   }
 
+  newUnit(dbData) {
+    return new Promise((resolve, reject) => {
+      db.collection('units').add(dbData)
+        .then(() => resolve())
+        .catch(() => reject());
+    });
+  }
+
   fetchUnit(id) {
     return new Promise((resolve, reject) => {
       this.unitRef = db.collection('units').doc(id);
