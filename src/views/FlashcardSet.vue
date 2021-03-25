@@ -31,8 +31,6 @@
 </template>
 
 <script>
-import { db, auth } from '@/initFirebase';
-
 export default {
   name: 'FlashcardSet',
   data: function () {
@@ -50,80 +48,65 @@ export default {
   },
   methods: {
     fetchData() {
-      const flashcardSetRef = db.collection('flashcards').doc(this.$route.params.id);
-      this.flashcardSetRef = flashcardSetRef;
-      flashcardSetRef.get()
-        .then((doc) => {
-          if (doc.data().uid === auth.currentUser.uid) {
-            this.flashcardSet = doc.data();
-            this.visibleSet = this.flashcardSet.set;
-            this.presentCard = { ...this.visibleSet[0] };
-          } else {
+      this.$service.fetchSet(this.$route.params.id)
+        .then(({ flashcardSet, visibleSet, presentCard }) => {
+          this.flashcardSet = flashcardSet;
+          this.visibleSet = visibleSet;
+          this.presentCard = presentCard;
+        })
+        .catch((reason) => {
+          if (reason == 'wrong user') {
             this.$notification['error']({
               message: 'Something went wrong',
-              description: 'It seems like you are not the autor of this set...',
+              description: 'It seems like you are not the autor of this unit...',
             });
-          }
-        })
-        .catch(() => this.$message.error('Something went wrong with database connection...'));
+          } else this.$message.error('Something went wrong with database connection...');
+        });
     },
     updateData() {
-      this.flashcardSetRef
-        .update({ set: this.visibleSet })
+      this.$service.updateSet()
         .catch(() => this.$message.error('Something went wrong with database connection...'));
     },
     reveal() {
       this.firstSide = false;
     },
     goodAnswear() {
-      const oldSection = this.presentCard.section;
-      if (this.presentCard.section < 5) this.presentCard.section++;
+      this.$service.checkGoodAnswer().then(({
+        allDone,
+        visibleSet,
+        presentCard,
+        passedNewSection,
+      }) => {
+        this.allDone = allDone;
+        this.visibleSet = visibleSet;
+        this.presentCard = presentCard;
 
-      this.visibleSet.push(this.presentCard);
-      this.visibleSet.shift();
-      this.visibleSet = this.visibleSet.sort(({ section: sectionA }, { section: sectionB }) => sectionA - sectionB);
-
-      if (this.visibleSet.filter(({ section }) => section < 5).length === 0) this.allDone = true;
-
-      this.updateData();
-
-      this.presentCard = { ...this.visibleSet[0] };
-
-      if (this.presentCard.section > oldSection) {
-        this.$notification['success']({
-          message: 'So awesome!',
-          description: "You've just finished flashcard session for today! (Better to come back a few days apart)",
-        });
-      }
-      this.firstSide = true;
+        if (passedNewSection) {
+          this.$notification['success']({
+            message: 'So awesome!',
+            description: "You've just finished flashcard session for today! (Better to come back a few days apart)",
+          });
+        }
+        this.firstSide = true;
+      });
     },
     badAnswear() {
-      this.visibleSet.push(this.presentCard);
-      this.visibleSet.shift();
-      this.visibleSet = this.visibleSet.sort(({ section: sectionA }, { section: sectionB }) => sectionA - sectionB);
-
-      this.updateData();
-
-      this.presentCard = { ...this.visibleSet[0] };
-      this.firstSide = true;
+      this.$service.checkBadAnswer().then(({ visibleSet, presentCard }) => {
+        this.visibleSet = visibleSet;
+        this.presentCard = presentCard;
+        this.firstSide = true;
+      });
     },
     restart() {
-      this.visibleSet.forEach((card) => {
-        const cardIndex = this.visibleSet.findIndex((cardSearch) => cardSearch === card);
-        this.visibleSet[cardIndex] = {
-          ...card,
-          section: 1,
-        };
+      this.$service.restartSet().then(({ visibleSet, presentCard }) => {
+        this.visibleSet = visibleSet;
+        this.presentCard = presentCard;
+        this.firstSide = true;
+        this.allDone = false;
       });
-
-      this.updateData();
-
-      this.presentCard = { ...this.visibleSet[0] };
-      this.firstSide = true;
-      this.allDone = false;
     },
     deleteDoc() {
-      this.flashcardSetRef.delete()
+      this.$service.deleteSet()
         .then(() => {
           this.$router.push({ path: '/flashcards' });
         })
