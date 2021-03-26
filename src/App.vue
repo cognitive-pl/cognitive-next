@@ -23,43 +23,43 @@
           class="menu"
         >
           <a-menu-item key="home">
-            <router-link to="/app">Home</router-link>
+            <router-link to="/app">{{ $t("appWrapper.home") }}</router-link>
           </a-menu-item>
           <a-sub-menu key="unit">
-            <span slot="title"><a-icon type="book"/>Unit</span>
+            <span slot="title"><a-icon type="book"/>{{ $t("appWrapper.unit") }}</span>
             <a-menu-item key="unit:1">
               <router-link to="/new-unit">
-                <a-icon type="plus-circle" /> Add new unit
+                <a-icon type="plus-circle" /> {{ $t("appWrapper.addUnit") }}
               </router-link>
             </a-menu-item>
           </a-sub-menu>
           <a-sub-menu key="flashcards">
-            <span slot="title"><a-icon type="appstore"/>Flashcards</span>
+            <span slot="title"><a-icon type="appstore"/>{{ $t("appWrapper.flashcards") }}</span>
             <a-menu-item key="flashcards:1">
               <router-link to="/flashcards">
-                <a-icon type="container" /> All sets
+                <a-icon type="container" /> {{ $t("appWrapper.allSets") }}
               </router-link>
             </a-menu-item>
             <a-menu-item key="flashcards:2">
               <router-link to="/new-set">
-                <a-icon type="plus-circle" /> Add new set
+                <a-icon type="plus-circle" /> {{ $t("appWrapper.addSet") }}
               </router-link>
             </a-menu-item>
           </a-sub-menu>
           <a-sub-menu key="account">
-            <span slot="title"><a-icon type="setting"/>Account</span>
+            <span slot="title"><a-icon type="setting"/>{{ $t("appWrapper.account") }}</span>
             <a-menu-item @click="logout()" key="account:1">
-              <a-icon type="logout" /> Logout
+              <a-icon type="logout" /> {{ $t("appWrapper.logout") }}
             </a-menu-item>
             <a-menu-item key="account:2">
               <router-link to="/support">
-                <dollar-icon type="icon-dollar1" :style="{color: 'green'}"/> Support
+                <dollar-icon type="icon-dollar1" :style="{color: 'green'}"/> {{ $t("appWrapper.support") }}
               </router-link>
             </a-menu-item>
           </a-sub-menu>
         </a-menu>
         <div v-if="showDownload" class="sider__download">
-          <p>Install the app</p>
+          <p>{{ $t("appWrapper.installPWA") }}</p>
           <button @click="download">
             <a-icon type="cloud-download"/>
           </button>
@@ -67,7 +67,7 @@
       </a-layout-sider>
       <a-layout-content class="contentWrapper">
         <a-breadcrumb class="breadcrumb">
-          <a-breadcrumb-item>Home</a-breadcrumb-item>
+          <a-breadcrumb-item>{{ $t("appWrapper.breadcrumb") }}</a-breadcrumb-item>
           <a-breadcrumb-item>{{this.$router.currentRoute.name}}</a-breadcrumb-item>
         </a-breadcrumb>
         <div class="contentWrapper__inner">
