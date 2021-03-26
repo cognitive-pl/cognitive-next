@@ -1,9 +1,9 @@
 <template>
   <div class="newUnit">
     <a-steps :current="stage" style="margin-bottom: 28px">
-      <a-step title="Basic info" />
-      <a-step title="Material parts" />
-      <a-step title="Division over time" />
+      <a-step :title='$t("newUnit.firstStage.title")' />
+      <a-step :title='$t("newUnit.secondStage.title")' />
+      <a-step :title='$t("newUnit.thirdStage.title")' />
     </a-steps>
     <FirstStage @infoSubmit="handleInfoSubmit" v-show="stage === 0"/>
     <SecondStage @partsSubmit="handlePartsSubmit" @back="prev()" v-show="stage === 1" />
@@ -56,14 +56,14 @@ export default {
       this.$service.newUnit(dbData)
         .then(() => {
           this.$notification['success']({
-            message: 'Great!',
-            description: 'You just made new unit, happy learning!',
+            message: this.$t('newUnit.messages.success.title'),
+            description: this.$t('newUnit.messages.success.description'),
           });
         })
         .catch(() => {
           this.$notification['warning']({
-            message: 'Oh, something went wrong...',
-            description: 'It looks like there are some problems with databse, please try again later...',
+            message: this.$t('newUnit.messages.warning.title'),
+            description: this.$t('newUnit.messages.warning.description'),
           });
         });
     },

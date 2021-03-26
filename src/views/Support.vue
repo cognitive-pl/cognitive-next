@@ -10,7 +10,7 @@
           </a>
         </a-card>
       </a-col>
-      <a-col :xs="{ span: 20, offset: 1 }" :lg="{ span: 7, offset: 2 }" :xl="{ span: 5, offset: 2 }">
+      <a-col :xs="{ span: 20, offset: 1 }" :lg="{ span: 7, offset: 2 }" :xl="{ span: 6, offset: 2 }">
         <a-card class="card" title="Support once">
           <a href="https://buymeacoffee.com/askubala" target="_blank">
             <button>Buy a coffe ☕</button>

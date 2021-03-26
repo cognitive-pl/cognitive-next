@@ -31,6 +31,50 @@ const messages = {
       everythingDone: 'Wszystko zrobione!',
       noSession: 'Nie ma żadnej sesji na dzisiaj',
     },
+    newUnit: {
+      firstStage: {
+        title: 'Podstawowe informacje',
+        button: 'Następny krok',
+        error: 'Nie wybieraj daty wcześniejszej niż jutro',
+        name: {
+          label: 'Nazwa',
+          message: 'Proszę wpisać nazwę!',
+        },
+        description: 'Opis',
+        deadline: {
+          label: 'Termin',
+          message: 'Proszę podać termin!',
+        },
+      },
+      secondStage: {
+        title: 'Części materiału',
+        description: 'Podziel cały materiał na części, których będziesz się uczył przez czas jednej sesji.',
+        nextStep: 'Nastepny krok',
+        previousStep: 'Poprzedni krok',
+        error: 'Proszę podać przynajmniej jedną część',
+        addPart: 'Dodaj część',
+        parts: {
+          label: 'Części',
+          message: 'Proszę podać część!',
+        },
+      },
+      thirdStage: {
+        title: 'Podział w czasie',
+        description: 'Te daty proponujemy jako dni przeznaczone na sesje nauki:',
+        previousStep: 'Poprzedni krok',
+        addUnit: 'Dodaj dział',
+      },
+      messages: {
+        success: {
+          title: 'Świetnie!',
+          description: 'Właśnie stworzyłeś nowy dział, miłej nauki!',
+        },
+        warning: {
+          title: 'Ou, coś poszło nie tak...',
+          description: 'Wygląda na to, że mamy drobne problemy z bazą danych, spróbuj ponownie później',
+        },
+      },
+    },
   },
   en: {
     appWrapper: {
@@ -63,6 +107,50 @@ const messages = {
       material: 'Parts of material:',
       everythingDone: "Everything's done!",
       noSession: 'No session for today',
+    },
+    newUnit: {
+      firstStage: {
+        title: 'Basic info',
+        button: 'Next step',
+        error: 'Do not pick a date prior to tommorow',
+        name: {
+          label: 'Name',
+          message: 'Please input unit name!',
+        },
+        description: 'Description',
+        deadline: {
+          label: 'Deadline',
+          message: 'Please input deadline!',
+        },
+      },
+      secondStage: {
+        title: 'Material parts',
+        description: 'Divide whole material into parts that you will learn in time of one session.',
+        nextStep: 'Next step',
+        previousStep: 'Previous step',
+        error: 'Please input at least one part',
+        addPart: 'Add part',
+        parts: {
+          label: 'Parts',
+          message: 'Please input any part!',
+        },
+      },
+      thirdStage: {
+        title: 'Division over time',
+        description: 'These are dates we propose as days for learning sessions:',
+        previousStep: 'Previous step',
+        addUnit: 'Add unit',
+      },
+      messages: {
+        success: {
+          title: 'Great!',
+          description: 'You just made new unit, happy learning!',
+        },
+        warning: {
+          title: 'Oh, something went wrong...',
+          description: 'It looks like there are some problems with database, please try again later',
+        },
+      },
     },
   },
 };
