@@ -17,6 +17,20 @@ const messages = {
       welcome: 'Witaj {name}!',
       open: 'Otwórz',
     },
+    unit: {
+      popConfirm: {
+        title: 'Na pewno?',
+        ok: 'Tak',
+        cancel: 'Nie',
+      },
+      delete: 'Usuń dział',
+      sessionsToday: 'Sesje na dziś:',
+      lastPart: 'Ostatnia niezrobiona część:',
+      markAsDone: 'Zaznacz sesję jako zrobioną',
+      material: 'Części materiału:',
+      everythingDone: 'Wszystko zrobione!',
+      noSession: 'Nie ma żadnej sesji na dzisiaj',
+    },
   },
   en: {
     appWrapper: {
@@ -35,6 +49,20 @@ const messages = {
     home: {
       welcome: 'Hi, {name}!',
       open: 'Open',
+    },
+    unit: {
+      popConfirm: {
+        title: 'Are you sure?',
+        ok: 'Yes',
+        cancel: 'No',
+      },
+      delete: 'Delete',
+      sessionsToday: 'Sessions for today:',
+      lastPart: 'Last not done part:',
+      markAsDone: 'Mark session as done',
+      material: 'Parts of material:',
+      everythingDone: "Everything's done!",
+      noSession: 'No session for today',
     },
   },
 };

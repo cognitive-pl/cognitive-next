@@ -4,31 +4,31 @@
       <h2>{{ unitObject.name }}</h2>
       <h4>{{ unitObject.description }}</h4>
       <a-popconfirm
-        title="Are you sure?"
-        ok-text="Yes"
-        cancel-text="No"
+        :title='$t("unit.popConfirm.title")'
+        :ok-text='$t("unit.popConfirm.ok")'
+        :cancel-text='$t("unit.popConfirm.cancel")'
         @confirm="deleteDoc"
       >
-        <a-button type="danger" ghost>Delete</a-button>
+        <a-button type="danger" ghost>{{ $t("unit.delete") }}</a-button>
       </a-popconfirm>
       <a-row :gutter="[24, { xs: 12, sm: 12, md: 0 }]" style="margin-top: 10px">
         <a-col :xs="{ span: 24 }" :md="{ span: 12 }" :lg="{ span: 8 }">
-          <h3>Sessions for today:</h3>
+          <h3>{{ $t("unit.sessionsToday") }}</h3>
           <ol v-if="todaySessions.length > 0">
             <li v-for="({ content }, index) in todaySessions" :key="index">
               {{ content }}
             </li>
           </ol>
-          {{todaySessions.length === 0 ? 'No sessions for today': null}}
+          {{todaySessions.length === 0 ? $t('unit.noSession'): null}}
         </a-col>
         <a-col :xs="{ span: 24 }" :md="{ span: 12 }" :lg="{ span: 8 }">
-          <h3>Last not done part</h3>
-          {{notDone ? notDone.content : "Everything's done!"}}
+          <h3>{{ $t("unit.lastPart") }}</h3>
+          {{notDone ? notDone.content : $t("unit.everythingDone")}}
           <br/>
-          <a-button type="primary" style="margin-top: 15px" @click="markAsDone" :disabled="!notDone">Mark session as done</a-button>
+          <a-button type="primary" style="margin-top: 15px" @click="markAsDone" :disabled="!notDone">{{ $t("unit.markAsDone") }}</a-button>
         </a-col>
       </a-row>
-      <p style="margin-top: 25px">Parts of material:</p>
+      <p style="margin-top: 25px">{{ $t("unit.material") }}</p>
       <ul>
         <li v-for="({ content, date, done }, index) in unitObject.parts" :key="index">
           <a-badge
