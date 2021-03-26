@@ -48,8 +48,6 @@
 </template>
 
 <script>
-import { db, auth } from '@/initFirebase';
-
 export default {
   name: 'Unit',
   data: function () {
@@ -65,49 +63,31 @@ export default {
   },
   methods: {
     fetchData() {
-      const unitRef = db.collection('units').doc(this.$route.params.id);
-      this.unitRef = unitRef;
-      unitRef.get()
-        .then((doc) => {
-          if (doc.data().uid === auth.currentUser.uid) {
-            this.unitObject = doc.data();
-            this.todaySessions = this.unitObject.parts.filter(({ date }) => {
-              const today = new Date();
-              const partDate = new Date(date);
-              return (
-                today.getDate() === partDate.getDate()
-                && today.getMonth() === partDate.getMonth()
-                && today.getFullYear() === partDate.getFullYear()
-              );
-            });
-            this.notDone = this.unitObject.parts.find(({ done }) => !done);
-          } else {
+      this.$service.fetchUnit(this.$route.params.id)
+        .then(({ unitObject, notDone, todaySessions }) => {
+          this.unitObject = unitObject;
+          this.notDone = notDone;
+          this.todaySessions = todaySessions;
+        })
+        .catch((reason) => {
+          if (reason == 'wrong user') {
             this.$notification['error']({
               message: 'Something went wrong',
               description: 'It seems like you are not the autor of this unit...',
             });
-          }
-        })
-        .catch(() => this.$message.error('Something went wrong with database connection...'));
+          } else this.$message.error('Something went wrong with database connection...');
+        });
     },
     isTodaySession(index) {
       return this.todaySessions.includes(this.unitObject.parts[index]);
     },
     markAsDone() {
-      const notDoneIndex = this.unitObject.parts.findIndex((part) => part === this.notDone);
-      const newParts = [...this.unitObject.parts];
-      newParts[notDoneIndex] = {
-        ...this.notDone,
-        done: true,
-      };
-
-      this.unitRef
-        .update({ parts: newParts })
+      this.$service.markSessionAsDone()
         .then(() => this.fetchData())
         .catch(() => this.$message.error('Something went wrong with database connection...'));
     },
     deleteDoc() {
-      this.unitRef.delete()
+      this.$service.deleteUnit()
         .then(() => {
           this.$router.push({ path: '/app' });
         })

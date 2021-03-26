@@ -6,9 +6,11 @@ import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import { auth } from './initFirebase';
+import ServiceClass from './service';
 
 Vue.use(Antd);
 Vue.config.productionTip = false;
+Vue.prototype.$service = new ServiceClass(Vue);
 
 router.afterEach((to) => {
   Vue.nextTick(() => {

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Landing from '@/views/Landing.vue';
 import Login from '@/views/Login.vue';
 import AppView from '@/views/AppView.vue';
+import Support from '@/views/Support.vue';
 import NewUnit from '@/views/NewUnit.vue';
 import UpdateUnit from '@/views/UpdateUnit.vue';
 import Unit from '@/views/Unit.vue';
@@ -25,6 +26,15 @@ const routes = [
     component: AppView,
     meta: {
       title: 'App',
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/support',
+    name: 'Support',
+    component: Support,
+    meta: {
+      title: 'Support',
       requiresAuth: true,
     },
   },

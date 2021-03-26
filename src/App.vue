@@ -51,6 +51,11 @@
             <a-menu-item @click="logout()" key="account:1">
               <a-icon type="logout" /> Logout
             </a-menu-item>
+            <a-menu-item key="account:2">
+              <router-link to="/support">
+                <dollar-icon type="icon-dollar1" :style="{color: 'green'}"/> Support
+              </router-link>
+            </a-menu-item>
           </a-sub-menu>
         </a-menu>
         <div v-if="showDownload" class="sider__download">
@@ -85,6 +90,11 @@
 
 <script>
 import { auth } from '@/initFirebase';
+import { Icon } from 'ant-design-vue';
+
+const DollarIcon = Icon.createFromIconfontCN({
+  scriptUrl: '//at.alicdn.com/t/font_2445976_dcplbpjao9.js',
+});
 
 export default {
   name: 'App',
@@ -94,6 +104,9 @@ export default {
       installPrompt: null,
       showDownload: false,
     };
+  },
+  components: {
+    'dollar-icon': DollarIcon,
   },
   beforeCreate() {
     window.addEventListener('beforeinstallprompt', (e) => {

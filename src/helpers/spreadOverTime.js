@@ -1,48 +1,78 @@
-export default function spreadOverTime(startDate, endDate, parts) {
-  const tasksAmount = parts.length;
-  const diffTime = Math.abs(startDate - endDate);
-  const daysAmount = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  const multiplier = (daysAmount - 1) / tasksAmount;
-  const daysList = [];
-  const newParts = [];
+import add from 'date-fns/add';
 
-  const testParts = [];
-  parts.forEach((part, index) => {
-    if (index === 1) {
-      testParts.push(part);
-      testParts.push(parts[index - 1]);
-    } else if (index > 1) {
-      testParts.push(part);
-      testParts.push(parts[index - 1]);
-      testParts.push(parts[index - 2]);
-    } else testParts.push(part);
-  });
-  console.log(testParts);
+export default class SpreadOverTime {
+  constructor(startDate, endDate, parts) {
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.parts = parts;
 
-  if (daysAmount == tasksAmount) {
-    for (let i = 0; i < tasksAmount; i++) {
-      daysList.push(i);
-    }
-  } else if (daysAmount - 2 >= tasksAmount) {
-    for (let i = 0; i < tasksAmount; i++) {
-      daysList.push(i * Math.round(multiplier));
-    }
-  } else if (daysAmount - 1 <= tasksAmount) {
-    for (let i = 0; i < tasksAmount; i++) {
-      daysList.push(Math.floor(i * multiplier));
+    this.tasksAmount = this.parts.length + 2;
+    this.diffTime = Math.abs(this.startDate - this.endDate);
+    this.daysAmount = Math.ceil(this.diffTime / (1000 * 60 * 60 * 24));
+    this.multiplier = (this.daysAmount - 1) / this.tasksAmount;
+    this.newParts = [];
+
+    this.partDate = startDate;
+  }
+
+  schedule() {
+    if (this.daysAmount == this.tasksAmount) {
+      return this.schedulingScript((firstDate, days) => add(firstDate, { days }));
+    } else if ((this.daysAmount - 2) >= this.tasksAmount) {
+      return this.schedulingScript((firstDate, days) => add(firstDate, {
+        days: days * Math.round(this.multiplier),
+      }));
+    } else if ((this.daysAmount - 1) <= this.tasksAmount) {
+      return this.schedulingScript((firstDate, days) => add(firstDate, {
+        days: Math.floor(days * this.multiplier),
+      }));
     }
   }
 
-  const partDate = startDate;
-  const startDay = startDate.getDate();
-  parts.map((content, index) => {
-    partDate.setDate(startDay + daysList[index]);
+  schedulingScript(makeNewDate) {
+    this.parts.forEach((part, i) => {
+      const updatedDate = makeNewDate(this.partDate, i);
 
-    newParts.push({
-      content,
-      date: new Date(partDate).toString(),
+      if (i === 1) {
+        this.newParts.push({
+          content: part,
+          date: new Date(updatedDate).toString(),
+        }, {
+          content: `${this.parts[i - 1]} (repetition 1)`,
+          date: new Date(updatedDate).toString(),
+        });
+      } else if (i > 1) {
+        this.newParts.push({
+          content: part,
+          date: new Date(updatedDate).toString(),
+        }, {
+          content: `${this.parts[i - 1]} (repetition 1)`,
+          date: new Date(updatedDate).toString(),
+        }, {
+          content: `${this.parts[i - 2]} (repetition 2)`,
+          date: new Date(updatedDate).toString(),
+        });
+      } else {
+        this.newParts.push({
+          content: part,
+          date: new Date(updatedDate).toString(),
+        });
+      }
     });
-  });
 
-  return newParts;
+    const updatedDate = makeNewDate(this.partDate, this.parts.length);
+    const updatedDate2 = makeNewDate(this.partDate, this.parts.length + 1);
+    this.newParts.push({
+      content: `${this.parts[this.parts.length - 1]} (repetition 1)`,
+      date: new Date(updatedDate).toString(),
+    }, {
+      content: `${this.parts[this.parts.length - 2]} (repetition 2)`,
+      date: new Date(updatedDate).toString(),
+    }, {
+      content: `${this.parts[this.parts.length - 1]} (repetition 2)`,
+      date: new Date(updatedDate2).toString(),
+    });
+
+    return this.newParts;
+  }
 }
