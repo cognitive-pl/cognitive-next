@@ -1,12 +1,20 @@
 import Vue from 'vue';
+import VueI18n from 'vue-i18n';
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
+import i18nData from './helpers/i18n';
 import App from './App.vue';
 import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import { auth } from './initFirebase';
 import ServiceClass from './service';
+
+Vue.use(VueI18n);
+const i18n = new VueI18n({
+  locale: 'pl', // set locale
+  messages: i18nData, // set locale messages
+});
 
 Vue.use(Antd);
 Vue.config.productionTip = false;
@@ -21,6 +29,7 @@ router.afterEach((to) => {
 new Vue({
   router,
   store,
+  i18n,
   created: function () {
     router.beforeEach((to, from, next) => {
       if (to.meta.requiresAuth && !auth.currentUser) {
