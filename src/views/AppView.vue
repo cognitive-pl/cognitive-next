@@ -5,7 +5,7 @@
         <a-card :title="name" v-for="({ name, description, id }, index) in units" :key="index">
           <a slot="extra">
             <router-link :to="'/unit/'+id">
-              Open
+              {{ $t("home.open") }}
               <a-icon type="right" />
             </router-link>
           </a>
