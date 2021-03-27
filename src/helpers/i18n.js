@@ -100,6 +100,19 @@ const messages = {
         databaseError: 'Coś poszło nie tak z połączeniem z bazą danych...',
       },
     },
+    support: {
+      title: 'Wesprzyj <span class="title">Cognitive</span>',
+      description: 'To świetnie, że chcesz wesprzeć mój projekt 😻<br/> Przygotowałem dwa sposoby na zrobienie tego:',
+      subscription: {
+        title: 'Subskrypcja',
+        prize: '5 zł / miesiąc',
+      },
+      supportOnce: {
+        title: 'Wesprzyj raz',
+        coffee: 'Kup mi kawę ☕',
+        prize: '10 zł / raz',
+      },
+    },
   },
   en: {
     appWrapper: {
@@ -200,6 +213,19 @@ const messages = {
           description: 'It seems like you are not the autor of this flashcard set...',
         },
         databaseError: 'Something went wrong with database connection...',
+      },
+    },
+    support: {
+      title: 'Support <span class="title">Cognitive</span>',
+      description: "It's awesome that you want to support my project 😻<br/> I prepared two ways for doing that:",
+      subscription: {
+        title: 'Subscription',
+        prize: '5 PLN / month',
+      },
+      supportOnce: {
+        title: 'Support once',
+        coffee: 'Buy a coffe ☕',
+        prize: '10 PLN / once',
       },
     },
   },
