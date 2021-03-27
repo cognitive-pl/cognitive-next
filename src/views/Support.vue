@@ -1,22 +1,22 @@
 <template>
   <div class="support">
-    <h1>Support <span class="title">Cognitive</span></h1>
-    <p>It's awesome that you want to support my project 😻<br/> I prepared two ways for doing that: </p>
+    <h1 v-html="$t('support.title')"></h1>
+    <p v-html="$t('support.description')"></p>
     <a-row :gutter="[16, 20]" style="margin-top: 30px">
       <a-col :xs="{ span: 20, offset: 1 }" :lg="{ span: 7, offset: 4 }" :xl="{ span: 5, offset: 6 }" >
-        <a-card class="card" title="Subscription">
+        <a-card class="card" :title="$t('support.subscription.title')">
           <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Y7VCYA25JRYS4" target="_blank">
-            <button>5 PLN / month</button>
+            <button>{{ $t('support.subscription.prize') }}</button>
           </a>
         </a-card>
       </a-col>
-      <a-col :xs="{ span: 20, offset: 1 }" :lg="{ span: 7, offset: 2 }" :xl="{ span: 5, offset: 2 }">
-        <a-card class="card" title="Support once">
+      <a-col :xs="{ span: 20, offset: 1 }" :lg="{ span: 7, offset: 2 }" :xl="{ span: 6, offset: 2 }">
+        <a-card class="card" :title="$t('support.supportOnce.title')">
           <a href="https://buymeacoffee.com/askubala" target="_blank">
-            <button>Buy a coffe ☕</button>
+            <button>{{ $t('support.supportOnce.coffee') }}</button>
           </a>
           <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HCSTEPKKGVJ3J" target="_blank">
-            <button>10 PLN / once</button>
+            <button>{{ $t('support.supportOnce.prize') }}</button>
           </a>
         </a-card>
       </a-col>
@@ -69,8 +69,9 @@ export default {
         cursor: pointer;
         border-radius: 5px;
         transition: transform .3s ease-out;
+        position: relative;
 
-        &:hover {
+        &:hover, &:focus {
           transform: translateY(-3px);
         }
       }

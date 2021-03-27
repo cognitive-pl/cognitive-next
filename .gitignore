@@ -4,6 +4,7 @@ node_modules
 
 
 # local env files
+credentials.json
 .env.local
 .env.*.local
 

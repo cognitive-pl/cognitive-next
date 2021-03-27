@@ -1,11 +1,11 @@
 <template>
   <div class="main">
-    <h1>Hi {{$store.state.user.displayName}}!</h1>
+    <h1>{{ $t("home.welcome", { name: $store.state.user.displayName }) }}</h1>
       <div class="main__grid" v-if="units.length > 0">
         <a-card :title="name" v-for="({ name, description, id }, index) in units" :key="index">
           <a slot="extra">
             <router-link :to="'/unit/'+id">
-              Open
+              {{ $t("home.open") }}
               <a-icon type="right" />
             </router-link>
           </a>

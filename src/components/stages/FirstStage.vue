@@ -1,27 +1,27 @@
 <template>
   <div>
     <a-form :form="form" :label-col="{ span: 5 }" :wrapper-col="{ span: 9 }" @submit="handleAddUnit">
-      <a-form-item label="Name">
+      <a-form-item :label="$t('newUnit.firstStage.name.label')">
         <a-input
-          v-decorator="['name', { rules: [{ required: true, message: 'Please input unit name!' }] }]"
+          v-decorator="['name', { rules: [{ required: true, message: $t('newUnit.firstStage.name.message') }] }]"
         />
       </a-form-item>
-      <a-form-item label="Description">
+      <a-form-item :label="$t('newUnit.firstStage.description')">
         <a-textarea
-          v-decorator="['description', { rules: [{ required: false, message: 'Please input description!' }] }]"
+          v-decorator="['description', { rules: [{ required: false }] }]"
           :auto-size="{ minRows: 2, maxRows: 6 }"
         />
       </a-form-item>
-      <a-form-item label="Deadline">
+      <a-form-item :label="$t('newUnit.firstStage.deadline.label')">
         <a-date-picker
-          v-decorator="['deadline', { rules: [{ required: true, message: 'Please input deadline!' }] }]"
+          v-decorator="['deadline', { rules: [{ required: true, message: $t('newUnit.firstStage.deadline.message') }] }]"
           show-time
           format="YYYY-MM-DD HH:mm:ss"
         />
       </a-form-item>
       <a-form-item>
         <a-button type="primary" html-type="submit">
-          Next step
+          {{ $t('newUnit.firstStage.button') }}
         </a-button>
       </a-form-item>
     </a-form>
@@ -40,7 +40,7 @@ export default {
       this.form.validateFields((err, fieldsValue) => {
         if (err) return;
         if (fieldsValue['deadline'] < new Date()) {
-          this.$message.error('Do not pick a date prior to tommorow');
+          this.$message.error(this.$t('newUnit.firstStage.error'));
           return;
         }
 

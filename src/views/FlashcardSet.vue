@@ -4,12 +4,12 @@
       <h2>{{flashcardSet.name}}</h2>
       <h4>{{flashcardSet.description}}</h4>
       <a-popconfirm
-        title="Are you sure?"
-        ok-text="Yes"
-        cancel-text="No"
+        :title="$t('flashcardSet.popConfirm.title')"
+        :ok-text="$t('flashcardSet.popConfirm.ok')"
+        :cancel-text="$t('flashcardSet.popConfirm.cancel')"
         @confirm="deleteDoc"
       >
-        <a-button type="danger" ghost>Delete</a-button>
+        <a-button type="danger" ghost>{{$t('flashcardSet.delete')}}</a-button>
       </a-popconfirm>
       <a-card v-if="!allDone" class="flashcardSet__card" :bodyStyle="{padding: '50px 25px', textAlign: 'center'}">
         <template slot="actions">
@@ -24,7 +24,7 @@
         <template slot="actions">
           <a-icon key="sync" type="sync" style="font-size: 1.5em;" @click="restart"/>
         </template>
-        <a-card-meta description="You revealed all set, you can restart it by clicking button below."></a-card-meta>
+        <a-card-meta :description="$t('flashcardSet.allDone')"></a-card-meta>
       </a-card>
     </div>
   </div>
@@ -57,15 +57,15 @@ export default {
         .catch((reason) => {
           if (reason == 'wrong user') {
             this.$notification['error']({
-              message: 'Something went wrong',
-              description: 'It seems like you are not the autor of this unit...',
+              message: this.$t('flashcardSet.messages.wrongUser.title'),
+              description: this.$t('flashcardSet.messages.wrongUser.description'),
             });
-          } else this.$message.error('Something went wrong with database connection...');
+          } else this.$message.error(this.$t('flashcardSet.messages.databaseError'));
         });
     },
     updateData() {
       this.$service.updateSet()
-        .catch(() => this.$message.error('Something went wrong with database connection...'));
+        .catch(() => this.$message.error(this.$t('flashcardSet.messages.databaseError')));
     },
     reveal() {
       this.firstSide = false;
@@ -83,8 +83,8 @@ export default {
 
         if (passedNewSection) {
           this.$notification['success']({
-            message: 'So awesome!',
-            description: "You've just finished flashcard session for today! (Better to come back a few days apart)",
+            message: this.$t('flashcardSet.messages.sessionDone.title'),
+            description: this.$t('flashcardSet.messages.sessionDone.description'),
           });
         }
         this.firstSide = true;
@@ -110,7 +110,7 @@ export default {
         .then(() => {
           this.$router.push({ path: '/flashcards' });
         })
-        .catch(() => this.$message.error('Something went wrong with database connection...'));
+        .catch(() => this.$message.error(this.$t('flashcardSet.messages.databaseError')));
     },
   },
 };
