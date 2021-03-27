@@ -69,8 +69,9 @@ export default {
         cursor: pointer;
         border-radius: 5px;
         transition: transform .3s ease-out;
+        position: relative;
 
-        &:hover {
+        &:hover, &:focus {
           transform: translateY(-3px);
         }
       }

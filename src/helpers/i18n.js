@@ -75,6 +75,31 @@ const messages = {
         },
       },
     },
+    flashcards: {
+      welcome: 'Twoje zestawy fiszek',
+      openButton: 'Otwórz',
+      cards: 'karty',
+    },
+    flashcardSet: {
+      allDone: 'Przejrzałeś cały zestaw, możesz go odnowić klikając w przycisk poniżej.',
+      delete: 'Usuń',
+      popConfirm: {
+        title: 'Na pewno?',
+        ok: 'Tak',
+        cancel: 'Nie',
+      },
+      messages: {
+        sessionDone: {
+          title: 'Świetnie!',
+          description: 'Właśnie ukończyłes dzisiejszą sesję pracy z fiszkami! (Wrócić lepiej po paru dniach przerwy)',
+        },
+        wrongUser: {
+          title: 'Coś poszło nie tak',
+          description: 'Wygląda na to, że nie jesteś autorem tego zestawu fiszek...',
+        },
+        databaseError: 'Coś poszło nie tak z połączeniem z bazą danych...',
+      },
+    },
   },
   en: {
     appWrapper: {
@@ -150,6 +175,31 @@ const messages = {
           title: 'Oh, something went wrong...',
           description: 'It looks like there are some problems with database, please try again later',
         },
+      },
+    },
+    flashcards: {
+      welcome: 'Your flashcard sets',
+      openButton: 'Open',
+      cards: 'card(s)',
+    },
+    flashcardSet: {
+      allDone: 'You revealed all set, you can restart it by clicking button below.',
+      delete: 'Delete',
+      popConfirm: {
+        title: 'Are you sure?',
+        ok: 'Yes',
+        cancel: 'No',
+      },
+      messages: {
+        sessionDone: {
+          title: 'So awesome!',
+          description: "You've just finished flashcard session for today! (Better to come back a few days apart)",
+        },
+        wrongUser: {
+          title: 'Something went wrong',
+          description: 'It seems like you are not the autor of this flashcard set...',
+        },
+        databaseError: 'Something went wrong with database connection...',
       },
     },
   },
