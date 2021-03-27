@@ -10,15 +10,17 @@ import store from './store';
 import { auth } from './initFirebase';
 import ServiceClass from './service';
 
-Vue.use(VueI18n);
-const i18n = new VueI18n({
-  locale: 'pl', // set locale
-  messages: i18nData, // set locale messages
-});
-
 Vue.use(Antd);
 Vue.config.productionTip = false;
-Vue.prototype.$service = new ServiceClass(Vue);
+
+const service = new ServiceClass();
+Vue.prototype.$service = service;
+
+Vue.use(VueI18n);
+const i18n = new VueI18n({
+  locale: service.getLanguage(), // set locale
+  messages: i18nData, // set locale messages
+});
 
 router.afterEach((to) => {
   Vue.nextTick(() => {

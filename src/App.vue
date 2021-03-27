@@ -57,6 +57,10 @@
               </router-link>
             </a-menu-item>
           </a-sub-menu>
+          <a-menu-item key="language" class="languageItem">
+            <a-button type="primary" v-if="this.language != 'pl'" @click="setLanguage('pl')">Polski</a-button>
+            <a-button type="primary" v-if="this.language === 'pl'" @click="setLanguage('en')">English</a-button>
+          </a-menu-item>
         </a-menu>
         <div v-if="showDownload" class="sider__download">
           <p>{{ $t("appWrapper.installPWA") }}</p>
@@ -103,6 +107,7 @@ export default {
       collapsed: false,
       installPrompt: null,
       showDownload: false,
+      language: '',
     };
   },
   components: {
@@ -118,7 +123,14 @@ export default {
       this.showDownload = true;
     });
   },
+  mounted() {
+    this.language = this.$service.getLanguage();
+  },
   methods: {
+    setLanguage(languageProp) {
+      this.$service.setLanguage(languageProp);
+      window.location.reload();
+    },
     logout() {
       auth.signOut();
     },
@@ -204,6 +216,10 @@ export default {
     position: sticky;
     top: 0;
     left: 0;
+
+    .languageItem {
+      margin-top: 40px;
+    }
 
     div {
       display: flex;

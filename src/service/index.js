@@ -1,6 +1,20 @@
 import { db, auth } from '@/initFirebase';
 
 export default class ServiceClass {
+  getLanguage() {
+    this.language = window.localStorage.getItem('language');
+    if (!this.language) {
+      window.localStorage.setItem('language', 'pl');
+      this.language = window.localStorage.getItem('language');
+    }
+    return this.language;
+  }
+
+  setLanguage(lanuageProp) {
+    window.localStorage.setItem('language', lanuageProp);
+    this.language = window.localStorage.getItem('language');
+  }
+
   newUnit(dbData) {
     return new Promise((resolve, reject) => {
       db.collection('units').add(dbData)
