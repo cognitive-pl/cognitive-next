@@ -113,6 +113,23 @@ const messages = {
         prize: '10 zł / raz',
       },
     },
+    tour: {
+      skip: 'Pomiń poradnik',
+      next: 'Dalej',
+      previous: 'Wcześniej',
+      finish: 'Zakończ poradnik',
+      welcome: {
+        title: 'Witaj',
+        content: 'Świetnie, że tu jesteś, pozwól, że pokażę Ci aplikację!',
+      },
+      home: 'Tutaj jest strona główna, znajdują się tu wszystkie działy materiału, którego chcesz się nauczyć',
+      addUnit: 'Naciskając ten przycisk możesz dodać pierwszy dział, pomoże Ci w regularnej nauce (dzięki temu też bardziej efektywnej)',
+      flashcards: 'Tutaj są wszystkie zestawy fiszek, pomogą Ci uczyć się bardziej efektywnie i pamiętać maieriał na dłużej',
+      addFlashcards: 'W tej sekcji możesz dodać pierwszy zestaw fiszek',
+      language: 'Tutaj możesz zmienić język aplikacji',
+      pwa: 'Klikając przycisk poniżej możesz zainstalować Cognitive na twoim urządzeniu',
+      support: 'Rozważ również wsparcie Cognitive ;)',
+    },
   },
   en: {
     appWrapper: {
@@ -227,6 +244,23 @@ const messages = {
         coffee: 'Buy a coffe ☕',
         prize: '10 PLN / once',
       },
+    },
+    tour: {
+      skip: 'Skip tour',
+      next: 'Next',
+      previous: 'Previous',
+      finish: 'Finish tour',
+      welcome: {
+        title: 'Welcome',
+        content: "So awesome to have you here, let's go through the app!",
+      },
+      home: 'Here is the homepage, you can see there all your material units that you want to learn.',
+      addUnit: 'By clicking this button you can add your first unit, it helps learn regularly (and by that more effectively)',
+      flashcards: 'Here are all of your flashcards sets, they will help you learn more effectively and remember material for a longer time',
+      addFlashcards: 'In this section you can add your first flashcard set',
+      language: 'Here you can change the language in the app',
+      pwa: 'By clicking the button below you can install Cognitive on your device',
+      support: 'Also, consider supporting Cognitive ;)',
     },
   },
 };

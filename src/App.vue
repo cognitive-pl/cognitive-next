@@ -20,9 +20,10 @@
           theme="dark"
           mode="vertical"
           :selectable="false"
+          :open-keys="openKeys"
           class="menu"
         >
-          <a-menu-item key="home">
+          <a-menu-item key="home" data-v-step="home">
             <router-link to="/app">{{ $t("appWrapper.home") }}</router-link>
           </a-menu-item>
           <a-sub-menu key="unit">
@@ -35,12 +36,12 @@
           </a-sub-menu>
           <a-sub-menu key="flashcards">
             <span slot="title"><a-icon type="appstore"/>{{ $t("appWrapper.flashcards") }}</span>
-            <a-menu-item key="flashcards:1">
+            <a-menu-item key="flashcards:1" data-v-step="flashcards">
               <router-link to="/flashcards">
                 <a-icon type="container" /> {{ $t("appWrapper.allSets") }}
               </router-link>
             </a-menu-item>
-            <a-menu-item key="flashcards:2">
+            <a-menu-item key="flashcards:2" data-v-step="addFlashcards">
               <router-link to="/new-set">
                 <a-icon type="plus-circle" /> {{ $t("appWrapper.addSet") }}
               </router-link>
@@ -51,13 +52,13 @@
             <a-menu-item @click="logout()" key="account:1">
               <a-icon type="logout" /> {{ $t("appWrapper.logout") }}
             </a-menu-item>
-            <a-menu-item key="account:2">
+            <a-menu-item key="account:2" data-v-step="support">
               <router-link to="/support">
                 <dollar-icon type="icon-dollar1" :style="{color: 'green'}"/> {{ $t("appWrapper.support") }}
               </router-link>
             </a-menu-item>
           </a-sub-menu>
-          <a-menu-item key="language" class="languageItem">
+          <a-menu-item key="language" class="languageItem" data-v-step="language">
             <a-button type="primary" v-if="this.language != 'pl'" @click="setLanguage('pl')">Polski</a-button>
             <a-button type="primary" v-if="this.language === 'pl'" @click="setLanguage('en')">English</a-button>
           </a-menu-item>
@@ -89,12 +90,15 @@
       </a-layout>
     </a-layout>
     <router-view v-if="!$router.currentRoute.meta.requiresAuth"/>
+
+    <Tour v-if="$store.state.user" @next="(step) => nextStep(step)" @finish="finishTour"/>
   </div>
 </template>
 
 <script>
 import { auth } from '@/initFirebase';
 import { Icon } from 'ant-design-vue';
+import Tour from '@/components/Tour.vue';
 
 const DollarIcon = Icon.createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/font_2445976_dcplbpjao9.js',
@@ -108,10 +112,13 @@ export default {
       installPrompt: null,
       showDownload: false,
       language: '',
+      isTourDone: false,
+      openKeys: [],
     };
   },
   components: {
     'dollar-icon': DollarIcon,
+    Tour,
   },
   beforeCreate() {
     window.addEventListener('beforeinstallprompt', (e) => {
@@ -123,13 +130,22 @@ export default {
       this.showDownload = true;
     });
   },
-  mounted() {
+  async mounted() {
     this.language = this.$service.getLanguage();
   },
   methods: {
     setLanguage(languageProp) {
       this.$service.setLanguage(languageProp);
       window.location.reload();
+    },
+    nextStep(step) {
+      if (step == 2 || step == 3) this.openKeys = ['flashcards'];
+      if (step == 6) this.openKeys = ['account'];
+    },
+    finishTour() {
+      console.log('end');
+      // this.isTourDone = true;
+      // this.$service.setTour(true);
     },
     logout() {
       auth.signOut();

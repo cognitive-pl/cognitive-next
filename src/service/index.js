@@ -15,6 +15,20 @@ export default class ServiceClass {
     this.language = window.localStorage.getItem('language');
   }
 
+  getTour() {
+    this.isTourDone = window.localStorage.getItem('isTourDone');
+    if (!this.isTourDone) {
+      window.localStorage.setItem('isTourDone', false);
+      this.isTourDone = window.localStorage.getItem('isTourDone');
+    }
+    return this.isTourDone;
+  }
+
+  setTour(isTourDoneProp) {
+    window.localStorage.setItem('isTourDone', isTourDoneProp);
+    this.isTourDone = window.localStorage.getItem('isTourDone');
+  }
+
   newUnit(dbData) {
     return new Promise((resolve, reject) => {
       db.collection('units').add(dbData)

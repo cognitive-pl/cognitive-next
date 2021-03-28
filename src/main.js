@@ -2,6 +2,8 @@ import Vue from 'vue';
 import VueI18n from 'vue-i18n';
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
+import VueTour from 'vue-tour';
+import 'vue-tour/dist/vue-tour.css';
 import i18nData from './helpers/i18n';
 import App from './App.vue';
 import './registerServiceWorker';
@@ -11,6 +13,7 @@ import { auth } from './initFirebase';
 import ServiceClass from './service';
 
 Vue.use(Antd);
+Vue.use(VueTour);
 Vue.config.productionTip = false;
 
 const service = new ServiceClass();

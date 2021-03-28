@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <h1>{{ $t("home.welcome", { name: $store.state.user.displayName }) }}</h1>
+    <h1 data-v-step="welcome">{{ $t("home.welcome", { name: $store.state.user.displayName }) }}</h1>
       <div class="main__grid" v-if="units.length > 0">
         <a-card :title="name" v-for="({ name, description, id }, index) in units" :key="index">
           <a slot="extra">
@@ -14,7 +14,9 @@
       </div>
       <a-empty size="large" v-if="units.length == 0">
         <span slot="description">Start your adventure with learning!</span>
-        <a-button type="primary"><router-link to="/new-unit">Add unit</router-link></a-button>
+        <a-button type="primary" data-v-step="addUnit">
+          <router-link to="/new-unit">Add unit</router-link>
+        </a-button>
       </a-empty>
   </div>
 </template>
