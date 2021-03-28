@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <a-config-provider :locale="currentLanguage()">
     <a-layout v-if="$router.currentRoute.meta.requiresAuth" style="min-height: 100vh;">
       <a-layout-header class="header">
         <a-icon
@@ -89,12 +90,15 @@
       </a-layout>
     </a-layout>
     <router-view v-if="!$router.currentRoute.meta.requiresAuth"/>
+    </a-config-provider>
   </div>
 </template>
 
 <script>
 import { auth } from '@/initFirebase';
 import { Icon } from 'ant-design-vue';
+import enGB from 'ant-design-vue/lib/locale-provider/en_GB';
+import plPL from 'ant-design-vue/lib/locale-provider/pl_PL';
 
 const DollarIcon = Icon.createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/font_2445976_dcplbpjao9.js',
@@ -127,6 +131,12 @@ export default {
     this.language = this.$service.getLanguage();
   },
   methods: {
+    currentLanguage() {
+      let lang = '';
+      if (this.$service.getLanguage() == 'pl') lang = plPL;
+      else if (this.$service.getLanguage() == 'en') lang = enGB;
+      return lang;
+    },
     setLanguage(languageProp) {
       this.$service.setLanguage(languageProp);
       window.location.reload();

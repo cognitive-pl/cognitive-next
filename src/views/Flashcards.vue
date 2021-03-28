@@ -13,8 +13,8 @@
         </a-card>
       </div>
       <a-empty size="large" v-if="flashcards.length == 0">
-        <span slot="description">Go ahead and make some flashcards!</span>
-        <a-button type="primary"><router-link to="/new-set">Add flashcard set</router-link></a-button>
+        <span slot="description">{{ $t('flashcards.startFlashcards') }}</span>
+        <a-button type="primary"><router-link to="/new-set">{{ $t('flashcards.addFlashcards') }}</router-link></a-button>
       </a-empty>
   </div>
 </template>

@@ -16,6 +16,8 @@ const messages = {
     home: {
       welcome: 'Witaj {name}!',
       open: 'Otwórz',
+      startAdventure: 'Zacznij przygodę z nauką!',
+      addUnitButton: 'Dodaj dział',
     },
     unit: {
       popConfirm: {
@@ -79,6 +81,8 @@ const messages = {
       welcome: 'Twoje zestawy fiszek',
       openButton: 'Otwórz',
       cards: 'karty',
+      startFlashcards: 'Nie wahaj sie i stwórz trochę fiszek!',
+      addFlashcards: 'Dodaj zestaw fiszek',
     },
     flashcardSet: {
       allDone: 'Przejrzałeś cały zestaw, możesz go odnowić klikając w przycisk poniżej.',
@@ -131,6 +135,8 @@ const messages = {
     home: {
       welcome: 'Hi, {name}!',
       open: 'Open',
+      startAdventure: 'Start your adventure with learning!',
+      addUnitButton: 'Add unit',
     },
     unit: {
       popConfirm: {
@@ -194,6 +200,8 @@ const messages = {
       welcome: 'Your flashcard sets',
       openButton: 'Open',
       cards: 'card(s)',
+      startFlashcards: 'Go ahead and make some flashcards!',
+      addFlashcards: 'Add flashcard set',
     },
     flashcardSet: {
       allDone: 'You revealed all set, you can restart it by clicking button below.',
