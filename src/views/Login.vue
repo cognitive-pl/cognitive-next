@@ -3,17 +3,15 @@
 </template>
 
 <script>
-import { auth, googleProvider } from '@/initFirebase';
-
 export default {
   name: 'Login',
   methods: {
     login() {
-      auth.signInWithPopup(googleProvider)
-        .then((result) => {
-          this.$store.dispatch('fetchUser', result.user);
+      this.$service.login()
+        .then(({ user }) => {
+          this.$store.dispatch('fetchUser', user);
         })
-        .catch((err) => alert(`Something went wrong: ${err.message}`));
+        .catch(() => alert('Something went wrong'));
     },
   },
 };

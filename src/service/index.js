@@ -1,6 +1,29 @@
-import { db, auth } from '@/initFirebase';
+import { db, auth, googleProvider } from '@/initFirebase';
+// import { db, auth } from '@/initFirebase';
 
 export default class ServiceClass {
+  login() {
+    const provider = googleProvider;
+    console.log(auth);
+    provider.addScope('profile');
+    provider.addScope('https://www.google.com/calendar/feeds');
+
+    return new Promise((resolve, reject) => {
+      auth.signInWithPopup(provider)
+        .then((result) => {
+          this.token = result.credential.accessToken;
+          console.log(this.token);
+          this.user = result.user;
+
+          resolve({
+            token: this.token,
+            user: this.user,
+          });
+        })
+        .catch(() => reject());
+    });
+  }
+
   getLanguage() {
     this.language = window.localStorage.getItem('language');
     if (!this.language) {

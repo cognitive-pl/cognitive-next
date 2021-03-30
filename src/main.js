@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import VueGapi from 'vue-gapi';
 import VueI18n from 'vue-i18n';
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
@@ -10,6 +11,12 @@ import store from './store';
 import { auth } from './initFirebase';
 import ServiceClass from './service';
 
+Vue.use(VueGapi, {
+  apiKey: '<YOUR_API_KEY>',
+  clientId: '<YOUR_CLIENT_ID>.apps.googleusercontent.com',
+  discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+  scope: 'https://www.googleapis.com/auth/spreadsheets',
+});
 Vue.use(Antd);
 Vue.config.productionTip = false;
 
