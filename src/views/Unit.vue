@@ -8,11 +8,12 @@
         :ok-text='$t("unit.popConfirm.ok")'
         :cancel-text='$t("unit.popConfirm.cancel")'
         @confirm="deleteDoc"
+        style="margin-top: 12px"
       >
         <a-button type="danger" ghost>{{ $t("unit.delete") }}</a-button>
       </a-popconfirm>
       <a-button type="primary" ghost @click="addReminder" style="margin-left: 15px">{{ $t("unit.calendar") }}</a-button>
-
+      <a-divider />
       <a-row :gutter="[24, { xs: 12, sm: 12, md: 0 }]" style="margin-top: 10px">
         <a-col :xs="{ span: 24 }" :md="{ span: 12 }" :lg="{ span: 8 }">
           <h3>{{ $t("unit.sessionsToday") }}</h3>
@@ -30,6 +31,7 @@
           <a-button type="primary" style="margin-top: 15px" @click="markAsDone" :disabled="!notDone">{{ $t("unit.markAsDone") }}</a-button>
         </a-col>
       </a-row>
+      <a-divider />
       <p style="margin-top: 25px">{{ $t("unit.material") }}</p>
       <ul>
         <li v-for="({ content, date, done }, index) in unitObject.parts" :key="index">
