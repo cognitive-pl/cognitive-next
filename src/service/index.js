@@ -2,10 +2,24 @@ import { db, auth, googleProvider } from '@/initFirebase';
 // import { db, auth } from '@/initFirebase';
 
 export default class ServiceClass {
-  async initClient() {
+  initClient() {
     this.gapi = window.gapi;
     this.gapi.load('client', async () => {
-      this.gapi.client.init({
+      await this.gapi.client.init({
+        apiKey: 'AIzaSyCutesdRUeG964BiVBdL5t4E6RKGW3oTM8',
+        clientId: '730664048281-17ck10c7id2nuse8prgton9hehbqsd8l.apps.googleusercontent.com',
+        discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
+        scope: 'https://www.googleapis.com/auth/calendar',
+      });
+
+      // this.gapi.client.load('calendar', 'v3');
+    });
+  }
+
+  login(callback) {
+    this.gapi = window.gapi;
+    this.gapi.load('client', async () => {
+      await this.gapi.client.init({
         apiKey: 'AIzaSyCutesdRUeG964BiVBdL5t4E6RKGW3oTM8',
         clientId: '730664048281-17ck10c7id2nuse8prgton9hehbqsd8l.apps.googleusercontent.com',
         discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
@@ -18,50 +32,12 @@ export default class ServiceClass {
       const googleUser = await googleAuth.signIn();
       const token = googleUser.getAuthResponse().id_token;
       const credential = googleProvider.credential(token);
-
-      await auth.signInWithCredential(credential)
+      auth.signInWithCredential(credential)
         .then((result) => {
           this.user = result.user;
-          this.gapiClient = this.gapi.client;
-        });
-
-      // const events = await this.gapi.client.calendar.events.list({
-      //   calendarId: 'primary',
-      // });
-      // console.log(events);
-    });
-  }
-
-  async login() {
-    this.gapi = window.gapi;
-    this.gapi.load('client', async () => {
-      await this.gapi.client.init({
-        apiKey: 'AIzaSyCutesdRUeG964BiVBdL5t4E6RKGW3oTM8',
-        clientId: '730664048281-17ck10c7id2nuse8prgton9hehbqsd8l.apps.googleusercontent.com',
-        discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
-        scope: 'https://www.googleapis.com/auth/calendar',
-      });
-
-      const googleAuth = this.gapi.auth2.getAuthInstance();
-      const googleUser = await googleAuth.signIn();
-      const token = googleUser.getAuthResponse().id_token;
-      const credential = googleProvider.credential(token);
-
-      await auth.signInWithCredential(credential)
-        .then((result) => {
-          this.user = result.user;
-          this.gapiClient = this.gapi.client;
-        });
-
-      // const events = await this.gapi.client.calendar.events.list({
-      //   calendarId: 'primary',
-      // });
-      // console.log(events);
-    });
-
-    return new Promise((resolve, reject) => {
-      if (this.user != null) resolve(this.user);
-      else reject();
+          callback(this.user);
+        })
+        .catch(() => window.alert('Something went wrong...'));
     });
   }
 
