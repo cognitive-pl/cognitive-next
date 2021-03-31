@@ -62,16 +62,26 @@ export default class SpreadOverTime {
 
     const updatedDate = makeNewDate(this.partDate, this.parts.length);
     const updatedDate2 = makeNewDate(this.partDate, this.parts.length + 1);
-    this.newParts.push({
-      content: `${this.parts[this.parts.length - 1]} (repetition 1)`,
-      date: new Date(updatedDate).toString(),
-    }, {
-      content: `${this.parts[this.parts.length - 2]} (repetition 2)`,
-      date: new Date(updatedDate).toString(),
-    }, {
-      content: `${this.parts[this.parts.length - 1]} (repetition 2)`,
-      date: new Date(updatedDate2).toString(),
-    });
+    if (this.parts.length > 1) {
+      this.newParts.push({
+        content: `${this.parts[this.parts.length - 1]} (repetition 1)`,
+        date: new Date(updatedDate).toString(),
+      }, {
+        content: `${this.parts[this.parts.length - 2]} (repetition 2)`,
+        date: new Date(updatedDate).toString(),
+      }, {
+        content: `${this.parts[this.parts.length - 1]} (repetition 2)`,
+        date: new Date(updatedDate2).toString(),
+      });
+    } else if (this.parts.length == 1) {
+      this.newParts.push({
+        content: `${this.parts[this.parts.length - 1]} (repetition 1)`,
+        date: new Date(updatedDate).toString(),
+      }, {
+        content: `${this.parts[this.parts.length - 1]} (repetition 2)`,
+        date: new Date(updatedDate2).toString(),
+      });
+    }
 
     return this.newParts;
   }
