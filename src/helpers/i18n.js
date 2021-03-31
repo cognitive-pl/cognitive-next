@@ -10,7 +10,7 @@ const messages = {
       account: 'Konto',
       logout: 'Wyloguj',
       support: 'Wesprzyj',
-      installPWA: 'Zainstaluje aplikację',
+      installPWA: 'Zainstaluj aplikację',
       breadcrumb: 'Strona Główna',
     },
     home: {

@@ -7,8 +7,8 @@ export default {
   name: 'Login',
   methods: {
     login() {
-      this.$service.login()
-        .then(({ user }) => {
+      this.$service.login(this.$gapi)
+        .then((user) => {
           this.$store.dispatch('fetchUser', user);
         })
         .catch(() => alert('Something went wrong'));
