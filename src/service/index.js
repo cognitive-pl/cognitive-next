@@ -35,9 +35,9 @@ export default class ServiceClass {
       auth.signInWithCredential(credential)
         .then((result) => {
           this.user = result.user;
-          callback(this.user);
+          callback(this.user, false);
         })
-        .catch(() => window.alert('Something went wrong...'));
+        .catch(() => callback(null, true));
     });
   }
 

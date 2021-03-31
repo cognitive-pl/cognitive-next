@@ -7,8 +7,9 @@ export default {
   name: 'Login',
   methods: {
     login() {
-      this.$service.login((user) => {
-        this.$store.dispatch('fetchUser', user);
+      this.$service.login((user, err) => {
+        if (err) alert('Something went wrong...');
+        else this.$store.dispatch('fetchUser', user);
       });
     },
   },
