@@ -1,37 +1,30 @@
 import { db, auth, googleProvider } from '@/initFirebase';
-// import { db, auth } from '@/initFirebase';
+import format from 'date-fns/format';
 
 export default class ServiceClass {
-  initClient() {
+  initClient(callback) {
     this.gapi = window.gapi;
     this.gapi.load('client', async () => {
       await this.gapi.client.init({
         apiKey: 'AIzaSyCutesdRUeG964BiVBdL5t4E6RKGW3oTM8',
         clientId: '730664048281-17ck10c7id2nuse8prgton9hehbqsd8l.apps.googleusercontent.com',
         discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
-        scope: 'https://www.googleapis.com/auth/calendar',
-      });
-
-      // this.gapi.client.load('calendar', 'v3');
-    });
-  }
-
-  login(callback) {
-    this.gapi = window.gapi;
-    this.gapi.load('client', async () => {
-      await this.gapi.client.init({
-        apiKey: 'AIzaSyCutesdRUeG964BiVBdL5t4E6RKGW3oTM8',
-        clientId: '730664048281-17ck10c7id2nuse8prgton9hehbqsd8l.apps.googleusercontent.com',
-        discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
-        scope: 'https://www.googleapis.com/auth/calendar',
+        scope: 'https://www.googleapis.com/auth/calendar.events',
       });
 
       this.gapi.client.load('calendar', 'v3');
 
+      callback();
+    });
+  }
+
+  login(callback) {
+    this.initClient(async () => {
       const googleAuth = this.gapi.auth2.getAuthInstance();
       const googleUser = await googleAuth.signIn();
       const token = googleUser.getAuthResponse().id_token;
       const credential = googleProvider.credential(token);
+
       auth.signInWithCredential(credential)
         .then((result) => {
           this.user = result.user;
@@ -89,6 +82,33 @@ export default class ServiceClass {
           } else reject('wrong user');
         })
         .catch(() => reject());
+    });
+  }
+
+  makeCalendarRemiders(sessions) {
+    return new Promise((resolve, reject) => {
+      this.initClient(() => {
+        const batch = this.gapi.client.newBatch();
+        sessions.forEach((session) => {
+          const eventData = {
+            summary: session.content,
+            start: {
+              date: format(new Date(session.date), 'yyyy-MM-dd'),
+            },
+            end: {
+              date: format(new Date(session.date), 'yyyy-MM-dd'),
+            },
+          };
+          batch.add(this.gapi.client.calendar.events.insert({
+            calendarId: 'primary',
+            resource: eventData,
+          }));
+        });
+
+        batch
+          .then(() => resolve())
+          .catch(() => reject());
+      });
     });
   }
 

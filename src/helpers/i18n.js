@@ -26,12 +26,17 @@ const messages = {
         cancel: 'Nie',
       },
       delete: 'Usuń dział',
+      calendar: 'Dodaj przypomnienie',
       sessionsToday: 'Sesje na dziś:',
       lastPart: 'Ostatnia niezrobiona część:',
       markAsDone: 'Zaznacz sesję jako zrobioną',
       material: 'Części materiału:',
       everythingDone: 'Wszystko zrobione!',
       noSession: 'Nie ma żadnej sesji na dzisiaj',
+      reminder: {
+        title: 'Świetnie!',
+        description: 'Teraz sprawdź swój Kalendarz Google ;)',
+      },
     },
     newUnit: {
       firstStage: {
@@ -145,12 +150,17 @@ const messages = {
         cancel: 'No',
       },
       delete: 'Delete',
+      calendar: 'Add the reminder',
       sessionsToday: 'Sessions for today:',
       lastPart: 'Last not done part:',
       markAsDone: 'Mark session as done',
       material: 'Parts of material:',
       everythingDone: "Everything's done!",
       noSession: 'No session for today',
+      reminder: {
+        title: 'Awesome!',
+        description: 'Now you can check out your Google Calendar ;)',
+      },
     },
     newUnit: {
       firstStage: {
@@ -232,7 +242,7 @@ const messages = {
       },
       supportOnce: {
         title: 'Support once',
-        coffee: 'Buy a coffe ☕',
+        coffee: 'Buy a coffee ☕',
         prize: '10 PLN / once',
       },
     },
