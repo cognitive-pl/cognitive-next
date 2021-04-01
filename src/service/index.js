@@ -1,5 +1,5 @@
 import { db, auth, googleProvider } from '@/initFirebase';
-import format from 'date-fns/format';
+import formatRFC3339 from 'date-fns/formatRFC3339';
 
 export default class ServiceClass {
   initClient(callback) {
@@ -89,16 +89,31 @@ export default class ServiceClass {
     return new Promise((resolve, reject) => {
       this.initClient(() => {
         const batch = this.gapi.client.newBatch();
+
         sessions.forEach((session) => {
+          const defaultDate = new Date(session.date);
+          defaultDate.setMinutes(0);
+
+          const startDate = formatRFC3339(defaultDate.setHours(18));
+          const endDate = formatRFC3339(defaultDate.setHours(20));
+
           const eventData = {
             summary: session.content,
             start: {
-              date: format(new Date(session.date), 'yyyy-MM-dd'),
+              dateTime: startDate,
             },
             end: {
-              date: format(new Date(session.date), 'yyyy-MM-dd'),
+              dateTime: endDate,
+            },
+            reminders: {
+              useDefault: false,
+              overrides: [
+                { method: 'popup', minutes: 2 * 60 },
+                { method: 'popup', minutes: 6 * 60 },
+              ],
             },
           };
+
           batch.add(this.gapi.client.calendar.events.insert({
             calendarId: 'primary',
             resource: eventData,
