@@ -16,7 +16,9 @@
         :collapsedWidth="0"
         :trigger="null"
       >
-        <img class="sidebar__logo" src="@/assets/logo.png" alt="Cognitive"/>
+        <router-link to="/app" class="sidebar__logo">
+          <img src="@/assets/logo.png" alt="Cognitive"/>
+        </router-link>
         <a-menu
           theme="dark"
           mode="vertical"
@@ -63,9 +65,9 @@
             <a-button type="primary" v-if="this.language === 'pl'" @click="setLanguage('en')">English</a-button>
           </a-menu-item>
         </a-menu>
-        <div v-if="showDownload" class="sider__download">
-          <p>{{ $t("appWrapper.installPWA") }}</p>
+        <div v-if="showDownload && !collapsed" class="sider__download">
           <button @click="download">
+            <p>{{ $t("appWrapper.pwa.install") }}</p>
             <a-icon type="cloud-download"/>
           </button>
         </div>
@@ -153,15 +155,15 @@ export default {
         this.installPrompt.userChoice.then((choiceResult) => {
           if (choiceResult.outcome === 'accepted') {
             this.$notification['success']({
-              message: 'So happy to have you here',
-              description: 'App should be installed on your device',
+              message: this.$t('appWrapper.pwa.success'),
+              description: this.$t('appWrapper.pwa.successDescription'),
             });
             // Hide the app provided install promotion
             this.showDownload = false;
           } else {
             this.$notification['warning']({
-              message: 'Ouch',
-              description: "We're sorry to see that you don't want our app.",
+              message: this.$t('appWrapper.pwa.cancel'),
+              description: this.$t('appWrapper.pwa.cancelDescription'),
             });
           }
         });
@@ -248,6 +250,11 @@ export default {
     width: 40px;
     height: 40px;
     margin: 25px auto 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   .sider__download {
@@ -265,6 +272,10 @@ export default {
       outline: none;
       cursor: pointer;
       padding: 20px 0;
+
+      p {
+        font-size: .65em;
+      }
     }
   }
 

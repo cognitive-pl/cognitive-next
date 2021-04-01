@@ -10,7 +10,13 @@ const messages = {
       account: 'Konto',
       logout: 'Wyloguj',
       support: 'Wesprzyj',
-      installPWA: 'Zainstaluj aplikację',
+      pwa: {
+        install: 'Zainstaluj aplikację',
+        success: 'Świetnie że tu jesteś!',
+        successDescription: 'Aplikacja powinna być zainstalowana na twoim urządzeniu.',
+        cancel: 'Ałć...',
+        cancelDescription: 'Przykro nam widzieć, że nie chcesz naszej aplikacji...',
+      },
       breadcrumb: 'Strona Główna',
     },
     home: {
@@ -134,7 +140,13 @@ const messages = {
       account: 'Account',
       logout: 'Logout',
       support: 'Support',
-      installPWA: 'Install the app',
+      pwa: {
+        install: 'Install the app',
+        success: "It's awesome to have you here",
+        successDescription: 'App should be installed on your device',
+        cancel: 'Ouch...',
+        cancelDescription: "We're sorry to see that you don't want our app.",
+      },
       breadcrumb: 'Home',
     },
     home: {
