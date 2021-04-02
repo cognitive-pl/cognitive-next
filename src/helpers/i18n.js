@@ -7,7 +7,7 @@ const messages = {
         title: 'Ostrzeżenie o bezpieczeństwie',
         content1: 'Ta aplikacja jest wciąż weryfikowana przez Google i możesz przez to zobaczyć ',
         alert: 'alert bezpieczeństwa.',
-        content2: 'Nie ma się czym przejmować, podczas logowania wystarczy wcisnąć "Zaawansowane" i przejść do następnego kroku.',
+        content2: 'Nie ma się czym przejmować, podczas logowania wystarczy wcisnąć "Zaawansowane", przejść do linku poniżej, a następnie zezwolić na dostęp do Kalendarza (jest on wykorzystywany wyłącznie do dodawania powiadomień).',
       },
     },
     appWrapper: {
@@ -147,7 +147,7 @@ const messages = {
         title: 'Security warning',
         content1: 'This app is still verifying by Google and because of that you may see ',
         alert: 'security alert.',
-        content2: 'There is no need to worry, during login process just click on "Advanced" and head to the next step.',
+        content2: 'There is no need to worry, during login process just click on "Advanced", head to the link below and grant permissions to Calendar (it is used only for adding remiders).',
       },
     },
     appWrapper: {
