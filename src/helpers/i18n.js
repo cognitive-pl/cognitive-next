@@ -3,6 +3,12 @@ const messages = {
     login: {
       title: 'Logowanie',
       button: 'Zaloguj sie z Google',
+      modal: {
+        title: 'Ostrzeżenie o bezpieczeństwie',
+        content1: 'Ta aplikacja jest wciąż weryfikowana przez Google i możesz przez to zobaczyć ',
+        alert: 'alert bezpieczeństwa.',
+        content2: 'Nie ma się czym przejmować, podczas logowania wystarczy wcisnąć "Zaawansowane" i przejść do następnego kroku.',
+      },
     },
     appWrapper: {
       home: 'Strona Główna',
@@ -137,6 +143,12 @@ const messages = {
     login: {
       title: 'Login',
       button: 'Login with Google',
+      modal: {
+        title: 'Security warning',
+        content1: 'This app is still verifying by Google and because of that you may see ',
+        alert: 'security alert.',
+        content2: 'There is no need to worry, during login process just click on "Advanced" and head to the next step.',
+      },
     },
     appWrapper: {
       home: 'Home',
