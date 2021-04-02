@@ -1,5 +1,9 @@
 const messages = {
   pl: {
+    login: {
+      title: 'Logowanie',
+      button: 'Zaloguj sie z Google',
+    },
     appWrapper: {
       home: 'Strona Główna',
       unit: 'Dział',
@@ -130,6 +134,10 @@ const messages = {
     },
   },
   en: {
+    login: {
+      title: 'Login',
+      button: 'Login with Google',
+    },
     appWrapper: {
       home: 'Home',
       unit: 'Unit',

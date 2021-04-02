@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Landing from '@/views/Landing.vue';
+import Policy from '@/views/Policy.vue';
 import Login from '@/views/Login.vue';
 import AppView from '@/views/AppView.vue';
 import Support from '@/views/Support.vue';
@@ -19,6 +20,11 @@ const routes = [
     path: '/',
     name: 'Landing',
     component: Landing,
+  },
+  {
+    path: '/policy',
+    name: 'Privacy Policy',
+    component: Policy,
   },
   {
     path: '/app',
