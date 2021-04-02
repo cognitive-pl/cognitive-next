@@ -6,6 +6,11 @@
       <Blob class="blob"/>
     </div>
     <div class="login__form">
+      <router-link to="/" class="link">
+        <a-button type="link">
+          <a-icon type="left" />Go back
+        </a-button>
+      </router-link>
       <h1 class="title">Cognitive</h1>
       <a-button @click.once="login()" type="primary">{{ $t('login.button') }}</a-button>
     </div>
@@ -31,6 +36,17 @@ export default {
         else this.$store.dispatch('fetchUser', user);
       });
     },
+  },
+  mounted() {
+    const h = this.$createElement;
+    this.$warning({
+      centered: true,
+      title: this.$t('login.modal.title'),
+      content: h('div', {}, [
+        h('p', [this.$t('login.modal.content1'), h('b', this.$t('login.modal.alert'))]),
+        h('p', this.$t('login.modal.content2')),
+      ]),
+    });
   },
 };
 </script>
@@ -98,8 +114,8 @@ export default {
     text-align: center;
 
     .title {
-      font-size: 2.5em;
-      margin: 1em;
+      font-size: 2.4em;
+      margin: 1.2em 0 .9em;
       color: black;
       text-decoration: underline;
       text-decoration-color: cornflowerblue;
