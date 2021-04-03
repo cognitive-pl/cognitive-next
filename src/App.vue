@@ -86,7 +86,7 @@
           </transition>
         </div>
       <a-layout-footer style="text-align: center">
-        Copyright © {{new Date().getFullYear()}} Aleksander Skubała
+        Copyright © 2020 - {{new Date().getFullYear()}} Aleksander Skubała
       </a-layout-footer>
       </a-layout-content>
       </a-layout>
