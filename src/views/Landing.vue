@@ -46,6 +46,12 @@ export default {
       font-size: 1.4em;
     }
 
+    .underline {
+      text-decoration: underline;
+      text-decoration-color: cornflowerblue;
+      text-decoration-thickness: .15em;
+    }
+
     .section {
       min-height: 55vh;
     }
