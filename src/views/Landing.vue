@@ -1,8 +1,19 @@
 <template>
   <div class="landing">
-    <!-- <header class="landing__header">
-      <h2>Cognitive</h2>
-    </header> -->
+    <header class="landing__header">
+      <div class="header__branding">
+        <h2>Cognitive</h2>
+      </div>
+      <div class="header__links">
+        <router-link to="/policy">
+          <a-button type="link">Privacy Policy</a-button>
+        </router-link>
+        <button class="landing__button--ghost">English</button>
+        <router-link to="/app">
+          <button class="landing__button">Sign in</button>
+        </router-link>
+      </div>
+    </header>
     <HeroSection />
     <!-- <footer class="landing__footer">
       <a href="/policy">Privacy Policy</a>
@@ -26,7 +37,7 @@ export default {
 
   .landing {
     width: 100%;
-    min-height: 100%;
+    min-height: 150vh;
     font-family: 'Noto Sans', sans-serif;
     font-size: 16px;
     line-height: 1.55;
@@ -54,6 +65,71 @@ export default {
 
     .section {
       min-height: 55vh;
+    }
+  }
+
+  .landing__button {
+    background: cornflowerblue;
+    border: none;
+    position: relative;
+    z-index: 3;
+    z-index: inherit;
+    border-radius: 4px;
+    color: white;
+    padding: 7px 12px;
+    cursor: pointer;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: transform .3s ease-out;
+
+    &::before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 4px;
+      background: none;
+      box-shadow: 0 0 10px -4px #000;
+      opacity: 0;
+      transition: opacity .3s ease-out;
+    }
+
+    &:hover, &:focus {
+      transform: translateY(-3px);
+
+      &::before {
+        opacity: 1;
+      }
+    }
+  }
+
+  .landing__header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    position: sticky;
+    top: 0;
+    left: 0;
+
+    &::before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      opacity: .7;
+    }
+
+    .header__links * {
+      margin-left: 5px;
     }
   }
 </style>

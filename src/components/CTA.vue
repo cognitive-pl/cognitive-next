@@ -24,14 +24,14 @@
     font-weight: bold;
 
     svg {
-      margin-left: 15px;
+      margin-left: 10px;
       fill: none;
       stroke-linecap: round;
       stroke-linejoin: round;
       stroke: #111;
       stroke-width: 2;
       transform: translateX(-5px);
-      transition: transform .2s ease-out;
+      transition: transform .3s ease-out;
     }
 
     &::before {
@@ -45,7 +45,7 @@
       border-radius: 31px;
       background: cornflowerblue;
       opacity: .7;
-      transition: opacity .2s ease-out, width .2s ease-out;
+      transition: opacity .3s ease-out, width .3s ease-out;
       will-change: width;
     }
 
