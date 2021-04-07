@@ -8,7 +8,7 @@
     <div class="login__form">
       <router-link to="/" class="link">
         <a-button type="link">
-          <a-icon type="left" />Go back
+          <a-icon type="left" />{{ $t('login.goBack') }}
         </a-button>
       </router-link>
       <h1 class="title">Cognitive</h1>

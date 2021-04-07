@@ -1,9 +1,9 @@
 <template>
   <section class="section hero">
-    <h1>We care about how much you <span class="underline">remember</span>.</h1>
-    <p>Start your journey with effective learning and head to the free app.</p>
+    <h1 v-html="$t('landing.hero.title')"></h1>
+    <p>{{ $t('landing.hero.paragraph') }}</p>
     <router-link to="/login">
-      <CTA>Get the app</CTA>
+      <CTA>{{ $t('landing.hero.cta') }}</CTA>
     </router-link>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1380 350" class="hero__svg">
       <g id="blob" transform="rotate(6) translate(-10,-20)">

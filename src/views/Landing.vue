@@ -6,15 +6,17 @@
       </div>
       <div class="header__links">
         <router-link to="/policy">
-          <a-button type="link">Privacy Policy</a-button>
+          <a-button type="link">{{ $t('landing.policy') }}</a-button>
         </router-link>
-        <button class="landing__button--ghost">English</button>
+        <button class="landing__button landing__button--ghost" v-if="language == 'pl'" @click="setLanguage('en')">English</button>
+        <button class="landing__button landing__button--ghost" v-if="language == 'en'" @click="setLanguage('pl')">Polski</button>
         <router-link to="/app">
-          <button class="landing__button">Sign in</button>
+          <button class="landing__button">{{ $t('landing.signIn') }}</button>
         </router-link>
       </div>
     </header>
     <HeroSection />
+    <FeatureSection />
     <!-- <footer class="landing__footer">
       <a href="/policy">Privacy Policy</a>
     </footer> -->
@@ -23,11 +25,22 @@
 
 <script>
 import HeroSection from '@/sections/HeroSection.vue';
+import FeatureSection from '@/sections/FeatureSection.vue';
 
 export default {
   name: 'Landing',
   components: {
     HeroSection,
+    FeatureSection,
+  },
+  created() {
+    this.language = this.$service.getLanguage();
+  },
+  methods: {
+    setLanguage(languageProp) {
+      this.$service.setLanguage(languageProp);
+      window.location.reload();
+    },
   },
 };
 </script>
@@ -37,7 +50,7 @@ export default {
 
   .landing {
     width: 100%;
-    min-height: 150vh;
+    min-height: 100vh;
     font-family: 'Noto Sans', sans-serif;
     font-size: 16px;
     line-height: 1.55;
@@ -104,6 +117,12 @@ export default {
         opacity: 1;
       }
     }
+
+    &.landing__button--ghost {
+      background: white !important;
+      border: 1px solid cornflowerblue;
+      color: cornflowerblue;
+    }
   }
 
   .landing__header {
@@ -113,6 +132,7 @@ export default {
     align-items: center;
     padding: 15px 30px;
     position: sticky;
+    z-index: 9999;
     top: 0;
     left: 0;
 
@@ -125,7 +145,7 @@ export default {
       width: 100%;
       height: 100%;
       background: white;
-      opacity: .7;
+      opacity: .9;
     }
 
     .header__links * {
