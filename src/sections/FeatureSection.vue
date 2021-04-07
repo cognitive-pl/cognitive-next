@@ -41,7 +41,6 @@ export default {
 
   .features__grid {
     width: 100%;
-    margin-bottom: 10vh;
     display: grid;
     grid-template-columns: 1fr;
 

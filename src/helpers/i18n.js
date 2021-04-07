@@ -19,6 +19,11 @@ const messages = {
           'Szybki i prosty dostęp do aplikacji, dzięki możliwości <span class="underline">instalacji na urządzeniu</span>.',
         ],
       },
+      science: {
+        title: 'My <span class="underline">szukamy informacji</span>, żebyś ty nie musiał.',
+        paragraph: 'Odwiedź stronę dokumentacji użytkownika i przeczytaj o badaniach naukowych, na których bazowaliśmy tworząc aplikację.',
+        link: 'Przejdź do dokumentacji',
+      },
     },
     login: {
       title: 'Logowanie',
@@ -179,6 +184,11 @@ const messages = {
           'Remeber material for longer time using <span class="underline">built-in flashcards module</span>.',
           'Quick and easy access to the app thanks to <span class="underline">installation on device feature</span>.',
         ],
+      },
+      science: {
+        title: 'We do <span class="underline">the research</span>, so you don\'t have to.',
+        paragraph: 'Visit the user\'s docs site and read about which scientific researches we were basing on while creating the app.',
+        link: 'Go to the docs',
       },
     },
     login: {

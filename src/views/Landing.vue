@@ -17,6 +17,7 @@
     </header>
     <HeroSection />
     <FeatureSection />
+    <ScienceSection />
     <!-- <footer class="landing__footer">
       <a href="/policy">Privacy Policy</a>
     </footer> -->
@@ -26,12 +27,14 @@
 <script>
 import HeroSection from '@/sections/HeroSection.vue';
 import FeatureSection from '@/sections/FeatureSection.vue';
+import ScienceSection from '@/sections/ScienceSection.vue';
 
 export default {
   name: 'Landing',
   components: {
     HeroSection,
     FeatureSection,
+    ScienceSection,
   },
   created() {
     this.language = this.$service.getLanguage();
@@ -63,7 +66,8 @@ export default {
     }
 
     h1 {
-      font-size: 1.9em;
+      font-size: 2.1em;
+      font-weight: bold;
     }
 
     h2 {
@@ -78,6 +82,9 @@ export default {
 
     .section {
       min-height: 55vh;
+      margin-top: 8vh;
+
+      &:first-of-type { margin-top: 0; }
     }
   }
 
