@@ -1,5 +1,5 @@
 <template>
-  <div class="section features">
+  <section class="section features">
     <h1>{{ $t('landing.features.title') }}</h1>
     <div class="features__grid">
       <div class="grid__img">
@@ -14,7 +14,7 @@
         </router-link>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>

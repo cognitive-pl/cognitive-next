@@ -66,7 +66,7 @@ export default {
     }
 
     h1 {
-      font-size: 2.1em;
+      font-size: 2em;
       font-weight: bold;
     }
 
@@ -85,6 +85,12 @@ export default {
       margin-top: 8vh;
 
       &:first-of-type { margin-top: 0; }
+    }
+
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 2.1em;
+      }
     }
   }
 
