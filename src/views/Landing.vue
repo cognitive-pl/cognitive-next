@@ -4,9 +4,19 @@
     <HeroSection />
     <FeatureSection />
     <ScienceSection />
-    <!-- <footer class="landing__footer">
-      <a href="/policy">Privacy Policy</a>
-    </footer> -->
+    <footer class="landing__footer">
+      <div class="footer__logo">
+        <img src="../assets/logo.png"/>
+        <h2>Cognitive</h2>
+      </div>
+      <div class="footer__links">
+        <router-link to="/">Homepage</router-link>
+        <router-link to="/login">Login</router-link>
+        <router-link to="/policy">Privacy Policy</router-link>
+        <a href="https://alexskubala.gitbook.io/cognitive/" target="_blank">User's Docs</a>
+        <p>Copyright © 2020 - {{new Date().getFullYear()}} Aleksander Skubała</p>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -123,6 +133,53 @@ export default {
       background: white !important;
       border: 1px solid cornflowerblue;
       color: cornflowerblue;
+    }
+  }
+
+  .landing__footer {
+    background: #29465b;
+    width: 100%;
+    min-height: 20vh;
+    padding: 5vw;
+    display: grid;
+    grid-template-columns: 1fr;
+    text-align: center;
+
+    & * {
+      color: white;
+    }
+
+    .footer__logo {
+      h2 {
+        font-weight: bold;
+      }
+
+      img{
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    .footer__links {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+
+      a {
+        margin-top: 10px;
+      }
+
+      p {
+        margin-top: 25px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 3fr;
+
+      .footer__links {
+        margin-top: 0;
+      }
     }
   }
 </style>
