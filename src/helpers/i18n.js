@@ -25,6 +25,13 @@ const messages = {
         paragraph: 'Odwiedź stronę dokumentacji użytkownika i przeczytaj o badaniach naukowych, na których bazowaliśmy tworząc aplikację.',
         link: 'Przejdź do dokumentacji',
       },
+      footer: {
+        homepage: 'Strona Główna',
+        login: 'Logowanie',
+        privacy: 'Polityka Prywatności',
+        policyLink: '/polityka',
+        docs: 'Dokumentacja dla użytkowników',
+      },
     },
     login: {
       title: 'Logowanie',
@@ -191,6 +198,13 @@ const messages = {
         title: 'We do <span class="underline">the research</span>, so you don\'t have to.',
         paragraph: 'Visit the user\'s docs site and read about which scientific researches we were basing on while creating the app.',
         link: 'Go to the docs',
+      },
+      footer: {
+        homepage: 'Homepage',
+        login: 'Login',
+        privacy: 'Privacy Policy',
+        policyLink: '/policy',
+        docs: 'Docs for users',
       },
     },
     login: {
