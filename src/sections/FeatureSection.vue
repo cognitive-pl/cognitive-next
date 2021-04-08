@@ -34,9 +34,12 @@ export default {
   .features {
     text-align: center;
 
-    h1 {
-      margin-bottom: 10vh;
+    @media (min-width: 768px) {
+      h1 {
+        margin-bottom: 10vh;
+      }
     }
+
   }
 
   .features__grid {
@@ -59,7 +62,7 @@ export default {
 
   .grid__text {
     text-align: left;
-    padding: 15vw;
+    padding: 5vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -67,7 +70,7 @@ export default {
 
     ul {
       list-style-type: none;
-      padding: 0;
+      padding: 0 10vw;
 
       li {
         margin-bottom: 20px;
@@ -88,8 +91,20 @@ export default {
       }
     }
 
+    .cta {
+      padding: 10px 20px;
+      font-size: 1.1em;
+    }
+
     @media (min-width: 768px) {
-      padding: 5vw;
+      ul {
+        padding: 0;
+      }
+
+      .cta {
+        padding: 15px 25px;
+        font-size: 1.2em;
+      }
     }
   }
 </style>

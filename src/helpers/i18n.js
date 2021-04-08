@@ -178,7 +178,7 @@ const messages = {
       },
       features: {
         title: 'Be prepared on time',
-        cta: 'Head to the app',
+        cta: 'Go to the app',
         list: [
           'Get organized with all your work thanks to the in-app schedule.',
           'Divide the material into parts and spend less time on everything thanks to <span class="underline">the material division system</span>.',

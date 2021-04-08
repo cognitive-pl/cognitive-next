@@ -35,7 +35,7 @@ export default {
 
   .science__content {
     display: flex;
-    width: 85%;
+    width: 95%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -45,7 +45,13 @@ export default {
       font-size: 1.1em;
     }
 
-    p { margin-top: 10px; }
+    p { margin: 5vh 0; }
+
+    @media (min-width: 768px) {
+      width: 85%;
+
+      p { margin-top: 10px; }
+    }
   }
 
   .science__blob {
