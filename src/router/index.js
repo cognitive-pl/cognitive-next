@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Landing from '@/views/Landing.vue';
 import Policy from '@/views/Policy.vue';
+import Polityka from '@/views/Polityka.vue';
 import Login from '@/views/Login.vue';
 import AppView from '@/views/AppView.vue';
 import Support from '@/views/Support.vue';
@@ -25,6 +26,11 @@ const routes = [
     path: '/policy',
     name: 'Privacy Policy',
     component: Policy,
+  },
+  {
+    path: '/polityka',
+    name: 'Polityka Prywatności',
+    component: Polityka,
   },
   {
     path: '/app',

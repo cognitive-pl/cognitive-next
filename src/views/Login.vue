@@ -8,7 +8,7 @@
     <div class="login__form">
       <router-link to="/" class="link">
         <a-button type="link">
-          <a-icon type="left" />Go back
+          <a-icon type="left" />{{ $t('login.goBack') }}
         </a-button>
       </router-link>
       <h1 class="title">Cognitive</h1>
@@ -18,9 +18,9 @@
 </template>
 
 <script>
-import LoginSVG1 from '@/assets/login-illustration1.svg';
-import LoginSVG2 from '@/assets/login-illustration2.svg';
-import Blob from '@/assets/blob.svg';
+import LoginSVG1 from '@/assets/svgs/login-illustration1.svg';
+import LoginSVG2 from '@/assets/svgs/login-illustration2.svg';
+import Blob from '@/assets/svgs/blob.svg';
 
 export default {
   name: 'Login',
@@ -51,8 +51,8 @@ export default {
 };
 </script>
 
-<style src="../assets/login-illustration1.css"></style>
-<style src="../assets/login-illustration2.css"></style>
+<style src="../assets/svgs/login-illustration1.css"></style>
+<style src="../assets/svgs/login-illustration2.css"></style>
 
 <style lang="scss">
   .login {

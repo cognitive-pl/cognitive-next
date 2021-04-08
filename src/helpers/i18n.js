@@ -1,8 +1,35 @@
 const messages = {
   pl: {
+    landing: {
+      policy: 'Polityka Prywatności',
+      policyLink: '/polityka',
+      signIn: 'Zaloguj sie',
+      hero: {
+        title: 'Obchodzi nas ile <span class="underline">pamiętasz</span>.',
+        paragraph: 'Zacznij przygodę z efektywnym uczeniem się i przejdź do darmowej aplikacji.',
+        cta: 'Zobacz apkę',
+      },
+      features: {
+        title: 'Bądź przygotowany na czas',
+        cta: 'Przejdź do apki',
+        list: [
+          'Zaplanuj całą swoją pracę dzięki terminarzowi w aplikacji.',
+          'Ucz się porcjami i poświęć na wszystko łącznie mniej czasu dzieki <span class="underline">systemowi podziału materiału</span>.',
+          'Nie zapomnij o nauce dzięki <span class="underline">synchronizacji z Kalendarzem</span>.',
+          'Zapamiętaj zagadnienia na dłużej korzystając z <span class="underline">wbudowanego modułu fiszek</span>.',
+          'Szybki i prosty dostęp do aplikacji, dzięki możliwości <span class="underline">instalacji na urządzeniu</span>.',
+        ],
+      },
+      science: {
+        title: 'My <span class="underline">szukamy informacji</span>, żebyś ty nie musiał.',
+        paragraph: 'Odwiedź stronę dokumentacji użytkownika i przeczytaj o badaniach naukowych, na których bazowaliśmy tworząc aplikację.',
+        link: 'Przejdź do dokumentacji',
+      },
+    },
     login: {
       title: 'Logowanie',
       button: 'Zaloguj sie z Google',
+      goBack: 'Powrót',
       modal: {
         title: 'Ostrzeżenie o bezpieczeństwie',
         content1: 'Ta aplikacja jest wciąż weryfikowana przez Google i możesz przez to zobaczyć ',
@@ -140,9 +167,36 @@ const messages = {
     },
   },
   en: {
+    landing: {
+      policy: 'Privacy Policy',
+      policyLink: '/policy',
+      signIn: 'Sign In',
+      hero: {
+        title: 'We care about how much you <span class="underline">remember</span>.',
+        paragraph: 'Start your journey with effective learning and head to the free app.',
+        cta: 'Get the app',
+      },
+      features: {
+        title: 'Be prepared on time',
+        cta: 'Go to the app',
+        list: [
+          'Get organized with all your work thanks to the in-app schedule.',
+          'Divide the material into parts and spend less time on everything thanks to <span class="underline">the material division system</span>.',
+          'Don\'t forget about learning thanks to <span class="underline">synchronization with Calendar</span>.',
+          'Remeber material for longer time using <span class="underline">built-in flashcards module</span>.',
+          'Quick and easy access to the app thanks to <span class="underline">installation on device feature</span>.',
+        ],
+      },
+      science: {
+        title: 'We do <span class="underline">the research</span>, so you don\'t have to.',
+        paragraph: 'Visit the user\'s docs site and read about which scientific researches we were basing on while creating the app.',
+        link: 'Go to the docs',
+      },
+    },
     login: {
       title: 'Login',
       button: 'Login with Google',
+      goBack: 'Go back',
       modal: {
         title: 'Security warning',
         content1: 'This app is still verifying by Google and because of that you may see ',
