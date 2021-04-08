@@ -1,20 +1,6 @@
 <template>
   <div class="landing">
-    <header class="landing__header">
-      <div class="header__branding">
-        <h2>Cognitive</h2>
-      </div>
-      <div class="header__links">
-        <router-link to="/policy">
-          <a-button type="link">{{ $t('landing.policy') }}</a-button>
-        </router-link>
-        <button class="landing__button landing__button--ghost" v-if="language == 'pl'" @click="setLanguage('en')">English</button>
-        <button class="landing__button landing__button--ghost" v-if="language == 'en'" @click="setLanguage('pl')">Polski</button>
-        <router-link to="/app">
-          <button class="landing__button">{{ $t('landing.signIn') }}</button>
-        </router-link>
-      </div>
-    </header>
+    <Header />
     <HeroSection />
     <FeatureSection />
     <ScienceSection />
@@ -25,6 +11,7 @@
 </template>
 
 <script>
+import Header from '@/sections/Header.vue';
 import HeroSection from '@/sections/HeroSection.vue';
 import FeatureSection from '@/sections/FeatureSection.vue';
 import ScienceSection from '@/sections/ScienceSection.vue';
@@ -32,6 +19,7 @@ import ScienceSection from '@/sections/ScienceSection.vue';
 export default {
   name: 'Landing',
   components: {
+    Header,
     HeroSection,
     FeatureSection,
     ScienceSection,
@@ -135,34 +123,6 @@ export default {
       background: white !important;
       border: 1px solid cornflowerblue;
       color: cornflowerblue;
-    }
-  }
-
-  .landing__header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
-    position: sticky;
-    z-index: 9999;
-    top: 0;
-    left: 0;
-
-    &::before {
-      content: '';
-      position: absolute;
-      z-index: -1;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: white;
-      opacity: .9;
-    }
-
-    .header__links * {
-      margin-left: 5px;
     }
   }
 </style>

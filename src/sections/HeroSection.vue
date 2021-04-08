@@ -39,7 +39,7 @@ export default {
 
 <style lang="scss">
   .hero {
-    font-size: 1.3em;
+    font-size: 1em;
     display: flex;
     height: 80vh;
     flex-direction: column;
@@ -47,7 +47,7 @@ export default {
     justify-content: center;
     text-align: center;
     padding: 0 20px;
-    margin-top: 5vh;
+    margin-top: 3vh;
 
     p {
       margin: 25px 0 50px;
@@ -66,6 +66,7 @@ export default {
     }
 
     @media (min-width: 768px) {
+      font-size: 1.2em;
       margin-top: 0;
       height: 80vh;
 

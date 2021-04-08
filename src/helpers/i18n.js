@@ -2,6 +2,7 @@ const messages = {
   pl: {
     landing: {
       policy: 'Polityka Prywatności',
+      policyLink: '/polityka',
       signIn: 'Zaloguj sie',
       hero: {
         title: 'Obchodzi nas ile <span class="underline">pamiętasz</span>.',
@@ -168,6 +169,7 @@ const messages = {
   en: {
     landing: {
       policy: 'Privacy Policy',
+      policyLink: '/policy',
       signIn: 'Sign In',
       hero: {
         title: 'We care about how much you <span class="underline">remember</span>.',
