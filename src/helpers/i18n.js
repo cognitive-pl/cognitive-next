@@ -139,6 +139,44 @@ const messages = {
       startFlashcards: 'Nie wahaj sie i stwórz trochę fiszek!',
       addFlashcards: 'Dodaj zestaw fiszek',
     },
+    newFlashcardSet: {
+      success: {
+        title: 'Świetnie!',
+        description: 'Właśnie stworzyłeś nowy zestaw fiszek!',
+      },
+      warning: {
+        title: 'Oj, coś poszło nie tak...',
+        description: 'Wygląda na to, że mamy pewne problemy z bazą danych, spróbuj ponownie później...',
+      },
+      firstStage: {
+        title: 'Podstawowe informacje',
+        name: {
+          label: 'Nazwa',
+          message: 'Proszę, podaj nazwę',
+        },
+        description: {
+          label: 'Opis',
+          message: 'Proszę, podaj opis',
+        },
+        nextStep: 'Następny krok',
+      },
+      secondStage: {
+        title: 'Fiszki',
+        description: 'Tutaj możesz dodać karty do twojego zestawu.',
+        firstSide: {
+          label: 'Pierwsza strona',
+          message: 'Proszę, podaj pierwszą stronę karty',
+        },
+        secondSide: {
+          label: 'Druga strona',
+          message: 'Proszę, podaj drugą stronę karty',
+        },
+        addCard: 'Dodaj kartę',
+        oneCard: 'Proszę, podaj przynajmniej jedną kartę',
+        previousStep: 'Poprzedni krok',
+        nextStep: 'Dodaj zestaw',
+      },
+    },
     flashcardSet: {
       allDone: 'Przejrzałeś cały zestaw, możesz go odnowić klikając w przycisk poniżej.',
       delete: 'Usuń',
@@ -312,6 +350,44 @@ const messages = {
       cards: 'card(s)',
       startFlashcards: 'Go ahead and make some flashcards!',
       addFlashcards: 'Add flashcard set',
+    },
+    newFlashcardSet: {
+      success: {
+        title: 'Great!',
+        description: 'You just add new flashcard set, simple as that!',
+      },
+      warning: {
+        title: 'Oh, something went wrong...',
+        description: 'It looks like there are some problems with databse, please try again later...',
+      },
+      firstStage: {
+        title: 'Basic info',
+        name: {
+          label: 'Name',
+          message: 'Please input unit name!',
+        },
+        description: {
+          label: 'Description',
+          message: 'Please input description!',
+        },
+        nextStep: 'Next Step',
+      },
+      secondStage: {
+        title: 'Flashcards',
+        description: 'Here you can add your cards to your set.',
+        firstSide: {
+          label: 'First side',
+          message: 'Please input first side of flashcard!',
+        },
+        secondSide: {
+          label: 'Second side',
+          message: 'Please input second side of flashcard!',
+        },
+        addCard: 'Add card',
+        oneCard: 'Please input at least one card',
+        previousStep: 'Previous step',
+        nextStep: 'Add set',
+      },
     },
     flashcardSet: {
       allDone: 'You revealed all set, you can restart it by clicking button below.',

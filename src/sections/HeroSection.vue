@@ -47,7 +47,7 @@ export default {
     justify-content: center;
     text-align: center;
     padding: 0 20px;
-    margin-top: 3vh;
+    margin-top: 3vh !important;
 
     p {
       margin: 25px 0 50px;
@@ -66,8 +66,8 @@ export default {
     }
 
     @media (min-width: 768px) {
+      margin-top: 6vh !important;
       font-size: 1.2em;
-      margin-top: 0;
       height: 80vh;
 
       .hero__svg {

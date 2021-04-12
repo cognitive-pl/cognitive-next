@@ -1,8 +1,8 @@
 <template>
   <div class="newUnit">
     <a-steps :current="stage" style="margin-bottom: 28px">
-      <a-step title="Basic info" />
-      <a-step title="Flashcards" />
+      <a-step :title="$t('newFlashcardSet.firstStage.title')" />
+      <a-step :title="$t('newFlashcardSet.secondStage.title')" />
     </a-steps>
     <FlashcardFirstStage @infoSubmit="handleInfoSubmit" v-show="stage === 0"/>
     <FlashcardsSecondStage @flashcardsSubmit="handleFlashcardsSubmit" @back="prev()" v-show="stage === 1" />
@@ -48,14 +48,14 @@ export default {
       db.collection('flashcards').add(dbData)
         .then(() => {
           this.$notification['success']({
-            message: 'Great!',
-            description: 'You just add new flashcard set, simple as that!',
+            message: this.$t('newFlashcardSet.success.title'),
+            description: this.$t('newFlashcardSet.success.description'),
           });
         })
         .catch(() => {
           this.$notification['warning']({
-            message: 'Oh, something went wrong...',
-            description: 'It looks like there are some problems with databse, please try again later...',
+            message: this.$t('newFlashcardSet.warning.title'),
+            description: this.$t('newFlashcardSet.warning.description'),
           });
         });
     },

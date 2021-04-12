@@ -1,20 +1,20 @@
 <template>
   <div>
     <a-form :form="form" :label-col="{ span: 5 }" :wrapper-col="{ span: 9 }" @submit="handleNextStep">
-      <a-form-item label="Name">
+      <a-form-item :label="$t('newFlashcardSet.firstStage.name.label')">
         <a-input
-          v-decorator="['name', { rules: [{ required: true, message: 'Please input unit name!' }] }]"
+          v-decorator="['name', { rules: [{ required: true, message: $t('newFlashcardSet.firstStage.name.message') }] }]"
         />
       </a-form-item>
-      <a-form-item label="Description">
+      <a-form-item :label="$t('newFlashcardSet.firstStage.description.label')">
         <a-textarea
-          v-decorator="['description', { rules: [{ required: false, message: 'Please input description!' }] }]"
+          v-decorator="['description', { rules: [{ required: false, message: $t('newFlashcardSet.firstStage.description.message') }] }]"
           :auto-size="{ minRows: 2, maxRows: 6 }"
         />
       </a-form-item>
       <a-form-item>
         <a-button type="primary" html-type="submit">
-          Next step
+          {{ $t('newFlashcardSet.firstStage.nextStep') }}
         </a-button>
       </a-form-item>
     </a-form>

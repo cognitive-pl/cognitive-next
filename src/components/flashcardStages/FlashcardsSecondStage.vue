@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>Here you can add your cards to your set.</p>
+    <p>{{ $t('newFlashcardSet.secondStage.description') }}</p>
     <a-list item-layout="horizontal" :data-source="flashcardSet">
       <a-list-item slot="renderItem" slot-scope="{ firstSide, secondSide }, index">
         <a slot="actions">
@@ -16,32 +16,32 @@
       </a-list-item>
     </a-list>
     <a-form :form="form" :label-col="{ span: 5 }" :wrapper-col="{ span: 10 }" @submit="handleSubmit">
-      <a-form-item label="First side">
+      <a-form-item :label="$t('newFlashcardSet.secondStage.firstSide.label')">
         <a-textarea
           ref="firstSideInput"
-          v-decorator="['firstSide', { rules: [{ required: true, message: 'Please input first side of flashcard!' }] }]"
+          v-decorator="['firstSide', { rules: [{ required: true, message: $t('newFlashcardSet.secondStage.firstSide.message') }] }]"
           :auto-size="{ minRows: 2, maxRows: 4 }"
         />
       </a-form-item>
-      <a-form-item label="Second side">
+      <a-form-item :label="$t('newFlashcardSet.secondStage.secondSide.label')">
         <a-textarea
-          v-decorator="['secondSide', { rules: [{ required: true, message: 'Please input second side of flashcard!' }] }]"
+          v-decorator="['secondSide', { rules: [{ required: true, message: $t('newFlashcardSet.secondStage.secondSide.message') }] }]"
           :auto-size="{ minRows: 2, maxRows: 4 }"
         />
       </a-form-item>
       <a-form-item :wrapper-col="{ offset: 5 }">
-        <a-button type="dashed" icon="plus" @click="handleAddCard">Add card</a-button>
+        <a-button type="dashed" icon="plus" @click="handleAddCard">{{ $t('newFlashcardSet.secondStage.addCard')}} </a-button>
       </a-form-item>
       <a-form-item
         style='display: inline-block; margin-right: 10px'
       >
         <a-button @click.once="$emit('back')">
-          Previous step
+          {{ $t('newFlashcardSet.secondStage.previousStep') }}
         </a-button>
       </a-form-item>
       <a-form-item style='display: inline-block'>
         <a-button type="primary" html-type="submit">
-          Add set
+          {{ $t('newFlashcardSet.secondStage.nextStep') }}
         </a-button>
       </a-form-item>
     </a-form>
@@ -81,7 +81,7 @@ export default {
       e.preventDefault();
       if (this.flashcardSet.length > 0) {
         this.$emit('flashcardsSubmit', this.flashcardSet);
-      } else this.$message.error('Please input at least one card');
+      } else this.$message.error(this.$t('newFlashcardSet.secondStage.oneCard'));
     },
   },
 };
