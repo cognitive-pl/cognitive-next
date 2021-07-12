@@ -13,6 +13,8 @@
         <router-link to="/">{{ $t('landing.footer.homepage') }}</router-link>
         <router-link to="/login">{{ $t('landing.footer.login') }}</router-link>
         <router-link :to="$t('landing.footer.policyLink')">{{ $t('landing.footer.privacy') }}</router-link>
+        <router-link to="/OAuth">{{ $t('landing.footer.oauth') }}</router-link>
+        <router-link to="/OAuth#cookies">{{ $t('landing.footer.cookies') }}</router-link>
         <a href="https://alexskubala.gitbook.io/cognitive/" target="_blank">{{ $t('landing.footer.docs') }}</a>
         <p>Copyright © 2020 - {{new Date().getFullYear()}} Aleksander Skubała</p>
       </div>

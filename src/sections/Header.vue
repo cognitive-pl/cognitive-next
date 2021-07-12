@@ -7,9 +7,6 @@
       <div class="button__line"></div>
     </button>
     <div :class="['header__links', { 'header__links--open': menuOpen }]">
-      <router-link :to="$t('landing.policyLink')">
-        <a-button type="link">{{ $t('landing.policy') }}</a-button>
-      </router-link>
       <button class="landing__button landing__button--ghost" v-if="language == 'pl'" @click="setLanguage('en')">English</button>
       <button class="landing__button landing__button--ghost" v-if="language == 'en'" @click="setLanguage('pl')">Polski</button>
       <router-link to="/app">

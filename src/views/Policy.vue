@@ -1,11 +1,5 @@
 <template>
 <div>
-  <router-link to="/">
-    <a-button type="link" style="margin: 2em 0 0">
-      <a-icon type="left" />Go back
-    </a-button>
-  </router-link>
-
   <h1>Privacy Policy for Cognitive</h1>
   <p>(You can also find this policy <a href="https://www.privacypolicygenerator.info/live.php?token=Qsr1V56LQD6ACMUA65Rmyo8QsZQar3Te">here</a>)</p>
 

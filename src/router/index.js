@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Landing from '@/views/Landing.vue';
+import OAuth from '@/views/OAuth.vue';
 import Policy from '@/views/Policy.vue';
 import Polityka from '@/views/Polityka.vue';
 import Login from '@/views/Login.vue';
@@ -31,6 +32,11 @@ const routes = [
     path: '/polityka',
     name: 'Polityka Prywatności',
     component: Polityka,
+  },
+  {
+    path: '/OAuth',
+    name: 'OAuth Info',
+    component: OAuth,
   },
   {
     path: '/app',
