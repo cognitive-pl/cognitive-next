@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 50%; margin: 5em auto;">
+  <div class="oauthWrapper">
     <router-link to="/">
       <a-button type="link">
         <a-icon type="left" />Go back
@@ -18,7 +18,7 @@
 
     <h1 id="homepage">Google OAuth2 Homepage</h1>
     <p>
-      <u>Accurately represents your app's identity:</u> App <img style="width: 16px; height: 16px;" alt="favicon" src="../../public/img/icons/favicon-16x16.png"/> cognitive.pl is
+      <u>Accurately represents your app's identity:</u> App <img alt="favicon" src="../../public/img/icons/favicon-16x16.png"/> cognitive.pl is
       described on a site <a href="https://cognitive.pl/OAuth">cognitive.pl/OAuth</a>.
     </p>
     <p>
@@ -32,12 +32,12 @@
       <u>Link to Privacy Policy:</u> <a href="/policy">Click here.</a>
     </p>
     <p>
-      <u>Describe the content, context, or connection to the app:</u> App <img style="width: 16px; height: 16px;" alt="favicon" src="../../public/img/icons/favicon-16x16.png"/> cognitive.pl is made to improve the learning results of users. For that we e.g. put a notifications in theirs calendars so they don't forget about any learning session.
+      <u>Describe the content, context, or connection to the app:</u> App <img alt="favicon" src="../../public/img/icons/favicon-16x16.png"/> cognitive.pl is made to improve the learning results of users. For that we e.g. put a notifications in theirs calendars so they don't forget about any learning session.
     </p>
 
     <h1 id="oauth">Google OAuth2 Limited Use Disclosure</h1>
     <p>
-      The <img style="width: 16px; height: 16px;" alt="favicon" src="../../public/img/icons/favicon-16x16.png"/> cognitive.pl App's
+      The <img alt="favicon" src="../../public/img/icons/favicon-16x16.png"/> cognitive.pl App's
       use of information received from Google APIs will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy#additional_requirements_for_specific_api_scopes">Google API Services User Data Policy</a>,
       including the Limited Use requirements.
     </p>
@@ -80,3 +80,29 @@
     </p>
   </div>
 </template>
+
+<style lang="scss">
+  .oauthWrapper {
+    width: 70%;
+    margin: 5em auto 3em;
+    font-size: 16px;
+
+    h1 {
+      text-align: center;
+      margin: 2em 0 1em;
+
+      &:first-of-type {
+        margin-top: 0;
+      }
+    }
+
+    img {
+      width: 16px;
+      height: 16px;
+    }
+
+    p {
+      text-align: justify;
+    }
+  }
+</style>
